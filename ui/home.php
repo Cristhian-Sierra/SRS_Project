@@ -50,6 +50,9 @@ if(isset($_POST['logIn'])){
 				<div class="card-body">
 					<p>This project will be in charge of having an information system capable of filtering and suggesting the best journals that exist registered on the ScimagoJR page, this in order to optimize the search processes for the best articles published globally, regardless of their area. or category.</p>
 				</div>
+				<div class="card-body">
+					<a href="index.php?pid=<?php echo base64_encode("ui/filterSearchPage.php") ?>">Search your journals here</a>	
+				</div>
 			</div>
 		</div>
 		<div class="col-md-3">

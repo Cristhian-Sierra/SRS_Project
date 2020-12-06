@@ -46,5 +46,9 @@ class AreaDAO{
 		return "delete from Area
 				where idArea = '" . $this -> idArea . "'";
 	}
+
+	function selectName(){
+		return "select name from Area";
+	}
 }
 ?>

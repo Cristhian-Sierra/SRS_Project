@@ -92,5 +92,14 @@ class Area {
 		$this -> connection -> close();
 		return $success;
 	}
+	function selectName(){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> areaDAO -> selectName());
+		$result = $this -> connection -> fetchRow();
+		$this -> connection -> close();
+		$this -> name = $result[0];
+	}
+
+
 }
 ?>

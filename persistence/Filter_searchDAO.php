@@ -65,5 +65,12 @@ class Filter_searchDAO{
 				from Filter_search
 				where search_date like '%" . $search . "%' or search_time like '%" . $search . "%' or hindex_filter like '%" . $search . "%' or references_filter like '%" . $search . "%' or country_filter like '%" . $search . "%' or category_filter like '%" . $search . "%' or area_filter like '%" . $search . "%' or quartile_filter like '%" . $search . "%' or sjr_filter like '%" . $search . "%'";
 	}
+
+	function searchFilter($search) {
+		return "select  hindex_filter, references_filter, country_filter, category_filter, area_filter, quartile_filter, sjr_filter
+				from Filter_search,Journal
+				where search_date like '%" . $search . "%' or search_time like '%" . $search . "%' or hindex_filter like '%" . $search . "%' or references_filter like '%" . $search . "%' or country_filter like '%" . $search . "%' or category_filter like '%" . $search . "%' or area_filter like '%" . $search . "%' or quartile_filter like '%" . $search . "%' or sjr_filter like '%" . $search . "%'
+				hindex_filter=hindex";
+	}
 }
 ?>
