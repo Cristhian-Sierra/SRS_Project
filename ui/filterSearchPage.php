@@ -1,8 +1,8 @@
+
 <?php 
-    require_once ('./business/Filter_search.php');
-    require_once ('./business/Area.php');
-    require_once ('./business/Category.php');
-    require_once ('./business/Country.php');
+    require_once ('business/Area.php');
+    require_once ('business/Category.php');
+    require_once ('business/Country.php');
     
 
     $areaFilter= new Area();//Instance from business in the Area class
@@ -28,30 +28,18 @@
 
 <div class="container">
     <form action="index.php?pid=<?php echo base64_encode("ui/filterSearchPage.php") ?>" method="POST">
-        <select name="area" >
-            
+        <select  id ="areaList" name="areaList" >
                 <?php 
                     $i=1;
                     foreach($areasF as $aF ){
                         ?>
-                        <option value= "<?php echo $aF->getName() ?>"> <?php echo $aF->getName() ?> </option >;                   
+                        <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo $aF->getName() ?> </option >;                   
                     <?php     
                     }
                     ?>
-        </select>
-        
-        <select >
-            
-            <?php 
-                $i=1;
-                foreach($categorysF as $caF ){
-                echo '<option  >' .$caF->getName().'</option >';
-                $i++;}
-            ?>
-            
-        </select>
-        <select >
-            
+        </select>  
+       <select name="categoryList" id="categoryList"></select>
+       <select >
             <?php 
                 $i=1;
                 foreach($countrysF as $coF ){
@@ -60,21 +48,49 @@
             ?>
         </select>
         <select >
-            
-            <?php 
-                echo '<option  >' .Q1.'</option >';
-                echo '<option  >' .Q2.'</option >';
-                echo '<option  >' .Q3.'</option >';
-                echo '<option  >' .Q4.'</option >';
-                
-            ?>
+            <option value="0">Quartile</option>
+            <option value="1">Q1</option>
+            <option value="2">Q2</option>
+            <option value="3">Q3</option>
+            <option value="4">Q4</option>
+            <option value="5">Without quartile</option>
             
         </select>
+        <select name="" id="">
+            <option value="0">H index</option>
+            <option value="1">0-200</option>
+            <option value="2">201-400</option>
+            <option value="3">401-600</option>
+            <option value="4">601-801</option>
+            <option value="5">800 or more</option>
+        </select>
+
         <input type="submit" class="btn btn-dark" value="Search with filters">	
     </form>
-
   </div>
+  
+  <script type="text/javascript">
+	$(document).ready(function(){
+		$('#areaList').val(1);
+		chargeList();
 
+		$('#areaList').change(function(){
+			chargeList();
+		});
+	})
+</script>
+<script type="text/javascript">
+	function chargeList(){
+		$.ajax({
+			type:"POST",
+			url:"index.php?pid=<?php echo base64_encode("ui/datesC.php") ?>",
+			data:"area=" + $('#areaList').val(),
+			success:function(r){
+				$('#categoryList').html(r);
+			}
+		});
+	}
+</script>
 
 <div class="container">
     <table class="table">

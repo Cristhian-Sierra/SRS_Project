@@ -57,5 +57,11 @@ class CategoryDAO{
 				from Category
 				where name like '%" . $search . "%'";
 	}
+
+	function searchCatA($search){
+		return "select c.name from category as c,area as a  where c.area_idArea='".$search."' ";
+		
+
+	}
 }
 ?>

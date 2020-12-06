@@ -129,5 +129,17 @@ class Category {
 		$this -> connection -> close();
 		return $categorys;
 	}
+
+	function searchCatA($search){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> categoryDAO -> searchcatA($search));
+		$categorys = array();
+		while ($result = $this -> connection -> fetchRow()){
+			array_push($categorys, new Category("",$search));
+		}
+		$this -> connection -> close();
+		return $categorys;
+	}
+
 }
 ?>
