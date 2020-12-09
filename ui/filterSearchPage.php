@@ -1,6 +1,7 @@
 
 <?php 
     require_once ('business/Area.php');
+    require_once ('business/Areacategory.php');
     require_once ('business/Category.php');
     require_once ('business/Country.php');
     
@@ -14,12 +15,21 @@
     $countryFilter= new Country();//Instance from business in the Country class
     $countrysF=$countryFilter->selectAll();//Method that get all the dates from db table Country
 
+    
     if(isset($_POST['area'])){
         $estado=$_POST['area'];
         echo $estado;
     }
-
-
+    
+    if(isset($_POST['AreaC'])){
+        $AreaC=$_POST['AreaC'];
+        $areaCat= new Areacategory($AreaC);
+        $cadena = $areaCat ->select();
+       
+    }
+   
+   
+  
 ?>
 
 <div align="center">
@@ -38,7 +48,12 @@
                     }
                     ?>
         </select>  
-       <select name="categoryList" id="categoryList"></select>
+       <select name="categoryList" id="categoryList">
+       <?php  if(isset($_POST['AreaC'])){
+            echo $cadena;
+               
+    }?>
+    </select>
        <select >
             <?php 
                 $i=1;
@@ -83,8 +98,8 @@
 	function chargeList(){
 		$.ajax({
 			type:"POST",
-			url:"index.php?pid=<?php echo base64_encode("ui/datesC.php") ?>",
-			data:"area=" + $('#areaList').val(),
+			url:"index.php?pid=<?php echo base64_encode("ui/filterSearchPage.php") ?>",
+			data:"AreaC=" + $('#areaList').val(),
 			success:function(r){
 				$('#categoryList').html(r);
 			}

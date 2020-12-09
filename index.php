@@ -3,6 +3,7 @@ session_start();
 require("business/Administrator.php");
 require("business/LogAdministrator.php");
 require("business/Area.php");
+require("business/Areacategory.php");
 require("business/Category.php");
 require("business/Journalcategory.php");
 require("business/Journal.php");
@@ -12,8 +13,7 @@ ini_set("display_errors","1");
 date_default_timezone_set("America/Bogota");
 $webPagesNoAuthentication = array(
 	'ui/recoverPassword.php',
-	'ui/filterSearchPage.php',
-	'ui/datesC.php',
+	'ui/filterSearchPage.php'
 
 );
 $webPages = array(
