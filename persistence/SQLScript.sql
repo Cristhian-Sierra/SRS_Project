@@ -83,6 +83,7 @@ CREATE TABLE Filter_search (
 	idFilter_search int(11) NOT NULL AUTO_INCREMENT,
 	search_date varchar(45) NOT NULL,
 	search_time varchar(45) NOT NULL,
+	journal_title varchar(45) NOT NULL,
 	hindex_filter int NOT NULL,
 	references_filter int NOT NULL,
 	country_filter varchar(45) NOT NULL,

@@ -46,9 +46,13 @@ class CountryDAO{
 				where idCountry = '" . $this -> idCountry . "'";
 	}
 
+	function selectN(){
+		return "select name from country";
+	}
+
 	function selectAll() {
 		return "select idCountry, name, region, documents, citable_docs, citations, self_citations, citations_per_doc, hindex
-				from Country";
+				from Country order by name";
 	}
 
 	function selectAllOrder($orden, $dir){

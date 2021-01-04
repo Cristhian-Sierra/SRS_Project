@@ -11,6 +11,7 @@ class Filter_searchDAO{
 	private $quartile_filter;
 	private $sjr_filter;
 
+
 	function Filter_searchDAO($pIdFilter_search = "", $pSearch_date = "", $pSearch_time = "", $pHindex_filter = "", $pReferences_filter = "", $pCountry_filter = "", $pCategory_filter = "", $pArea_filter = "", $pQuartile_filter = "", $pSjr_filter = ""){
 		$this -> idFilter_search = $pIdFilter_search;
 		$this -> search_date = $pSearch_date;
@@ -66,6 +67,10 @@ class Filter_searchDAO{
 				where search_date like '%" . $search . "%' or search_time like '%" . $search . "%' or hindex_filter like '%" . $search . "%' or references_filter like '%" . $search . "%' or country_filter like '%" . $search . "%' or category_filter like '%" . $search . "%' or area_filter like '%" . $search . "%' or quartile_filter like '%" . $search . "%' or sjr_filter like '%" . $search . "%'";
 	}
 
+	
+
 
 }
 ?>
+
+		

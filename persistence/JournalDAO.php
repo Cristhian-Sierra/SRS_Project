@@ -59,8 +59,9 @@ class JournalDAO{
 	}
 
 	function selectAll() {
-		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-				from Journal";
+		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name 
+			FROM journal as j,country as co
+			WHERE j.country_idCountry=co.idCountry ";
 	}
 
 	function selectAllByCountry() {
@@ -91,6 +92,24 @@ class JournalDAO{
 	function delete(){
 		return "delete from Journal
 				where idJournal = '" . $this -> idJournal . "'";
+	}
+
+
+	public function searchPage($quantity, $page){
+        return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,
+		j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name FROM journal as j,country as co  WHERE j.country_idCountry=co.idCountry 
+                limit " . (($page-1) * $quantity) . ", " . $quantity;
+    }
+
+    public function searchQuantity(){
+        return "SELECT count(j.idJournal) FROM journal as j";
+    }
+
+
+    function selectF(){
+		return "SELECT j.idJournal,j.title,j.issn,j.hindex,j.total_references,co.name ,j.categories,a.name,j.sjr
+			FROM journal as j,country as co,area as a
+			WHERE a.name='Medicine'";
 	}
 }
 ?>

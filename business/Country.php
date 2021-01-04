@@ -129,6 +129,14 @@ class Country {
 		$this -> hindex = $result[8];
 	}
 
+	function selectN(){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> countryDAO -> selectN());
+		$result = $this -> connection -> fetchRow();
+		$this -> connection -> close();
+		$this -> name = $result[0];
+	}
+
 	function selectAll(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> countryDAO -> selectAll());

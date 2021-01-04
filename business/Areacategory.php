@@ -21,26 +21,18 @@ class Areacategory{
         $this-> areacategoryDAO = new AreacategoryDAO($this->$AreaC);
         $this -> connection -> run($this ->areacategoryDAO->select());
        // $result = $this -> connection -> fetchRow();
-        $cadena="<label>Category List</label>";
+        //$cadena="<select id='categories' name='categories'> </select>";
         while ($result = $this -> connection -> fetchRow()){
           //  array_push($categorys, new Category("",$search));
-            $cadena=$cadena.'<option value='.$result[0].'>'.utf8_encode($result[2]).'</option>';
+        
+            $cadena=$cadena."<option value=".$result[0].">".$result[2]."</option>";
         }
        
-        $this -> conexion -> cerrar();
+        $this -> conection -> close();
         return $cadena;
     }
     
  
-    
-   
-    
-    
-   /* while ($ver=mysqli_fetch_row($result)) {
-        $cadena=$cadena.'<option value='.$ver[0].'>'.utf8_encode($ver[2]).'</option>';
-    }*/
-    
- //   echo  $cadena;
 }
 
 

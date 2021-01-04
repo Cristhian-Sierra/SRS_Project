@@ -8,7 +8,7 @@ class AreacategoryDAO{
 
 	function select() {
 	  return  "SELECT idCategory, area_idArea,name from category
-		where area_idArea='.$this->AreaC.'";
+		where area_idArea=1";
 	}
 
 

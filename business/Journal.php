@@ -180,8 +180,10 @@ class Journal {
 		$this -> connection -> run($this -> journalDAO -> selectAll());
 		$journals = array();
 		while ($result = $this -> connection -> fetchRow()){
-			$country = new Country($result[12]);
-			$country -> select();
+			$country = new Country();
+			$country -> getName();
+			$country=$result[12];
+	
 			array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
 		}
 		$this -> connection -> close();
@@ -246,6 +248,85 @@ class Journal {
 		$success = $this -> connection -> querySuccess();
 		$this -> connection -> close();
 		return $success;
+	}
+
+	public function searchPage($quantity, $page){
+        $this -> connection -> open();        
+        $this -> connection -> run($this -> journalDAO -> searchPage($quantity, $page));
+        $journals= array();
+        while(($result = $this -> connection -> fetchRow()) != null){
+        	$country = new Country();
+			$country -> getName();
+			$country=$result[12];
+            $j = new Journal ($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country);
+            array_push($journals, $j);
+        }
+        $this -> connection -> close();
+        return $journals;
+    }
+    
+    public function searchQuantity(){
+        $this -> connection -> open();
+        $this -> connection -> run($this -> journalDAO -> searchQuantity());
+        $this -> connection -> close();
+        return $this -> connection -> fetchRow()[0];
+    }
+
+    function selectF(){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> journalDAO  -> selectF());
+		$filters= array();
+		while ($result = $this -> connection -> fetchRow()){
+			$journal = new Journal();
+			
+			/**/
+			/*$journal->getTotal_docs(); 
+			$journal_total_docs=$result[6];*/
+			/*$journal->getTotal_cites() ;
+			$journal_total_cites=$result[8];*/
+			
+			/*$journal->getCitable_docs();
+			$journal_cites_docs=$result[9];*/
+			
+			/*$journal->getCoverage() ;
+			$journal_coverage=$result[10];*/
+
+			$journal->getIdJournal();
+			$journal_id=$result[0];
+
+			$journal->getTitle();
+			$journal_title=$result[1];
+			
+			$journal->getIssn();
+			$journal_issn=$result[2];
+
+			$journal->getHindex();
+			$journal_hindex=$result[3];
+
+			$journal->getTotal_references();
+			$journal_total_refs=$result[4];
+
+			$country = new Country();
+			$country -> getName();
+			$country=$result[5];
+
+			$journal->getCategories() ;
+			$journal_category=$result[6];
+
+			$area = new Area();
+			$area->getName();
+			$area=$result[7];
+
+			$journal->getBest_quartile();
+			$journal_quartile=$result[8];
+
+			$journal->getSjr();
+			$journal_sjr=$result[9];
+			
+			array_push($filters, new  Filter_search($journal_id,$journal_title,$journal_issn,$journal_hindex,$journal_total_refs,$country,$journal_category,$area,$journal_quartile,$journal_sjr));
+		}
+		$this -> connection -> close();
+		return $filters;
 	}
 }
 ?>

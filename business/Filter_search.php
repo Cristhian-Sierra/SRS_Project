@@ -4,6 +4,7 @@ require_once ("persistence/Connection.php");
 
 class Filter_search {
 	private $idFilter_search;
+	private $journal_title;
 	private $search_date;
 	private $search_time;
 	private $hindex_filter;
@@ -32,6 +33,14 @@ class Filter_search {
 		$this -> search_date = $pSearch_date;
 	}
 
+
+	function getJournal_title() {
+		return $this -> journal_title;
+	}
+
+	function setJournal_title($pJournal_title) {
+		$this -> journal_title = $pJournal_title;
+	}
 	function getSearch_time() {
 		return $this -> search_time;
 	}
@@ -172,5 +181,7 @@ class Filter_search {
 		$this -> connection -> close();
 		return $filter_searchs;
 	}
+
+	
 }
 ?>
