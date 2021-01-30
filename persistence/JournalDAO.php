@@ -106,10 +106,6 @@ class JournalDAO{
     }
 
 
-    function selectF(){
-		return "SELECT j.idJournal,j.title,j.issn,j.hindex,j.total_references,co.name ,j.categories,a.name,j.sjr
-			FROM journal as j,country as co,area as a
-			WHERE a.name='Medicine'";
-	}
+    
 }
 ?>

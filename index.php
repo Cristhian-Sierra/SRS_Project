@@ -14,7 +14,8 @@ date_default_timezone_set("America/Bogota");
 $webPagesNoAuthentication = array(
 	'ui/recoverPassword.php',
 	'ui/filterSearchPage.php',
-	'ui/datesC.php'
+	'ui/datesC.php',
+	'ui/resultsPage.php'
 
 
 );

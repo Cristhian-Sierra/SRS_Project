@@ -17,8 +17,6 @@
     $countryFilter= new Country();//Instance from business in the Country class
     $countrysF=$countryFilter->selectAll();//Method that get all the dates from db table Country
     
-    $filterSClass = new Filter_search();
-    
 
     $journalFilter = new Journal();
     $journalsF= $journalFilter->selectAll();
@@ -148,15 +146,13 @@
 
         $filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
         $filterSClass->insert();
-        echo "Insert exitoso";
-
-       /* $filterSF=$filterSClass->selectF();
-        foreach ($filterSF as $fS ) {
-            echo $fS->getArea_filter(); 
-        }*/
-
-    }else{
-        echo "PAILASSSSSSSSS";
+     
+        $filterResult= new Filter_search("","","",$hindex,$references,$country,$category,$area,$quartile,$sjr);
+        $filterR= $filterResult->selectF();
+        foreach ($filterR as $fR) {
+            echo "Uno".$fR->getHindex_filter();
+        }
+        
     }
 
 //This is for pagination 
@@ -318,11 +314,14 @@
             <tr>
             <th scope="col">#</th>
             <th scope="col"> Title</th>
-           
+            <th scope="col"> Issn</th>
             <th scope="col">sjr</th>
             <th scope="col">Best_quartile</th>
             <th scope="col">H index</th>
+            <th scope="col">Total documents</th>
             <th scope="col">Total references</th>
+            <th scope="col">Total cites</th>
+            <th scope="col">Coverage</th>
             <th scope="col">All categories</th>
             <th scope="col">Country</th>
             </tr>
@@ -334,10 +333,14 @@
             echo "<tr>";
             echo "<td>" . $jP->getIdJournal() . "</td>";
             echo "<td>" . $jP ->  getTitle() . "</td>";
+            echo "<td>" . $jP ->  getIssn() . "</td>";
             echo "<td>" . $jP  -> getSjr() . "</td>";
             echo "<td>" . $jP  -> getBest_quartile() . "</td>";
             echo "<td>" . $jP  -> getHindex(). "</td>";
+            echo "<td>" . $jP  ->  getTotal_docs() . "</td>";
             echo "<td>" . $jP  ->  getTotal_references() . "</td>";
+            echo "<td>" . $jP  ->  getTotal_cites() . "</td>";
+            echo "<td>" . $jP  ->  getCoverage() . "</td>";
             echo "<td>" . $jP  -> getCategories(). "</td>";
             echo "<td>" . $jP  -> getCountry(). "</td>";
             echo "</tr>";
