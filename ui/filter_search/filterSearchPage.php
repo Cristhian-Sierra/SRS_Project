@@ -360,7 +360,7 @@
 <script>
 $(document).ready(function(){
     $("#sjr","#hindex","#references","#countries","#categories","#areas","#quartiles").keyup(function(){
-        if($("#sjr","#hindex","#references","#countries","#categories","#areas","#quartile").val().length > 1){
+        
             var sjrF = $("#sjr").val();
             var hindexF = $("#hindex").val();
             var referenceF = $("#references").val();
@@ -371,7 +371,7 @@ $(document).ready(function(){
 
             var path = "indexAjax.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php"); ?>&sjrF="+sjrF+"&hindex="+hindexF+"&references="+referenceF+"&countries="+countryF+"&categories="+categoryF+"&areas="+areaF+"&quartiles="+quartileF;
             $("#searchResult").load(path);
-        }
+        
     });
 });
 </script>

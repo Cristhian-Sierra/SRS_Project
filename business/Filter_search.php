@@ -189,7 +189,7 @@ class Filter_search {
 		$this -> connection -> run($this -> filter_searchDAO -> searchF($sjr,$hindex,$references,$countries,$categories,$areas,$quartile));
 		$filter_searchs = array();
 		while ($result = $this -> connection -> fetchRow()){
-			array_push($filter_searchs, new Filter_search($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9]));
+			array_push($filter_searchs, new Filter_search($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7]));
 		}
 		$this -> connection -> close();
 		return $filter_searchs;
