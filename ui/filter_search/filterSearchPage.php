@@ -174,7 +174,7 @@
 </div>
 
 <div class="container" >
-	<form action="index.php?pid=<?php echo base64_encode("ui/filterSearchPage.php") ?>" method="POST">
+	<form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
 
         <select name="areas" id="areas" required>
             <option  value="" > Area</option >
@@ -265,7 +265,7 @@
     function chargeList(){
         $.ajax({
             type:"POST",
-            url:"index.php?pid=<?php echo base64_encode("ui/datesC.php") ?>",
+            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
             data:"area_category=" + $('#areas').val(),
             success:function(r){
                 $('#categories').html(r);
@@ -280,17 +280,17 @@
 		<div class="col-md-3">
 		    <nav aria-label="Page navigation Journals">
 		    	<ul class="pagination">
-		            <li class="page-item <?php echo ($page==1)?"disabled": ""; ?>"><a class="page-link" href="<?php echo "index.php?pid=" . base64_encode("ui/filterSearchPage.php") . "&page=" . ($page-1) . "&quantity=" . $quantity ?>"> &lt;&lt; </a></li>
+		            <li class="page-item <?php echo ($page==1)?"disabled": ""; ?>"><a class="page-link" href="<?php echo "index.php?pid=" . base64_encode("ui/filter_search/filterSearchPage.php") . "&page=" . ($page-1) . "&quantity=" . $quantity ?>"> &lt;&lt; </a></li>
 		            <?php 
 		            for($i=1; $i<=$totalPages; $i++){
 		            	if($i==$page){
 		            		echo "<li class='page-item active' aria-current='page'><span class='page-link'>" . $i . "<span class='sr-only'></span></span></li>";
 		            	}else{
-		            		echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("ui/filterSearchPage.php") . "&page=" . $i . "&quantity=" . $quantity . "'>" . $i . "</a></li>";
+		            		echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("ui/filter_search/filterSearchPage.php") . "&page=" . $i . "&quantity=" . $quantity . "'>" . $i . "</a></li>";
 		            	}        						            						    
 		            }        						
 		            ?>
-		            <li class="page-item <?php echo ($lastPage)?"disabled": ""; ?>"><a class="page-link" href="<?php echo "index.php?pid=" . base64_encode("ui/filterSearchPage.php") . "&page=" . ($page+1) . "&quantity=" . $quantity ?>"> &gt;&gt; </a></li>
+		            <li class="page-item <?php echo ($lastPage)?"disabled": ""; ?>"><a class="page-link" href="<?php echo "index.php?pid=" . base64_encode("ui/filter_search/filterSearchPage.php") . "&page=" . ($page+1) . "&quantity=" . $quantity ?>"> &gt;&gt; </a></li>
 		        </ul>
 		    </nav>
             <select id="quantity" >
@@ -352,7 +352,7 @@
 
 <script>
     $("#quantity").on("change", function() {
-        url = "index.php?pid=<?php echo base64_encode("ui/filterSearchPage.php") ?>&quantity=" + $(this).val();     
+        url = "index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>&quantity=" + $(this).val();     
         location.replace(url);
     });
 </script>
@@ -369,7 +369,7 @@ $(document).ready(function(){
             var areaF = $("#areas").val();
             var quartileF = $("#quartiles").val();
 
-            var path = "indexAjax.php?pid=<?php echo base64_encode("ui/filterSearchPageAjax.php"); ?>&sjrF="+sjrF+"&hindex="+hindexF+"&references="+referenceF+"&countries="+countryF+"&categories="+categoryF+"&areas="+areaF+"&quartiles="+quartileF;
+            var path = "indexAjax.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php"); ?>&sjrF="+sjrF+"&hindex="+hindexF+"&references="+referenceF+"&countries="+countryF+"&categories="+categoryF+"&areas="+areaF+"&quartiles="+quartileF;
             $("#searchResult").load(path);
         }
     });

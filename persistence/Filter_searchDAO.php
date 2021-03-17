@@ -67,9 +67,9 @@ class Filter_searchDAO{
 				where search_date like '%" . $search . "%' or search_time like '%" . $search . "%' or hindex_filter like '%" . $search . "%' or references_filter like '%" . $search . "%' or country_filter like '%" . $search . "%' or category_filter like '%" . $search . "%' or area_filter like '%" . $search . "%' or quartile_filter like '%" . $search . "%' or sjr_filter like '%" . $search . "%'";
 	}
 
-	function selectF(){
+	function searchF($sjrF,$hindexF,$referenceF,$countryF,$categoryF,$areaF,$quartileF){
 		return "SELECT  fs.idFilter_search, fs.search_date, fs.search_time,j.hindex,j.total_references,co.name,ca.name,a.name,j.best_quartile,j.sjr
-			FROM filter_search as fs,journal as j,country as co, category as ca, area as a where j.sjr='".$this->sjr_filter."' AND j.hindex='".$this->hindex_filter."' AND j.total_references='".$this->references_filter."' AND co.name='".$this->country_filter."' AND ca.name='".$this->category_filter."' AND a.name='".$this->area_filter."' AND j.best_quartile='".$this->quartile_filter."' AND j.sjr='".$this->sjr_filter."'";
+			FROM filter_search AS fs,journal AS j,country AS co, category AS ca, area AS a WHERE j.sjr='".$sjrF."' AND j.hindex='".$hindexF."' AND j.total_references='".$referenceF."' AND co.name='".$countryF."' AND ca.name='".$categoryF."' AND a.name='".$areaF."' AND j.best_quartile='".$quartileF."'";
 	}
 
 

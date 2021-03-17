@@ -181,7 +181,27 @@ class Filter_search {
 		$this -> connection -> close();
 		return $filter_searchs;
 	}
-	function selectF(){
+
+
+
+	function searchF($sjr,$hindex,$references,$countries,$categories,$areas,$quartile){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> filter_searchDAO -> searchF($sjr,$hindex,$references,$countries,$categories,$areas,$quartile));
+		$filter_searchs = array();
+		while ($result = $this -> connection -> fetchRow()){
+			array_push($filter_searchs, new Filter_search($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9]));
+		}
+		$this -> connection -> close();
+		return $filter_searchs;
+
+	}
+
+
+	
+	
+
+
+		/*function selectF(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> filter_searchDAO  -> selectF());
 		$filters= array();
@@ -195,7 +215,7 @@ class Filter_search {
 			$journal_title=$result[1];
 			
 			$journal->getIssn();
-			$journal_issn=$result[2];*/
+			$journal_issn=$result[2];
 
 			$journal->getHindex();
 			$journal_hindex=$result[3];
@@ -224,9 +244,10 @@ class Filter_search {
 		
 		}
 
+
 		$this -> connection -> close();
 		return $filters;
-	}
+	}*/
 
 	
 	
