@@ -242,6 +242,7 @@ class Journal {
 		return $journals;
 	}
 
+
 	function delete(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> journalDAO -> delete());
@@ -272,6 +273,20 @@ class Journal {
         return $this -> connection -> fetchRow()[0];
     }
 
-    
+    function searchF($countries){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO -> searchF($countries));
+    	$filter_searchs = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country();
+    		$country -> getName();
+			$country=$result[12];
+    		array_push($filter_searchs, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $filter_searchs;
+
+    }
+
 }
 ?>

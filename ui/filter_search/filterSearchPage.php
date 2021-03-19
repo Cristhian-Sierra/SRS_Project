@@ -177,7 +177,7 @@
 	<form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
 
         <select name="areas" id="areas" required>
-            <option  value="" > Area</option >
+            <option  value="0">Area</option >
             <?php 
             $i=1;
             foreach($areasF as $aF ){?>
@@ -201,15 +201,16 @@
             <option  value="">Category</option >
         </select>
 
-		<select  name="countries" id="countries"required>
-			<option  value=""> Country</option >;
-			<?php 
-			$i=1;
-			foreach($countrysF as $coF ){
-				echo "<option  >" . utf8_encode($coF->getName())."</option >";
-				$i++;}
-				?>
-		</select>
+		<select name="countries" id="countries"  required>
+            <option  value="0">Country</option >
+            <?php 
+            $i=1;
+            foreach($countrysF as $coF ){?>
+                <option value= "<?php echo $coF->getIdCountry() ?>"> <?php echo $coF->getName() ?> </option >;
+                <?php
+                $i++;}
+                ?>
+        </select>
 
 		<select  name="quartile" id="quartile" required>
             <option value="">Quartile</option>
@@ -305,7 +306,13 @@
      
      <!--Table's Structure-->
      <div class="text-right">Searchs <?php echo (($page-1)*$quantity+1) ?> to <?php echo (($page-1)*$quantity)+count($journalsP) ?> of <?php echo $journalsR ?> registers searched</div>
-     <div id="searchResult">
+
+     <select name="searchResult" id="searchResult" required>
+        <option  value="">Journals</option >
+    </select>
+
+
+     <div id="searchResults">
         <table class="table table-hover table-striped table-responsive-md">
             <thead class="thead-dark">
                 <tr>
@@ -348,6 +355,7 @@
 
         </table>
     </div>
+     
 </div>
 
 <script>
@@ -357,24 +365,47 @@
     });
 </script>
 
-<script>
-$(document).ready(function(){
-    $("#sjr","#hindex","#references","#countries","#categories","#areas","#quartiles").keyup(function(){
-        
-            var sjrF = $("#sjr").val();
-            var hindexF = $("#hindex").val();
-            var referenceF = $("#references").val();
-            var countryF = $("#countries").val();
-            var categoryF = $("#categories").val();
-            var areaF = $("#areas").val();
-            var quartileF = $("#quartiles").val();
+<!--EL AJAX PARA HACER CONSULTAS CON FILTROS(SOLO PAISES AHORA)-->
 
-            var path = "indexAjax.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php"); ?>&sjrF="+sjrF+"&hindex="+hindexF+"&references="+referenceF+"&countries="+countryF+"&categories="+categoryF+"&areas="+areaF+"&quartiles="+quartileF;
-            $("#searchResult").load(path);
-        
-    });
-});
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+        chargesList();
+        $('#countries').change(function(){
+            chargesList();
+        });
+        $('#areas').change(function(){
+            chargesList();
+        });
+    })
+</script>
+<script type="text/javascript">
+    function chargesList(){
+        $.ajax({
+            type:"POST",
+            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
+            data:{"country_filter":$('#countries').val(),
+                 "area_filter":$('#areas').val(),
+                 "category_filter":$('#categories').val()
+             },
+            //data:"area_filter=" + $('#areas').val(),
+            success:function(r){
+                $('#searchResult').html(r);
+            }
+        });
+    }
 </script>
 
-
-
+<!--<script type="text/javascript">
+$(document).ready(function(){
+    $("#countries").keyup(function(){
+         var fil = $("#countries").val();
+         console.log(fil);
+         
+             <?php/* echo "var ruta = \"indexAjax.php?pid=". base64_encode("ui/filter_search/filterSearchPageAjax.php")."\";\n";*/?>
+             $("#searchResult").load(ruta,{fil});
+         
+    
+    });
+});
+</script>-->

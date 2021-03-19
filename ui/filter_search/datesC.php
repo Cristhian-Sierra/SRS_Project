@@ -10,12 +10,19 @@ $area=$_POST['area_category'];
 	$result=mysqli_query($con,$sql);
 
 	$cadena="";
-
-	while ($ver=mysqli_fetch_row($result)) {
+    if($area=="0"){
+    	$cadena=$cadena.'<option>Category</option>';
+    }
+    else{
+    	while ($ver=mysqli_fetch_row($result)) {
 		$cadena=$cadena.'<option value='.$ver[0].'>'.utf8_encode($ver[2]).'</option>';
 	}
 
+}
 	echo  $cadena;
+	
+
+
 	
 
 ?>

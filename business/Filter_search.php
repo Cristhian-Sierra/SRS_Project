@@ -184,7 +184,7 @@ class Filter_search {
 
 
 
-	function searchF($sjr,$hindex,$references,$countries,$categories,$areas,$quartile){
+	/*function searchF($sjr,$hindex,$references,$countries,$categories,$areas,$quartile){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> filter_searchDAO -> searchF($sjr,$hindex,$references,$countries,$categories,$areas,$quartile));
 		$filter_searchs = array();
@@ -194,12 +194,7 @@ class Filter_search {
 		$this -> connection -> close();
 		return $filter_searchs;
 
-	}
-
-
-	
-	
-
+	}*/
 
 		/*function selectF(){
 		$this -> connection -> open();
