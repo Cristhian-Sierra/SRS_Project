@@ -1,4 +1,6 @@
+   <head>
 
+</head>
 <?php 
     require_once ('business/Area.php');
     require_once ('business/Areacategory.php');
@@ -213,24 +215,48 @@
         </select>
 
 		<select  name="quartile" id="quartile" required>
-            <option value="">Quartile</option>
+            <option value="0">Quartile</option>
             <option value="1">Q1</option>
             <option value="2">Q2</option>
             <option value="3">Q3</option>
           
         </select>
-		            
-		<select name="hindex" id="hindex" required>
-			<option value="">H index </option>
+
+		<!--<select name="hindex" id="hindex" required>
+			<option value="0">H index </option>
 			<option value="1">0-200</option>
 			<option value="2">201-400</option>
 			<option value="3">401-600</option>
 			<option value="4">601-800</option>
 			<option value="5">801 or more</option>
-		</select>
+		</select>-->
+
+        <!--SLIDER DE HINDEX-->
+        <div class="container">     
+            <label for="amount">H index:</label>
+            <input type="text" id="amount" name="range" style="border: 0; color: #f6931f; font-weight: bold;" />
+
+            <div id="slider-range" style="width:300px;"></div>
+        </div>   
+        <!--JQUERY que permite mostrar datos del slider-->    
+        <script>
+            $(function() {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 1,
+                    max: 1150,
+                    values: [0, 300],
+                    slide: function(event, ui) {
+                        $("#amount").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
+                    }
+                });
+
+                $( "#amount" ).val($("#slider-range").slider("values", 0) + "-" + $("#slider-range").slider( "values", 1) + "");
+            });
+        </script>
 
 		<select name="sjr" id="sjr" required>
-			<option value="">SJR</option>
+			<option value="0">SJR</option>
 			<option value="1">1-20</option>
 			<option value="2">21-40</option>
 			<option value="3">41-60</option>
@@ -239,7 +265,7 @@
 		</select>
 
 		<select  name="references" id="references" required>
-			<option value="">References</option>
+			<option value="0">References</option>
 			<option value="1">0-1000</option>
 			<option value="2">1001-10000</option>
 			<option value="3">10001-100000</option>
@@ -252,28 +278,7 @@
 		</div>        
 	</form>    
   </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-       // $('#areas').val(1);
-        chargeList();
 
-        $('#areas').change(function(){
-            chargeList();
-        });
-    })
-</script>
-<script type="text/javascript">
-    function chargeList(){
-        $.ajax({
-            type:"POST",
-            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
-            data:"area_category=" + $('#areas').val(),
-            success:function(r){
-                $('#categories').html(r);
-            }
-        });
-    }
-</script>
 
 <div class="container"><!-- Pagination div-->
 	<div class="row"> 
@@ -310,6 +315,7 @@
      <select name="searchResult" id="searchResult" required>
         <option  value="">Journals</option >
     </select>
+
 
 
      <div id="searchResults">
@@ -358,6 +364,7 @@
      
 </div>
 
+<!--SCRIPT QUE PERMITE LA PAGINACIÓN-->
 <script>
     $("#quantity").on("change", function() {
         url = "index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>&quantity=" + $(this).val();     
@@ -365,7 +372,48 @@
     });
 </script>
 
-<!--EL AJAX PARA HACER CONSULTAS CON FILTROS(SOLO PAISES AHORA)-->
+
+<!--SCRIPT PARA OBTENER VALOR DEL INTERVALO HINDEX-->
+<!--<script>
+    function filterHindex() {
+        var hindex_range = $('#slider-range').val();
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?pid=<?php /*echo base64_encode("ui/filter_search/getHindexFilter.php") */?>',
+            data:'hindex_range='+hindex_range,
+            success:function(r){
+                $('#searchResult').html(r);
+            }
+        });
+    }
+</script>-->
+
+
+<!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
+<script type="text/javascript">
+    $(document).ready(function(){
+       // $('#areas').val(1);
+        chargeList();
+
+        $('#areas').change(function(){
+            chargeList();
+        });
+    })
+</script>
+<script type="text/javascript">
+    function chargeList(){
+        $.ajax({
+            type:"POST",
+            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
+            data:"area_category=" + $('#areas').val(),
+            success:function(r){
+                $('#categories').html(r);
+            }
+        });
+    }
+</script>
+
+<!--EL JQUERY Y AJAX PARA HACER CONSULTAS CON FILTROS-->
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -377,16 +425,26 @@
         $('#areas').change(function(){
             chargesList();
         });
+         $('#categories').change(function(){
+            chargesList();
+        });
+          $('#slider-range').change(function(){
+            chargesList();
+        });
+
     })
 </script>
+
 <script type="text/javascript">
     function chargesList(){
+        var hindex_range = $("#slider-range").val();
         $.ajax({
             type:"POST",
             url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
             data:{"country_filter":$('#countries').val(),
                  "area_filter":$('#areas').val(),
-                 "category_filter":$('#categories').val()
+                 "category_filter":$('#categories').val(),
+                 "hindex_filter=":+hindex_range
              },
             //data:"area_filter=" + $('#areas').val(),
             success:function(r){
@@ -395,6 +453,8 @@
         });
     }
 </script>
+
+
 
 <!--<script type="text/javascript">
 $(document).ready(function(){

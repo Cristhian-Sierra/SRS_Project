@@ -3,18 +3,25 @@ $con=mysqli_connect('localhost','root','','srs');
 $country=$_POST['country_filter'];
 $area=$_POST['area_filter'];
 $category=$_POST['category_filter'];
+$quartile=$_POST['quartile_filter'];
+$hindex=$_POST['hindex_filter'];
 /*$references=$_POST['references_filter'];
 $sjr=$_POST['sjr_filter'];
-$hindex=$_POST['hindex_filter'];
-$quartile=$_POST['quartile_filter'];*/
 
+*/
+ $hindexRangeSQL="";
+  if(!empty($hindex)){
+        $hindexRangeArr = explode('-', $hindex);
+        $hindexRangeSQL = "j.hindex BETWEEN '".$hindexRangeArr[0]."' AND '".$hindexRangeArr[1]."'";
+        $orderSQL = " ORDER BY j.hindex ASC ";
+    }
 
-	$sql="SELECT  j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name AS country  FROM journal AS j,country AS co,area AS a,category AS ca  WHERE j.country_idCountry=co.idCountry AND ca.area_idArea=a.idArea AND co.idCountry='$country' AND a.idArea='$area' AND ca.idCategory='$category'";
+	$sql="SELECT  j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name AS country  FROM journal AS j,country AS co,area AS a,category AS ca  WHERE j.country_idCountry=co.idCountry AND ca.area_idArea=a.idArea AND co.idCountry='$country' AND a.idArea='$area' AND ca.idCategory='$category'  ";
 
 	$result=mysqli_query($con,$sql);
 
 	$cadena="";
-    if($country=="0" or $area=="0"){
+    if($country=="0" or $area=="0" ){
     	$cadena=$cadena.'<option>Nothing all</option> ';
     }
     else{
