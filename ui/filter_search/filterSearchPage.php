@@ -178,16 +178,19 @@
 <div class="container" >
 	<form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
 
-        <select name="areas" id="areas" required>
-            <option  value="0">Area</option >
-            <?php 
-            $i=1;
-            foreach($areasF as $aF ){?>
-                <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo $aF->getName() ?> </option >;
-                <?php
-                $i++;}
-                ?>
-        </select>
+
+        <label>Area: 
+            <select name="areas" id="areas" required>
+                <option  value="0">Area</option >
+                <?php 
+                $i=1;
+                foreach($areasF as $aF ){?>
+                    <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo $aF->getName() ?> </option >;
+                    <?php
+                    $i++;}
+                    ?>
+                </select>
+        </label>
 
          <!--<select name="categories" id="categories" required>
             <option  value="">Category</option >;
@@ -199,42 +202,41 @@
                 ?>
         </select>-->
 
-        <select name="categories" id="categories" required>
-            <option  value="">Category</option >
-        </select>
+        <label>Category: 
+            <select name="categories" id="categories" required>
+                <option  value="">Category</option >
+            </select>
+        </label>
 
-		<select name="countries" id="countries"  required>
-            <option  value="0">Country</option >
-            <?php 
-            $i=1;
-            foreach($countrysF as $coF ){?>
-                <option value= "<?php echo $coF->getIdCountry() ?>"> <?php echo $coF->getName() ?> </option >;
-                <?php
-                $i++;}
-                ?>
-        </select>
+        <label>Country:
+            <select name="countries" id="countries"  required>
+                <option  value="0">Country</option >
+                <?php 
+                $i=1;
+                foreach($countrysF as $coF ){?>
+                    <option value= "<?php echo $coF->getIdCountry() ?>"> <?php echo $coF->getName() ?> </option >;
+                    <?php
+                    $i++;}
+                    ?>
+                </select>
+        </label>
+        
+        <label>Quartile
+    		<select  name="quartile" id="quartile" required>
+                <option value="0">Quartile</option>
+                <option value="1">Q1</option>
+                <option value="2">Q2</option>
+                <option value="3">Q3</option>
+              
+            </select>
+        </label>
 
-		<select  name="quartile" id="quartile" required>
-            <option value="0">Quartile</option>
-            <option value="1">Q1</option>
-            <option value="2">Q2</option>
-            <option value="3">Q3</option>
-          
-        </select>
-
-		<!--<select name="hindex" id="hindex" required>
-			<option value="0">H index </option>
-			<option value="1">0-200</option>
-			<option value="2">201-400</option>
-			<option value="3">401-600</option>
-			<option value="4">601-800</option>
-			<option value="5">801 or more</option>
-		</select>-->
 
         <!--SLIDER DE HINDEX-->
+
         <div class="container">     
             <label for="amount">H index:</label>
-            <input type="text" id="amount" name="range" style="border: 0; color: #f6931f; font-weight: bold;" />
+            <input type="text" id="amount" name="range" style="border: 0; color: #4DCD7C    ; font-weight: bold;" readonly/>
 
             <div id="slider-range" style="width:300px;"></div>
         </div>   
@@ -245,7 +247,7 @@
                     range: true,
                     min: 1,
                     max: 1150,
-                    values: [0, 300],
+                    values: [0, 500],
                     slide: function(event, ui) {
                         $("#amount").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
                     }
@@ -255,23 +257,92 @@
             });
         </script>
 
-		<select name="sjr" id="sjr" required>
-			<option value="0">SJR</option>
-			<option value="1">1-20</option>
-			<option value="2">21-40</option>
-			<option value="3">41-60</option>
-			<option value="4">61-80</option>
-			<option value="5">80 or more</option>
-		</select>
+        <!--SLIDER DE SJR-->
 
-		<select  name="references" id="references" required>
-			<option value="0">References</option>
-			<option value="1">0-1000</option>
-			<option value="2">1001-10000</option>
-			<option value="3">10001-100000</option>
-			<option value="4">100001-500000</option>
-			<option value="5">500001 or more</option>
-		</select>
+        <div class="container">     
+            <label for="amountS">SJR:</label>
+            <input type="text" id="amountS" name="range" style="border: 0; color: #4DCD7C    ; font-weight: bold;"  readonly />
+
+            <div id="slider-rangeS" style="width:300px;"></div>
+        </div>   
+        <!--JQUERY que permite mostrar datos del slider-->    
+        <script>
+            $(function() {
+                $("#slider-rangeS").slider({
+                    range: true,
+                    min: 1,
+                    max: 88,
+                    values: [0, 44],
+                    slide: function(event, ui) {
+                        $("#amountS").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
+                    }
+                });
+
+                $( "#amountS" ).val($("#slider-rangeS").slider("values", 0) + "-" + $("#slider-rangeS").slider( "values", 1) + "");
+            });
+        </script>
+
+        <!--SLIDER DE REFERENES-->
+
+        <div class="container">     
+            <label for="amountR">References:</label>
+            <input type="text" id="amountR" name="range" style="border: 0; color: #4DCD7C    ; font-weight: bold;" readonly/>
+
+            <div id="slider-rangeR" style="width:300px;"></div>
+        </div>   
+        <!--JQUERY que permite mostrar datos del slider-->    
+        <script>
+            $(function() {
+                $("#slider-rangeR").slider({
+                    range: true,
+                    min: 0,
+                    max: 989223,
+                    values: [0, 400000],
+                    slide: function(event, ui) {
+                        $("#amountR").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
+                    }
+                });
+
+                $( "#amountR" ).val($("#slider-rangeR").slider("values", 0) + "-" + $("#slider-rangeR").slider( "values", 1) + "");
+            });
+        </script>
+
+
+        <!--<select name="hindex" id="hindex" required>
+            <option value="0">H index </option>
+            <option value="1">0-200</option>
+            <option value="2">201-400</option>
+            <option value="3">401-600</option>
+            <option value="4">601-800</option>
+            <option value="5">801 or more</option>
+        </select>-->
+
+
+      <!--  <label>SJR: 
+    		<select name="sjr" id="sjr" required>
+    			<option value="0">SJR</option>
+    			<option value="1">1-20</option>
+    			<option value="2">21-40</option>
+    			<option value="3">41-60</option>
+    			<option value="4">61-80</option>
+    			<option value="5">80 or more</option>
+    		</select>
+        </label>
+    -->
+    <!--
+
+        <label>References: 
+    		<select  name="references" id="references" required>
+    			<option value="0">References</option>
+    			<option value="1">0-1000</option>
+    			<option value="2">1001-10000</option>
+    			<option value="3">10001-100000</option>
+    			<option value="4">100001-500000</option>
+    			<option value="5">500001 or more</option>
+    		</select>
+        </label>
+    -->
+
 		<br> <br>
 		<div class="form-group">
 			<input type="submit" class="btn btn-dark" value="Search with filters" name="Action">	
@@ -373,20 +444,6 @@
 </script>
 
 
-<!--SCRIPT PARA OBTENER VALOR DEL INTERVALO HINDEX-->
-<!--<script>
-    function filterHindex() {
-        var hindex_range = $('#slider-range').val();
-        $.ajax({
-            type: 'POST',
-            url: 'index.php?pid=<?php /*echo base64_encode("ui/filter_search/getHindexFilter.php") */?>',
-            data:'hindex_range='+hindex_range,
-            success:function(r){
-                $('#searchResult').html(r);
-            }
-        });
-    }
-</script>-->
 
 
 <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
@@ -427,24 +484,24 @@
         });
          $('#categories').change(function(){
             chargesList();
-        });
+        });/*
           $('#slider-range').change(function(){
             chargesList();
-        });
+        });*/
 
     })
 </script>
 
 <script type="text/javascript">
     function chargesList(){
-        var hindex_range = $("#slider-range").val();
+        var hindex_range = $('#slider-range').val();
         $.ajax({
             type:"POST",
             url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
             data:{"country_filter":$('#countries').val(),
                  "area_filter":$('#areas').val(),
-                 "category_filter":$('#categories').val(),
-                 "hindex_filter=":+hindex_range
+                 "category_filter":$('#categories').val()
+                 //"hindex_filter=":+hindex_range
              },
             //data:"area_filter=" + $('#areas').val(),
             success:function(r){
@@ -455,17 +512,3 @@
 </script>
 
 
-
-<!--<script type="text/javascript">
-$(document).ready(function(){
-    $("#countries").keyup(function(){
-         var fil = $("#countries").val();
-         console.log(fil);
-         
-             <?php/* echo "var ruta = \"indexAjax.php?pid=". base64_encode("ui/filter_search/filterSearchPageAjax.php")."\";\n";*/?>
-             $("#searchResult").load(ruta,{fil});
-         
-    
-    });
-});
-</script>-->
