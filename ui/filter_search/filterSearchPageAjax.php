@@ -9,19 +9,22 @@ $hindex=$_POST['hindex_filter'];
 $sjr=$_POST['sjr_filter'];
 
 */
- $hindexRangeSQL="";
-  if(!empty($hindex)){
+ $hindexRangeArr="";
+ $orderSQL="";
+
         $hindexRangeArr = explode('-', $hindex);
         $hindexRangeSQL = "j.hindex BETWEEN '".$hindexRangeArr[0]."' AND '".$hindexRangeArr[1]."'";
-        $orderSQL = " ORDER BY j.hindex ASC ";
-    }
+        $orderSQL = "ORDER BY j.hindex DESC";
+    
 
-	$sql="SELECT  j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name AS country  FROM journal AS j,country AS co,area AS a,category AS ca  WHERE j.country_idCountry=co.idCountry AND ca.area_idArea=a.idArea AND co.idCountry='$country' AND a.idArea='$area' AND ca.idCategory='$category'  ";
+        $sql="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name AS country,a.name as area FROM journal AS j,country AS co,area AS a,category AS ca, journalcategory as jc WHERE j.country_idCountry=co.idCountry AND ca.area_idArea=a.idArea AND jc.category_idCategory=ca.idCategory AND jc.journal_idJournal=j.idJournal AND a.idArea='$area' AND co.idCountry='$country' AND ca.idCategory='$category' 
+        	$orderSQL";
+
 
 	$result=mysqli_query($con,$sql);
 
 	$cadena="";
-    if($country=="0" or $area=="0" ){
+    if($area=="0" || $country=="0" ){
     	$cadena=$cadena.'<option>Nothing all</option> ';
     }
     else{
@@ -31,7 +34,7 @@ $sjr=$_POST['sjr_filter'];
 
 }
 	echo  $cadena;
-	
+
 
 ?>
 

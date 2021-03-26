@@ -192,19 +192,9 @@
                 </select>
         </label>
 
-         <!--<select name="categories" id="categories" required>
-            <option  value="">Category</option >;
-            <?php 
-            /*$i=1;
-            foreach($categoriesF as $cF ){
-                echo "<option>" . utf8_encode($cF->getName())."</option >";
-                $i++;}*/
-                ?>
-        </select>-->
-
         <label>Category: 
             <select name="categories" id="categories" required>
-                <option  value="">Category</option >
+                <option  value="0">Category</option >
             </select>
         </label>
 
@@ -235,25 +225,25 @@
         <!--SLIDER DE HINDEX-->
 
         <div class="container">     
-            <label for="amount">H index:</label>
-            <input type="text" id="amount" name="range" style="border: 0; color: #4DCD7C    ; font-weight: bold;" readonly/>
+            <label for="amountH">H index:</label>
+            <input type="text" id="amountH" name="range" style="border: 0; color: #4DCD7C    ; font-weight: bold;" readonly/>
 
-            <div id="slider-range" style="width:300px;"></div>
+            <div id="slider-rangeH" style="width:300px;"></div>
         </div>   
         <!--JQUERY que permite mostrar datos del slider-->    
         <script>
             $(function() {
-                $("#slider-range").slider({
+                $("#slider-rangeH").slider({
                     range: true,
                     min: 1,
                     max: 1150,
                     values: [0, 500],
                     slide: function(event, ui) {
-                        $("#amount").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
+                        $("#amountH").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
                     }
                 });
 
-                $( "#amount" ).val($("#slider-range").slider("values", 0) + "-" + $("#slider-range").slider( "values", 1) + "");
+                $( "#amountH" ).val($("#slider-rangeH").slider("values", 0) + "-" + $("#slider-rangeH").slider( "values", 1) + "");
             });
         </script>
 
@@ -484,28 +474,33 @@
         });
          $('#categories').change(function(){
             chargesList();
-        });/*
-          $('#slider-range').change(function(){
+        });
+        
+          $('#slider-rangeH').change(function(){
             chargesList();
-        });*/
+        });
 
-    })
+    });
 </script>
 
 <script type="text/javascript">
     function chargesList(){
-        var hindex_range = $('#slider-range').val();
+        //var hindex_range = $('#slider-rangeH').val();
+       // $('#searchResult').html(loader);
         $.ajax({
             type:"POST",
             url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
-            data:{"country_filter":$('#countries').val(),
-                 "area_filter":$('#areas').val(),
-                 "category_filter":$('#categories').val()
-                 //"hindex_filter=":+hindex_range
-             },
-            //data:"area_filter=" + $('#areas').val(),
+            data:{
+                "area_filter":$('#areas').val(),
+                "country_filter":$('#countries').val(),
+                "category_filter":$('#categories').val(),
+                "hindex_filter":$('#slider-rangeH').val()
+
+                },
             success:function(r){
                 $('#searchResult').html(r);
+                /*$('#searchResult').fadeOut('slow',function(){
+                $('#searchResult').html(r).fadeIn('fast');*/
             }
         });
     }
