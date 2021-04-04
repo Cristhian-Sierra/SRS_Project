@@ -8,7 +8,7 @@ require("business/Journalcategory.php");
 require("business/Journal.php");
 require("business/Country.php");
 require("business/Filter_search.php");
-
+require("fpdf/fpdf.php");
 $pid=base64_decode($_GET['pid']);
 include($pid);
 ?>

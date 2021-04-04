@@ -9,6 +9,8 @@ require("business/Journalcategory.php");
 require("business/Journal.php");
 require("business/Country.php");
 require("business/Filter_search.php");
+require("ui/filter_search/pdf/fpdf.php");
+
 ini_set("display_errors","1");
 date_default_timezone_set("America/Bogota");
 $webPagesNoAuthentication = array(
@@ -58,7 +60,8 @@ $webPages = array(
 	'ui/filter_search/insertFilter_search.php',
 	'ui/filter_search/updateFilter_search.php',
 	'ui/filter_search/selectAllFilter_search.php',
-	'ui/filter_search/searchFilter_search.php'
+	'ui/filter_search/searchFilter_search.php',
+    'ui/filter_search/pdf/printpdf.php'
 	
 );
 if(isset($_GET['logOut'])){

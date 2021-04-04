@@ -1,5 +1,8 @@
 <?php
 $order = "";
+$filter_search = new Filter_search();
+$searchs = $filter_search -> selectAll();
+
 if(isset($_GET['order'])){
 	$order = $_GET['order'];
 }
@@ -149,9 +152,10 @@ if(isset($_GET['dir'])){
 				</thead>
 				</tbody>
 					<?php
-					$filter_search = new Filter_search();
+					
 					if($order != "" && $dir != "") {
 						$filter_searchs = $filter_search -> selectAllOrder($order, $dir);
+						
 					} else {
 						$filter_searchs = $filter_search -> selectAll();
 					}
@@ -178,6 +182,11 @@ if(isset($_GET['dir'])){
 					?>
 				</tbody>
 			</table>
+	
+		<form name="download_pdf" method="post" action="index.php?pid=<?php echo base64_encode("ui/filter_search/pdf/printpdf.php")?>" method=POST>
+		<input type="hidden" value= "'.serialize(<?php echo $searchs?>)'" name="searchs"></input>
+				<button type="submit" class="btn btn-primary">Descargar pdf</button>
+		</form>
 			</div>
 		</div>
 	</div>
