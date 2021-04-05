@@ -176,6 +176,9 @@ if(isset($_GET['dir'])){
 						$counter++;
 					}
 					?>
+				<div class="container">
+					<a href='index.php?pid=<?php echo base64_encode("ui/filter_search/PDFSearchs.php") ?>'  target="_blank">PDF</a>	
+				</div>	
 				</tbody>
 			</table>
 			</div>

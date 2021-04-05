@@ -298,41 +298,6 @@
         </script>
 
 
-        <!--<select name="hindex" id="hindex" required>
-            <option value="0">H index </option>
-            <option value="1">0-200</option>
-            <option value="2">201-400</option>
-            <option value="3">401-600</option>
-            <option value="4">601-800</option>
-            <option value="5">801 or more</option>
-        </select>-->
-
-
-      <!--  <label>SJR: 
-    		<select name="sjr" id="sjr" required>
-    			<option value="0">SJR</option>
-    			<option value="1">1-20</option>
-    			<option value="2">21-40</option>
-    			<option value="3">41-60</option>
-    			<option value="4">61-80</option>
-    			<option value="5">80 or more</option>
-    		</select>
-        </label>
-    -->
-    <!--
-
-        <label>References: 
-    		<select  name="references" id="references" required>
-    			<option value="0">References</option>
-    			<option value="1">0-1000</option>
-    			<option value="2">1001-10000</option>
-    			<option value="3">10001-100000</option>
-    			<option value="4">100001-500000</option>
-    			<option value="5">500001 or more</option>
-    		</select>
-        </label>
-    -->
-
 		<br> <br>
 		<div class="form-group">
 			<input type="submit" class="btn btn-dark" value="Search with filters" name="Action">	
@@ -476,7 +441,7 @@
             chargesList();
         });
         
-          $('#slider-rangeH').change(function(){
+          $('#amountH').change(function(){
             chargesList();
         });
 
@@ -494,7 +459,7 @@
                 "area_filter":$('#areas').val(),
                 "country_filter":$('#countries').val(),
                 "category_filter":$('#categories').val(),
-                "hindex_filter":$('#slider-rangeH').val()
+                "hindex_filter":$('#amountH').val()
 
                 },
             success:function(r){
@@ -507,3 +472,38 @@
 </script>
 
 
+
+        <!--<select name="hindex" id="hindex" required>
+            <option value="0">H index </option>
+            <option value="1">0-200</option>
+            <option value="2">201-400</option>
+            <option value="3">401-600</option>
+            <option value="4">601-800</option>
+            <option value="5">801 or more</option>
+        </select>-->
+
+
+      <!--  <label>SJR: 
+            <select name="sjr" id="sjr" required>
+                <option value="0">SJR</option>
+                <option value="1">1-20</option>
+                <option value="2">21-40</option>
+                <option value="3">41-60</option>
+                <option value="4">61-80</option>
+                <option value="5">80 or more</option>
+            </select>
+        </label>
+    -->
+    <!--
+
+        <label>References: 
+            <select  name="references" id="references" required>
+                <option value="0">References</option>
+                <option value="1">0-1000</option>
+                <option value="2">1001-10000</option>
+                <option value="3">10001-100000</option>
+                <option value="4">100001-500000</option>
+                <option value="5">500001 or more</option>
+            </select>
+        </label>
+    -->

@@ -16,7 +16,8 @@ $webPagesNoAuthentication = array(
 	'ui/filter_search/filterSearchPage.php',
 	'ui/filter_search/datesC.php',
 	'ui/filter_search/getHindexFilter.php',
-	'ui/filter_search/filterSearchPageAjax.php'
+	'ui/filter_search/filterSearchPageAjax.php',
+	'ui/filter_search/PDFSearchs.php'
 
 
 );
@@ -59,6 +60,7 @@ $webPages = array(
 	'ui/filter_search/updateFilter_search.php',
 	'ui/filter_search/selectAllFilter_search.php',
 	'ui/filter_search/searchFilter_search.php'
+
 	
 );
 if(isset($_GET['logOut'])){
