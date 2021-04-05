@@ -2,7 +2,7 @@
 require_once 'business/Filter_search.php';
 $bo= new Filter_search();
 $searchs= $bo->selectAll();
-//$searchs = unsearialize($_POST["searchs"]);
+$hi= "hola";
 class printpdf extends fpdf
 {
 
@@ -10,9 +10,7 @@ class printpdf extends fpdf
     // Cabecera de página
     function Header()
     {
-        // Logo
-        $this->Image('logo.png',10,8,33);
-        // Arial bold 15
+
         $this->SetFont('Arial','B',15);
         // Movernos a la derecha
         $this->Cell(80);
@@ -42,9 +40,12 @@ class printpdf extends fpdf
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->SetFont('Times','',12);
-    while ($row = $searchs -> fetch_assoc()){
+    
+    while ($row = mysqli_fetch_row($searchs)) {
         $pdf->Cell(90,10,$row['search_date']);
     }
+        
+    
    
     $pdf->Output();
 
@@ -52,3 +53,6 @@ class printpdf extends fpdf
 
    // unserialize($_POST["searchs"]);
 ?>
+<script type="text/javascript">
+   console.log(<?php echo $searchs?>);
+</script>
