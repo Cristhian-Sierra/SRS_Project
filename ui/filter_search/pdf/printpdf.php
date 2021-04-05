@@ -53,6 +53,7 @@ class printpdf extends fpdf
 
    // unserialize($_POST["searchs"]);
 ?>
+
 <script type="text/javascript">
    console.log(<?php echo $searchs?>);
 </script>
