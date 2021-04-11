@@ -183,6 +183,8 @@ class Journal {
 			$country = new Country();
 			$country -> getName();
 			$country=$result[12];
+			/*$country = new Country($result[12]);
+			$country -> select();*/
 	
 			array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
 		}

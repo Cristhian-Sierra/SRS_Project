@@ -67,8 +67,7 @@ class JournalDAO {
 
 	function selectAllByCountry() {
 		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-		from Journal
-		where country_idCountry = '" . $this -> country . "'";
+		from Journal";
 	}
 
 	function selectAllOrder($orden, $dir){

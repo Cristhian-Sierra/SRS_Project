@@ -10,7 +10,7 @@ $area=$_POST['area_category'];
 	$result=mysqli_query($con,$sql);
 
 	$cadena="";
-    if($area=="0"){
+    if($area==""){
     	$cadena=$cadena.'<option>Category</option>';
     }
     else{
