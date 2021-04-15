@@ -135,23 +135,23 @@
         <div class="container">
             
                 <label id="referencesH" >H index:
-                  <input type="number" name="hindex" id="hindex" min="1" max="1159" value="" oninput="this.form.hindex_range.value=this.value" /> 
+                  <input type="number" name="hindex" id="hindex" min="1" max="1159" value="" oninput="this.form.hindex_range.value=this.value" required  /> 
                   <br>
                   <input type="range" name="hindex_range" id="hindex_range" min="1" max="1159" value="" oninput="this.form.hindex.value=this.value" />
                   
               </label>
 
               <label id="referencesL" >References:
-                  <input type="number" name="references" id="references" min="0" max="989223" value="" oninput="this.form.refs_range.value=this.value" /> 
+                  <input type="number" name="references" id="references" min="0" max="989223" value="" oninput="this.form.refs_range.value=this.value" required /> 
                   <br>
-                  <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="" oninput="this.form.references.value=this.value" />
+                  <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="" oninput="this.form.references.value=this.value"   />
                   
               </label>
 
               <label id="referencesS" >SJR:
-                  <input type="number" name="sjr" id="sjr" min="1" max="88" value="" oninput="this.form.sjr_range.value=this.value" /> 
+                  <input type="number" name="sjr" id="sjr" min="1" max="88" value="" oninput="this.form.sjr_range.value=this.value" required /> 
                   <br>
-                  <input type="range" name="sjr_range" id="sjr_range" min="1" max="88" value="" oninput="this.form.sjr.value=this.value" />
+                  <input type="range" name="sjr_range" id="sjr_range" min="1" max="88" value="" oninput="this.form.sjr.value=this.value"   />
                   
               </label>
            
@@ -175,7 +175,7 @@
         <table   class="table table-dark " id="JournalTable">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Rank</th>
                     <th scope="col"> Title</th>
                     <th scope="col"> Issn</th>
                     <th scope="col">sjr</th>
@@ -225,7 +225,7 @@
             $(document).ready( function () {
                 $('#JournalTable').DataTable({
                     //dom:'<"top"lfip> rt <"bottom"pi><"clear">',
-                    lengthMenu: [ [100, 500, 1000,-1],[100, 500, 1000,"All"] ]
+                    lengthMenu: [ [100, 500,-1],[100,500,"All"] ]
                 });
                  
             } );
@@ -276,15 +276,15 @@
             chargesList();
         });
         
-        $('#hindex').change(function(){
+        $('#hindex_range').change(function(){
             chargesList();
         });
 
-        $('#references').change(function(){
+        $('#refs_range').change(function(){
             chargesList();
         });
 
-        $('#sjr').change(function(){
+        $('#sjr_range').change(function(){
             chargesList();
         });
 
@@ -307,9 +307,9 @@
                 "area_filter":$('#areas').val(),
                 "country_filter":$('#countries').val(),
                 "category_filter":$('#categories').val(),
-                "hindex_filter":$('#hindex').val(),
-                "ref_filter":$('#references').val(),
-                "sjr_filter":$('#sjr').val(),
+                "hindex_filter":$('#hindex_range').val(),
+                "ref_filter":$('#refs_range').val(),
+                "sjr_filter":$('#sjr_range').val(),
                 "quartile_filter":$('#quartile').val()
 
                 },

@@ -12,14 +12,9 @@ $sjr=$_POST['sjr_filter'];
         $sqlF="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a WHERE co.idCountry=j.country_IdCountry  AND a.idArea=ca.area_idArea  AND a.idArea='$area' AND co.idCountry='$country' AND ca.idCategory='$category' AND j.hindex>='$hindex' AND j.total_references>='$references' AND j.sjr>='$sjr' AND j.best_quartile='$quartile' order by j.idJournal";
 
 
-
-
-        //AND j.hindex>='$hindex' AND j.total_references>='$references' AND j.sjr>='$sjr'
-
         $sqlAll="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co WHERE co.idCountry=j.country_IdCountry";
         	
-//
-//  AND j.best_quartile='$quartile' j.country_idCountry=co.idCountry AND ca.area_idArea=a.idArea AND jc.category_idCategory=ca.idCategory AND jc.journal_idJournal=j.idJournal AND        
+ 
 ?>
 
 
@@ -28,7 +23,7 @@ $sjr=$_POST['sjr_filter'];
 			<table class="table table-dark "  id="JournalTableS">
 				<thead  class="thead-dark">
 					<tr>
-						<th scope="col">#</th>
+						<th scope="col">Rank</th>
 						<th scope="col"> Title</th>
 						<th scope="col"> Issn</th>
 						<th scope="col">sjr</th>
