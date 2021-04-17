@@ -9,10 +9,12 @@ $references=$_POST['ref_filter'];
 $sjr=$_POST['sjr_filter'];
   
 
-        $sqlF="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a WHERE co.idCountry=j.country_IdCountry  AND a.idArea=ca.area_idArea  AND a.idArea='$area' AND co.idCountry='$country' AND ca.idCategory='$category' AND j.hindex>='$hindex' AND j.total_references>='$references' AND j.sjr>='$sjr' AND j.best_quartile='$quartile' order by j.idJournal";
+        $sqlF="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.name='".$area."') AND (co.name='".$country."') AND (ca.name='".$category."') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') AND (j.best_quartile='$quartile') order by j.idJournal";
 
 
         $sqlAll="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co WHERE co.idCountry=j.country_IdCountry";
+
+      
         	
  
 ?>

@@ -7,6 +7,26 @@ $dir = "";
 if(isset($_GET['dir'])){
 	$dir = $_GET['dir'];
 }
+
+$user_ip = getenv('REMOTE_ADDR');
+$agent = $_SERVER["HTTP_USER_AGENT"];
+$browser = "-";
+if( preg_match('/MSIE (\d+\.\d+);/', $agent) ) {
+    $browser = "Internet Explorer";
+} else if (preg_match('/Chrome[\/\s](\d+\.\d+)/', $agent) ) {
+    $browser = "Chrome";
+} else if (preg_match('/Edge\/\d+/', $agent) ) {
+    $browser = "Edge";
+} else if ( preg_match('/Firefox[\/\s](\d+\.\d+)/', $agent) ) {
+    $browser = "Firefox";
+} else if ( preg_match('/OPR[\/\s](\d+\.\d+)/', $agent) ) {
+    $browser = "Opera";
+} else if (preg_match('/Safari[\/\s](\d+\.\d+)/', $agent) ) {
+    $browser = "Safari";
+}
+$administrator=new Administrator();
+$logAdministrator = new LogAdministrator("", "View all filter searchs", "", date("Y-m-d"), date("H:i:s"), $user_ip, PHP_OS, $browser, $administrator -> getIdAdministrator());
+				$logAdministrator -> insert();
 ?>
 <div class="container-fluid">
 	<div class="card">
@@ -176,9 +196,7 @@ if(isset($_GET['dir'])){
 						$counter++;
 					}
 					?>
-				<div class="container">
-					<a href='index.php?pid=<?php echo base64_encode("ui/filter_search/PDFSearchs.php") ?>'  target="_blank">PDF</a>	
-				</div>	
+				
 				</tbody>
 			</table>
 			</div>

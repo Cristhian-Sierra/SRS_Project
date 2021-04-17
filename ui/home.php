@@ -48,13 +48,13 @@ if(isset($_POST['logIn'])){
 					<h4><strong>SRS</strong></h4>
 				</div>
 				<div class="card-body">
-					<p>This project will be in charge of having an information system capable of filtering and suggesting the best journals that exist registered on the ScimagoJR page, this in order to optimize the search processes for the best articles published globally, regardless of their area. or category.</p>
+					<p>This project will be in charge of having an information system capable of filtering and suggesting the best magazines that exist registered on the ScimagoJR page, based on your search criteria, which you can do with filters such as area, category, country, references, quartile, Hindex and SJR.</p>
 				</div>
 				<div class="card-body">
 					<a href="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>">Search the journals here</a>
 				</div>
-				<div class="container">
-					<a href='index.php?pid=<?php echo base64_encode("ui/filter_search/PDFSearchs.php") ?>'  target="_blank">PDF</a>	
+				<div class="card-body">
+					<a href='index.php?pid=<?php echo base64_encode("ui/filter_search/PDFSearchs.php") ?>'  target="_blank">View graphs</a>	
 				</div>
 			</div>
 		</div>

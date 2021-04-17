@@ -1,3 +1,26 @@
+<?php 
+$user_ip = getenv('REMOTE_ADDR');
+$agent = $_SERVER["HTTP_USER_AGENT"];
+$browser = "-";
+if( preg_match('/MSIE (\d+\.\d+);/', $agent) ) {
+    $browser = "Internet Explorer";
+} else if (preg_match('/Chrome[\/\s](\d+\.\d+)/', $agent) ) {
+    $browser = "Chrome";
+} else if (preg_match('/Edge\/\d+/', $agent) ) {
+    $browser = "Edge";
+} else if ( preg_match('/Firefox[\/\s](\d+\.\d+)/', $agent) ) {
+    $browser = "Firefox";
+} else if ( preg_match('/OPR[\/\s](\d+\.\d+)/', $agent) ) {
+    $browser = "Opera";
+} else if (preg_match('/Safari[\/\s](\d+\.\d+)/', $agent) ) {
+    $browser = "Safari";
+}
+$administrator=new Administrator();
+$logAdministrator = new LogAdministrator("", "Search administrators", "", date("Y-m-d"), date("H:i:s"), $user_ip, PHP_OS, $browser, $administrator -> getIdAdministrator());
+				$logAdministrator -> insert();
+
+ ?>
+
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-header">

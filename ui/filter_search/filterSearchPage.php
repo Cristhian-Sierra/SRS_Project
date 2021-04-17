@@ -77,6 +77,8 @@
 
         $filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
         $filterSClass->insert();
+
+        echo "<script>alert('Search saved')</script>";
        
     }
 ?>
@@ -95,7 +97,7 @@
                     <?php 
                     $i=1;
                     foreach($areasF as $aF ){?>
-                        <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo $aF->getName() ?> </option >;
+                        <option value= "<?php echo $aF->getName() ?>"> <?php echo utf8_encode($aF->getName()) ?> </option >;
                         <?php
                         $i++;}
                         ?>
@@ -114,7 +116,7 @@
                     <?php 
                     $i=1;
                     foreach($countrysF as $coF ){?>
-                        <option value= "<?php echo $coF->getIdCountry() ?>"> <?php echo $coF->getName() ?> </option >;
+                        <option value= "<?php echo $coF->getName() ?>"> <?php echo $coF->getName() ?> </option >;
                         <?php
                         $i++;}
                         ?>
@@ -134,24 +136,24 @@
 
         <div class="container">
             
-                <label id="referencesH" >H index:
-                  <input type="number" name="hindex" id="hindex" min="1" max="1159" value="" oninput="this.form.hindex_range.value=this.value" required  /> 
+                <label id="referencesH" >H index >=
+                  <input type="number" name="hindex" id="hindex" min="1" max="1159" value="1" oninput="this.form.hindex_range.value=this.value" required  /> 
                   <br>
-                  <input type="range" name="hindex_range" id="hindex_range" min="1" max="1159" value="" oninput="this.form.hindex.value=this.value" />
+                  <input type="range" name="hindex_range" id="hindex_range" min="1" max="1159" value="1" oninput="this.form.hindex.value=this.value"  />
                   
               </label>
 
-              <label id="referencesL" >References:
-                  <input type="number" name="references" id="references" min="0" max="989223" value="" oninput="this.form.refs_range.value=this.value" required /> 
+              <label id="referencesL" >References >=
+                  <input type="number" name="references" id="references" min="0" max="989223" value="0" oninput="this.form.refs_range.value=this.value" required /> 
                   <br>
-                  <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="" oninput="this.form.references.value=this.value"   />
+                  <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="0" oninput="this.form.references.value=this.value"   />
                   
               </label>
 
-              <label id="referencesS" >SJR:
-                  <input type="number" name="sjr" id="sjr" min="1" max="88" value="" oninput="this.form.sjr_range.value=this.value" required /> 
+              <label id="referencesS" >SJR >=
+                  <input type="number" name="sjr" id="sjr" min="1" max="88" value="1" oninput="this.form.sjr_range.value=this.value" required  /> 
                   <br>
-                  <input type="range" name="sjr_range" id="sjr_range" min="1" max="88" value="" oninput="this.form.sjr.value=this.value"   />
+                  <input type="range" name="sjr_range" id="sjr_range" min="1" max="88" value="1" oninput="this.form.sjr.value=this.value"   />
                   
               </label>
            
@@ -288,6 +290,19 @@
             chargesList();
         });
 
+
+        $('#hindex').change(function(){
+            chargesList();
+        });
+
+        $('#references').change(function(){
+            chargesList();
+        });
+
+        $('#sjr').change(function(){
+            chargesList();
+        });
+
         $('#quartile').change(function(){
             chargesList();
         });
@@ -300,6 +315,8 @@
     function chargesList(){
         //var hindex_range = $('#slider-rangeH').val();
        // $('#searchResult').html(loader);
+       var area=$('#countries').val();
+       console.log(area);
         $.ajax({
             type:"POST",
             url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
@@ -313,6 +330,7 @@
                 "quartile_filter":$('#quartile').val()
 
                 },
+
             success:function(r){
                 $('#searchResults').html(r);
                /* $('#searchResult').fadeOut('slow',function(){

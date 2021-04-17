@@ -141,5 +141,16 @@ class Category {
 		return $categorys;
 	}
 
+	function datesC($areaC){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> categoryDAO -> datesC($areaC));
+		$categorys = array();
+		while ($result = $this -> connection -> fetchRow()){
+			array_push($categorys, new Category("","",$areaC));
+		}
+		$this -> connection -> close();
+		return $categorys;
+	}
+
 }
 ?>
