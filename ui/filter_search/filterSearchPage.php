@@ -86,7 +86,7 @@
 <div align="center">
 	<?php include("ui/header.php"); ?>
 </div>
-
+<br> <br>
 <div class="container" >
 	<form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
 
@@ -97,7 +97,7 @@
                     <?php 
                     $i=1;
                     foreach($areasF as $aF ){?>
-                        <option value= "<?php echo $aF->getName() ?>"> <?php echo utf8_encode($aF->getName()) ?> </option >;
+                        <option value= "<?php echo $aF->getName() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
                         <?php
                         $i++;}
                         ?>
@@ -112,11 +112,11 @@
 
             <label>Country:
                 <select name="countries" id="countries" class="form-control input-sm"   required>
-                    <option  value="">Country</option >
+                    <option  value="">Country </option >
                     <?php 
                     $i=1;
                     foreach($countrysF as $coF ){?>
-                        <option value= "<?php echo $coF->getName() ?>"> <?php echo $coF->getName() ?> </option >;
+                        <option value= "<?php echo utf8_decode($coF->getName()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
                         <?php
                         $i++;}
                         ?>
@@ -162,7 +162,7 @@
 
         <br>
 		<div class="form-group">
-			<input type="submit" class="btn btn-dark" value="Save your search" name="Action">	
+			<input type="submit" class="btn btn-dark" value="Save your search" name="Action" alt="Please save your search to a report" >	
 		</div>        
 	</form>    
   </div>
@@ -175,7 +175,7 @@
      <!--Table's Structure-->
      <div id="searchResults">
         <table   class="table table-dark " id="JournalTable">
-            <thead class="thead-dark">
+         <!--   <thead class="thead-dark">
                 <tr>
                     <th scope="col">Rank</th>
                     <th scope="col"> Title</th>
@@ -193,7 +193,7 @@
             </thead>
             <tbody>
                 <?php 
-                $i=1;
+                /*$i=1;
                 foreach($journalsF as $jP){
                     echo "<tr>";
                     echo "<td>" . $jP->getIdJournal() . "</td>";
@@ -210,31 +210,33 @@
                     echo "<td>" . $jP  -> getCountry(). "</td>";
                     echo "</tr>";
                     $i++;
-                }
+                }*/
                 ?>
             </tbody>
-
-        </table>
-        <!--DATABLE JQUERY
-        i=info
-        t=table
-        f=filter input text
-        p=pagination
-        r=research
-        l=list of dates
         -->
-        <script type="text/javascript">
-            $(document).ready( function () {
-                $('#JournalTable').DataTable({
-                    //dom:'<"top"lfip> rt <"bottom"pi><"clear">',
-                    lengthMenu: [ [100, 500,-1],[100,500,"All"] ]
-                });
-                 
-            } );
-        </script>
+        </table>
+      
     </div>
-     
+      
 </div>
+
+<!--DATABLE JQUERY
+            i=info
+            t=table
+            f=filter input text
+            p=pagination
+            r=research
+            l=list of dates
+-->
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#JournalTable').DataTable({
+            //dom:'<"top"lfip> rt <"bottom"pi><"clear">',
+            lengthMenu: [ [100, 500,-1],[100,500,"All"] ]
+        });
+
+    } );
+</script>
 
 
 

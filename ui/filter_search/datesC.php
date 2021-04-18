@@ -27,7 +27,7 @@ $area=$_POST['area_category'];
 
 
 <?php 
-	/*
+/*	
 $areaC=$_POST['area_category'];
 $category= new Category();
 $cat= $category->datesC($areaC);

@@ -19,7 +19,6 @@ $sjr=$_POST['sjr_filter'];
  
 ?>
 
-
 	<!--class="table table-hover table-striped table-responsive-md"-->
 		<div id="container">
 			<table class="table table-dark "  id="JournalTableS">
@@ -50,7 +49,7 @@ $sjr=$_POST['sjr_filter'];
 						while ($ver=mysqli_fetch_row($resultAll)) {
 							echo "<tr>";	
 							echo "<td>".$ver[0]."</td>";
-							echo "<td>".$ver[1]."</td>";
+							echo "<td>"."<a href='https://www.scimagojr.com/journalsearch.php?q=".$ver[2]."' target='_blank'>".$ver[1]."</a>"."</td>";
 							echo "<td>".$ver[2]."</td>";
 							echo "<td>".$ver[3]."</td>";
 							echo "<td>".$ver[4]."</td>";
@@ -66,10 +65,11 @@ $sjr=$_POST['sjr_filter'];
 
 					}
 					else{
+
 						while ($ver=mysqli_fetch_row($resultF)) {
 							echo "<tr>";	
 							echo "<td>".$ver[0]."</td>";
-							echo "<td>".$ver[1]."</td>";
+							echo "<td>"."<a href='https://www.scimagojr.com/journalsearch.php?q=".$ver[2]."' target='_blank'>".$ver[1]."</a>"."</td>";
 							echo "<td>".$ver[2]."</td>";
 							echo "<td>".$ver[3]."</td>";
 							echo "<td>".$ver[4]."</td>";
@@ -88,19 +88,20 @@ $sjr=$_POST['sjr_filter'];
 					?>
 				</tbody>
 			</table>
-
-			<!--DATABLE JQUERY-->
-			<script type="text/javascript">
-				$(document).ready( function () {
-					$('#JournalTableS').DataTable({
-					//dom:'<"top"lfip> rt <"bottom"pi><"clear">',
-                    lengthMenu: [ [100, 500,-1],[100,500,"All"] ]
-					});
-
-				} );
-			</script>
 		</div>
 
+		<!--DATABLE JQUERY-->
+		<script type="text/javascript">
+			$(document).ready( function () {
+				$('#JournalTableS').DataTable({
+					//dom:'<"top"lfip> rt <"bottom"pi><"clear">',
+					lengthMenu: [ [100, 500,-1],[100,500,"All"] ]
+				});
+
+			} );
+		</script>
+
+	
 
 
 <?php
