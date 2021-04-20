@@ -2,26 +2,23 @@
 $con=mysqli_connect('localhost','root','','srs');
 $area=$_POST['area_category'];
 
-	$sql="SELECT ca.idCategory,
-			 ca.area_idArea,ca.name 
-		from category as ca, area as a
-		where a.idArea=ca.area_idArea AND a.name='$area' ";
+$sql="select ca.idCategory, ca.area_idArea,ca.name from category as ca,area as a where ca.area_idArea=a.idArea AND a.name='$area'";
 
-	$result=mysqli_query($con,$sql);
+$result=mysqli_query($con,$sql);
 
-	$cadena="";
-    if($area==""){
-    	$cadena=$cadena.'<option>Category</option>';
-    }
-    else{
-    	while ($ver=mysqli_fetch_row($result)) {
-		$cadena=$cadena.'<option value= "'.$ver[2].'">'.utf8_encode($ver[2]).'</option>';
-	}
+$cadena="";
+
+$cadena=$cadena.'<option value="">Category</option>';
+
+
+while ($ver=mysqli_fetch_row($result)) {
+	$cadena=$cadena.'<option value= "'.$ver[2].'">'.utf8_encode($ver[2]).'</option>';
+	
 
 }
-	echo  $cadena;
+echo  $cadena;
 
-	
+
 
 ?>
 

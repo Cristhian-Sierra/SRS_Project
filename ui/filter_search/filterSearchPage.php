@@ -92,7 +92,7 @@
 
         <div class="container">
             <label>Area: 
-                <select name="areas" id="areas" class="form-control input-sm" required>
+                <select name="areas" id="areas" class="form-control input-sm" >
                     <option  value="">Area</option >
                     <?php 
                     $i=1;
@@ -105,13 +105,13 @@
             </label>
 
             <label>Category: 
-                <select name="categories" id="categories" class="form-control input-sm"  required>
-                    <option  value="">Category</option >
+                <select name="categories" id="categories" class="form-control input-sm" >
+                     <option  value="">Category</option >
                 </select>
             </label>
 
             <label>Country:
-                <select name="countries" id="countries" class="form-control input-sm"   required>
+                <select name="countries" id="countries" class="form-control input-sm"   >
                     <option  value="">Country </option >
                     <?php 
                     $i=1;
@@ -124,7 +124,7 @@
             </label>
             
             <label>Quartile
-        		<select  name="quartile" id="quartile" class="form-control input-sm"  required>
+        		<select  name="quartile" id="quartile" class="form-control input-sm"  >
                     <option value="">Quartile</option>
                     <option value="Q1">Q1</option>
                     <option value="Q2">Q2</option>
@@ -137,21 +137,21 @@
         <div class="container">
             
                 <label id="referencesH" >H index >=
-                  <input type="number" name="hindex" id="hindex" min="1" max="1159" value="1" oninput="this.form.hindex_range.value=this.value" required  /> 
+                  <input type="number" name="hindex" id="hindex" min="1" max="1159" value="1" oninput="this.form.hindex_range.value=this.value"   /> 
                   <br>
                   <input type="range" name="hindex_range" id="hindex_range" min="1" max="1159" value="1" oninput="this.form.hindex.value=this.value"  />
                   
               </label>
 
               <label id="referencesL" >References >=
-                  <input type="number" name="references" id="references" min="0" max="989223" value="0" oninput="this.form.refs_range.value=this.value" required /> 
+                  <input type="number" name="references" id="references" min="0" max="989223" value="0" oninput="this.form.refs_range.value=this.value"  /> 
                   <br>
                   <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="0" oninput="this.form.references.value=this.value"   />
                   
               </label>
 
               <label id="referencesS" >SJR >=
-                  <input type="number" name="sjr" id="sjr" min="1" max="88" value="1" oninput="this.form.sjr_range.value=this.value" required  /> 
+                  <input type="number" name="sjr" id="sjr" min="1" max="88" value="1" oninput="this.form.sjr_range.value=this.value"   /> 
                   <br>
                   <input type="range" name="sjr_range" id="sjr_range" min="1" max="88" value="1" oninput="this.form.sjr.value=this.value"   />
                   
@@ -162,7 +162,7 @@
 
         <br>
 		<div class="form-group">
-			<input type="submit" class="btn btn-dark" value="Save your search" name="Action" alt="Please save your search to a report" >	
+			<input type="submit" class="btn btn-dark" value="Save your search" name="Action">	
 		</div>        
 	</form>    
   </div>
@@ -197,7 +197,7 @@
                 foreach($journalsF as $jP){
                     echo "<tr>";
                     echo "<td>" . $jP->getIdJournal() . "</td>";
-                    echo "<td>" . $jP ->  getTitle() . "</td>";
+                    echo "<td>"."<a href='https://www.scimagojr.com/journalsearch.php?q=".$jP->getIssn()."' target='_blank'>".$jP->getTitle()."</a>"."</td>";
                     echo "<td>" . $jP ->  getIssn() . "</td>";
                     echo "<td>" . $jP  -> getSjr() . "</td>";
                     echo "<td>" . $jP  -> getBest_quartile() . "</td>";

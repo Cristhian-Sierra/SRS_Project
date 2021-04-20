@@ -68,7 +68,7 @@ class CategoryDAO{
 		return "select ca.idCategory,
 			 ca.area_idArea,ca.name 
 		from category as ca, area as a
-		where a.idArea=ca.area_idArea AND a.name='".$areaC."'"; 
+		where a.idArea=ca.area_idArea AND a.idArea='".$areaC."'"; 
 
 	}
 	

@@ -28,8 +28,8 @@ $filS=$filterS->selectAll();
 
 $pdf =new Cezpdf('a4');
 $pdf->selectFont('pdf/fonts/Times-Roman.afm');
-$pdf->ezText("<b>Searchs</b>\n", 30, array("justification" => "center") );
-$opciones = array('width' => '500');
+$pdf->ezText("<b>Search Reports </b>\n", 30, array("justification" => "center") );
+$opciones = array('width' => '550');
 $cols = array('nro' => 'Nro',
     'search_date' => 'Search date' ,
     'search_time' => 'Search time' ,
@@ -42,7 +42,7 @@ $cols = array('nro' => 'Nro',
     'sjr_filter' => 'SJR filter'
     
 );
-$i=0;
+$i=1;
 
 foreach($filS as $fs){
 
