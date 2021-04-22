@@ -60,14 +60,15 @@ class JournalDAO {
 	}
 
 	function selectAll() {
-		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name 
+		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.idCountry 
 		FROM journal as j,country as co
-		WHERE j.country_idCountry=co.idCountry ";
+		WHERE j.country_idCountry=co.idCountry AND (j.hindex>=1) AND (j.total_references>=1) AND (j.sjr>=1)";
 	}
 
 	function selectAllByCountry() {
-		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-		from Journal";
+		return  "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
+		from Journal
+		where country_idCountry = '" . $this -> country . "'";
 	}
 
 	function selectAllOrder($orden, $dir){
@@ -78,19 +79,19 @@ class JournalDAO {
 
 	function selectAllByCountryOrder($orden, $dir) {
 		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-		from Journal
+		from journal
 		where country_idCountry = '" . $this -> country . "'
 		order by " . $orden . " " . $dir;
 	}
 
 	function search($search) {
 		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-		from Journal
+		from journal
 		where title like '%" . $search . "%' or issn like '%" . $search . "%' or sjr like '%" . $search . "%' or best_quartile like '%" . $search . "%' or hindex like '%" . $search . "%' or total_docs like '%" . $search . "%' or total_references like '%" . $search . "%' or total_cites like '%" . $search . "%' or citable_docs like '%" . $search . "%' or coverage like '%" . $search . "%' or categories like '%" . $search . "%'";
 	}
 
 	function delete(){
-		return "delete from Journal
+		return "delete from journal
 		where idJournal = '" . $this -> idJournal . "'";
 	}
 

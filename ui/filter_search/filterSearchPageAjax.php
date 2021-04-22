@@ -9,40 +9,42 @@ $references=$_POST['ref_filter'];
 $sjr=$_POST['sjr_filter'];
   
 		//Selcet with all filters
-        $sqlF="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.name='$area') AND (co.name='$country') AND (ca.name='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') AND (j.best_quartile='$quartile') order by j.idJournal";
+$sqlF="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') AND (j.best_quartile='$quartile') order by j.idJournal";
 
 
         //Select without filters
-        $sqlAll="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+$sqlAll="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
 
         //Select with area
-        $sqlA="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.name='$area') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+$sqlA="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
 
-        
+
         //Select with area and category filter
-        $sqlCA="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.name='$area') AND (ca.name='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+$sqlCA="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
 
         //Select with country filter
-        $sqlCountry=" SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, 
-        j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country 
-        FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc 
-        WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) 
-        AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) 
-        AND (co.name='$country') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+$sqlCountry=" SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, 
+j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country 
+FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc 
+WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) 
+AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) 
+AND (co.idCountry='$country') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
 
         //Select with quartile filter
-        $sqlQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (j.best_quartile='$quartile') AND (j.hindex>='$sjr') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+$sqlQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (j.best_quartile='$quartile') AND (j.hindex>='$sjr') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
 
         //select with area, category, country
-        $sqlACC="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.name='$area') AND (co.name='$country') AND (ca.name='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+$sqlACC="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
 
          //select with area, country
-        $sqlACo="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.name='$area') AND (co.name='$country')  AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')";
+$sqlACo="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country')  AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')";
 
          //select with area, country,quartile
-        $sqlACQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.citable_docs,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.name='$area') AND (co.name='$country')  AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
-        	
-        	
+$sqlACQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country')  AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+
+$sqlACaCQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (ca.idCategory='$category') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+
+        
  
 ?>
 
@@ -80,7 +82,7 @@ $sjr=$_POST['sjr_filter'];
 
 
 
-					echo $sqlF;
+					//echo $sqlF;
 					
 					if($area=="" && $country==""  && $quartile=="" ){
 						while ($ver=mysqli_fetch_row($resultAll)) {
@@ -170,16 +172,16 @@ $sjr=$_POST['sjr_filter'];
 
  ?>
 
-		<!--DATABLE JQUERY-->
-		<script type="text/javascript">
-			$(document).ready( function () {
-				$('#JournalTableS').DataTable({
+ <!--DATABLE JQUERY-->
+ <script type="text/javascript">
+ 	$(document).ready( function () {
+ 		$('#JournalTableS').DataTable({
 					//dom:'<"top"lfip> rt <"bottom"pi><"clear">',
-					lengthMenu: [ [100, 500,-1],[100,500,"All"] ]
+					lengthMenu: [ [50, 500,-1],[50,500,"All"] ]
 				});
 
-			} );
-		</script>
+ 	} );
+ </script>
 
 	
 

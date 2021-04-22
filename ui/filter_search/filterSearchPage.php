@@ -97,7 +97,7 @@
                     <?php 
                     $i=1;
                     foreach($areasF as $aF ){?>
-                        <option value= "<?php echo $aF->getName() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
+                        <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
                         <?php
                         $i++;}
                         ?>
@@ -116,7 +116,7 @@
                     <?php 
                     $i=1;
                     foreach($countrysF as $coF ){?>
-                        <option value= "<?php echo utf8_decode($coF->getName()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
+                        <option value= "<?php echo utf8_decode($coF->getIdCountry()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
                         <?php
                         $i++;}
                         ?>
@@ -129,6 +129,8 @@
                     <option value="Q1">Q1</option>
                     <option value="Q2">Q2</option>
                     <option value="Q3">Q3</option>
+                    <option value="Q4">Q4</option>
+                    <option value="-">Without quartile</option>
                   
                 </select>
             </label>
@@ -137,9 +139,9 @@
         <div class="container">
             
                 <label id="referencesH" >H index >=
-                  <input type="number" name="hindex" id="hindex" min="1" max="1159" value="1" oninput="this.form.hindex_range.value=this.value"   /> 
+                  <input type="number" name="hindex" id="hindex" min="0" max="1159" value="0" oninput="this.form.hindex_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="hindex_range" id="hindex_range" min="1" max="1159" value="1" oninput="this.form.hindex.value=this.value"  />
+                  <input type="range" name="hindex_range" id="hindex_range" min="0" max="1159" value="0" oninput="this.form.hindex.value=this.value"  />
                   
               </label>
 
@@ -151,9 +153,9 @@
               </label>
 
               <label id="referencesS" >SJR >=
-                  <input type="number" name="sjr" id="sjr" min="1" max="88" value="1" oninput="this.form.sjr_range.value=this.value"   /> 
+                  <input type="number" name="sjr" id="sjr" min="0" max="88" value="0" oninput="this.form.sjr_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="sjr_range" id="sjr_range" min="1" max="88" value="1" oninput="this.form.sjr.value=this.value"   />
+                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="88" value="0" oninput="this.form.sjr.value=this.value"   />
                   
               </label>
            
@@ -167,7 +169,6 @@
 	</form>    
   </div>
   <br>
-
 
 <div class="container"><!-- Pagination div-->
 	
@@ -207,7 +208,7 @@
                     echo "<td>" . $jP  ->  getTotal_cites() . "</td>";
                     echo "<td>" . $jP  ->  getCoverage() . "</td>";
                     echo "<td>" . $jP  -> getCategories(). "</td>";
-                    echo "<td>" . $jP  -> getCountry(). "</td>";
+                    echo "<td>" . $jP  -> getCountry()->getName(). "</td>";
                     echo "</tr>";
                     $i++;
                 }*/
@@ -217,7 +218,7 @@
         </table>
       
     </div>
-      
+ 
 </div>
 
 <!--DATABLE JQUERY
@@ -232,7 +233,7 @@
     $(document).ready( function () {
         $('#JournalTable').DataTable({
             //dom:'<"top"lfip> rt <"bottom"pi><"clear">',
-            lengthMenu: [ [100, 500,-1],[100,500,"All"] ]
+            lengthMenu: [ [50, 500,-1],[100,500,"All"] ]
         });
 
     } );
