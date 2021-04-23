@@ -62,7 +62,7 @@ class JournalDAO {
 	function selectAll() {
 		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.idCountry 
 		FROM journal as j,country as co
-		WHERE j.country_idCountry=co.idCountry AND (j.hindex>=1) AND (j.total_references>=1) AND (j.sjr>=1)";
+		WHERE j.country_idCountry=co.idCountry AND (j.best_quartile='Q1' OR j.best_quartile='Q2')";
 	}
 
 	function selectAllByCountry() {

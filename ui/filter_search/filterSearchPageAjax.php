@@ -13,7 +13,7 @@ $sqlF="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile
 
 
         //Select without filters
-$sqlAll="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+$sqlAll="SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') AND (j.best_quartile='Q1' OR j.best_quartile='Q2') order by j.idJournal";
 
         //Select with area
 $sqlA="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
@@ -40,9 +40,16 @@ $sqlACC="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quarti
 $sqlACo="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country')  AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')";
 
          //select with area, country,quartile
-$sqlACQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country')  AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+$sqlACoQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country')  AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
 
-$sqlACaCQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (ca.idCategory='$category') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+//select area,category, quartile
+$sqlACaQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+
+//select area, quartile
+$sqlAQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+
+//select with country. quartile
+$sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.coverage,j.categories,co.name AS country FROM journal AS j,country AS co,category as ca, area as a,journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (co.idCountry='$country') AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
 
         
  
@@ -78,7 +85,10 @@ $sqlACaCQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quar
 					$resultACC=mysqli_query($con,$sqlACC);
 					$resultAll=mysqli_query($con,$sqlAll);
 					$resultAreaCo=mysqli_query($con,$sqlACo);
-					$resultACQ=mysqli_query($con,$sqlACQ);
+					$resultACoQ=mysqli_query($con,$sqlACoQ);
+					$resultACaQ=mysqli_query($con,$sqlACaQ);
+					$resultAQ=mysqli_query($con,$sqlAQ);
+					$resultCoQu=mysqli_query($con,$sqlCoQu);
 
 
 
@@ -91,49 +101,68 @@ $sqlACaCQ="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quar
 
 					}
 
-					else if($area=="" && $category=="" && $quartile=="" ){
+					 if($area=="" && $quartile=="" ){
 						while ($ver=mysqli_fetch_row($resultCountry)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
 
 					}
 
-					else if($country=="" && $category=="" && $quartile=="" ){
+					if($country=="" && $category=="" && $quartile=="" ){
 						while ($ver=mysqli_fetch_row($resultA)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
 					}
 
-					else if($country==""  && $quartile=="" ){
+					 if($country==""  && $quartile=="" ){
 						while ($ver=mysqli_fetch_row($resultCA)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
 					}	
 
-					else if($area=="" && $country=="" && $category=="" ){ 
+					if($area=="" && $country=="" && $category=="" ){ 
 						while ($ver=mysqli_fetch_row($resultQ)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
 					}
 
-					else if($quartile=="" ){ 
+					 if($quartile=="" ){ 
 						while ($ver=mysqli_fetch_row($resultACC)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
 					}
 
-					 if($quartile=="" && $category==""){ 
+					if($quartile=="" && $category==""){ 
 						while ($ver=mysqli_fetch_row($resultAreaCo)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
 					}
 
 
-					else if($category=="" ){ 
-						while ($ver=mysqli_fetch_row($resultACQ)) {
+					 if($category=="" ){ 
+						while ($ver=mysqli_fetch_row($resultACoQ)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
 					}	
+
+					if($country=="" ){ 
+						while ($ver=mysqli_fetch_row($resultACaQ)) {
+							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
+						}
+					}
+
+					 if($area==""){ 
+						while ($ver=mysqli_fetch_row($resultCoQu)) {
+							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
+						}
+						
+					}
+					if($country=="" && $category==""){ 
+						while ($ver=mysqli_fetch_row($resultAQ)) {
+							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
+						}
+						
+					}
 
 					else{
 

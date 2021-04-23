@@ -55,11 +55,11 @@ class Filter_searchDAO{
 				from Filter_search";
 	}
 
-	/*function selectAll() {
+	function selectAllNames() {
 		return "select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, co.name , ca.name ,a.name , fs.quartile_filter, fs.sjr_filter
 			from Filter_search as fs, country as co, category as ca, area as a 
 			where  fs.country_filter=co.idCountry AND fs.category_filter=ca.idCategory AND fs.area_filter= a.idArea";
-	}*/
+	}
 
 	function selectAllOrder($orden, $dir){
 		return "select idFilter_search, search_date, search_time, hindex_filter, references_filter, country_filter, category_filter, area_filter, quartile_filter, sjr_filter

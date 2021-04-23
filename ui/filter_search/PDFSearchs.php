@@ -33,13 +33,13 @@ $opciones = array('width' => '550');
 $cols = array('nro' => 'Nro',
     'search_date' => 'Search date' ,
     'search_time' => 'Search time' ,
-    'hindex_filter' => 'H index filter',
-    'references_filter' => 'References filter',
+    'hindex_filter' => 'H index filter >=',
+    'references_filter' => 'References filter >=',
     'country_filter' => 'Country filter',
     'category_filter' => 'Category filter',
     'area_filter' => 'Area filter',
     'quartile_filter' => 'Quartile filter',
-    'sjr_filter' => 'SJR filter'
+    'sjr_filter' => 'SJR filter >='
     
 );
 $i=1;
