@@ -227,7 +227,7 @@ if(isset($_GET['action']) && $_GET['action']=="delete"){
 					if($order != "" && $dir != "") {
 						$journals = $journal -> selectAllOrder($order, $dir);
 					} else {
-						$journals = $journal -> selectAll();
+						$journals = $journal -> selectAllByCountry();
 					}
 					$counter = 1;
 					foreach ($journals as $currentJournal) {

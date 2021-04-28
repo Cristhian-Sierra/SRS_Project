@@ -23,24 +23,14 @@
     $journalFilter = new Journal();
     $journalsF= $journalFilter->selectAll();
     
-   
-
-    /*$AreaC="";
-    if(isset($_POST["AreaC"])){ //Conditinal to determinate the category list
-        $AreaC=$_POST["AreaC"];
-        $areaCat= new Areacategory($AreaC);
-        $cadena = $areaCat ->select();
-        echo $cadena;
-       
-    }*/
 
     //date_default_timezone_set('UTC');
     date_default_timezone_set("America/Bogota");
     $date = date("Y-m-d");
     $time = date("H:i a");
 
-   
-     $area="";
+
+    $area="";
     if(isset($_POST["areas"])){
         $area=$_POST["areas"];
 
@@ -55,300 +45,141 @@
     if(isset($_POST["countries"])){
         $country=$_POST["countries"];
         
-    }      
+    }
 
     $hindex="";
-    if(isset($_POST["Action"])){    //This conditional is of the button that makes insert in the db
-        //$hindex=$_POST["hindex"];
+    if(isset($_POST["hindex"])){
+        $hindex=$_POST["hindex"];
         
-        switch($_POST["hindex"])//Switch case from hindex select
-        {
-            case 1:
-                $hindex = 0;
-                break;
-            case 2:
-                $hindex = 201 ;
-                break;
-            case 3:
-                $hindex =401 ;
-                break;
-            case 4:
-                $hindex =601;
-                break;
-            case 5:
-                $hindex =801;
-                break;
-            default:
-               
-                break;
-        }
+    } 
 
-        $sjr="";
-        switch($_POST["sjr"]) //Switch case from sjr select
-        {
-            case 1:
-                $sjr = 1;
-                break;
-            case 2:
-                $sjr = 21;
-                break;
-            case 3:
-                $sjr =41 ;
-                break;
-            case 4:
-                $sjr =61;
-                break;
-            case 5:
-                $sjr =81;
-                break;
-            default:
-               
-                break;
-        }
+    $references="";
+    if(isset($_POST["references"])){
+        $references=$_POST["references"];
+        
+    }
 
-        $references="";
-        switch($_POST["references"]) //Switch case from references select
-        {
-            case 1:
-                $references = 0;
-                break;
-            case 2:
-                $references = 2001;
-                break;
-            case 3:
-                $references =10001 ;
-                break;
-            case 4:
-                $references =100001;
-                break;
-            case 5:
-                $references =500001 ;
-                break;
-            default:
-               
-                break;
-        }
+    $sjr=""; 
+    if(isset($_POST["sjr"])){
+        $sjr=$_POST["sjr"];
+        
+    }
 
-        $quartile="";
-        switch($_POST["quartile"]) //Switch case from quartile select
-        {
-            case 1:
-                $quartile = "Q1";
-                break;
-            case 2:
-                $quartile = "Q2";
-                break;
-            case 3:
-                $quartile ="Q3";
-                break;
-            default:
-                
-                break;
-        }
+    $quartile="";
+    if(isset($_POST["quartile"])){
+        $quartile=$_POST["quartile"];
+        
+    } 
+
+   
+    if(isset($_POST["Action"])){
+        //This conditional is of the button that makes insert in the db
 
         $filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
         $filterSClass->insert();
-     
-        
-    }
 
-//This is for pagination 
-    
-    $quantity = 900;
-    if(isset($_GET["quantity"])){
-    	$quantity = $_GET["quantity"];
+        echo "<script>alert('Search saved')</script>";
+       
     }
-    $page = 1;
-    if(isset($_GET["page"])){
-    	$page = $_GET["page"];
-    }
-    $journalsP = $journalFilter -> searchPage($quantity, $page);
-    $journalsR = $journalFilter -> searchQuantity();
-    $totalPages = intval($journalsR/$quantity);
-    if($journalsR%$quantity != 0){
-    	$totalPages++;
-    }
-    $lastPage = ($totalPages == $page); 
 ?>
 
 <div align="center">
-	<?php include("ui/header.php"); ?>
+    <?php include("ui/header.php"); ?>
 </div>
-
+<br> <br>
 <div class="container" >
-	<form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
+    <form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
 
+        <div class="container">
+            <label>Area: 
+                <select name="areas" id="areas" class="form-control input-sm" >
+                    <option  value="">Area</option >
+                    <?php 
+                    $i=1;
+                    foreach($areasF as $aF ){?>
+                        <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
+                        <?php
+                        $i++;}
+                        ?>
+                    </select>
+            </label>
 
-        <label>Area: 
-            <select name="areas" id="areas" required>
-                <option  value="0">Area</option >
-                <?php 
-                $i=1;
-                foreach($areasF as $aF ){?>
-                    <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo $aF->getName() ?> </option >;
-                    <?php
-                    $i++;}
-                    ?>
+            <label>Category: 
+                <select name="categories" id="categories" class="form-control input-sm" >
+                     <option  value="">Category</option >
                 </select>
-        </label>
+            </label>
 
-        <label>Category: 
-            <select name="categories" id="categories" required>
-                <option  value="0">Category</option >
-            </select>
-        </label>
-
-        <label>Country:
-            <select name="countries" id="countries"  required>
-                <option  value="0">Country</option >
-                <?php 
-                $i=1;
-                foreach($countrysF as $coF ){?>
-                    <option value= "<?php echo $coF->getIdCountry() ?>"> <?php echo $coF->getName() ?> </option >;
-                    <?php
-                    $i++;}
-                    ?>
+            <label>Country:
+                <select name="countries" id="countries" class="form-control input-sm"   >
+                    <option  value="">Country </option >
+                    <?php 
+                    $i=1;
+                    foreach($countrysF as $coF ){?>
+                        <option value= "<?php echo utf8_decode($coF->getIdCountry()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
+                        <?php
+                        $i++;}
+                        ?>
+                    </select>
+            </label>
+            
+            <label>Quartile
+                <select  name="quartile" id="quartile" class="form-control input-sm"  >
+                    <option value="">Quartile</option>
+                    <option value="Q1">Q1</option>
+                    <option value="Q2">Q2</option>
+                    <option value="Q3">Q3</option>
+                    <option value="Q4">Q4</option>
+                    <option value="-">Without quartile</option>
+                  
                 </select>
-        </label>
-        
-        <label>Quartile
-    		<select  name="quartile" id="quartile" required>
-                <option value="0">Quartile</option>
-                <option value="1">Q1</option>
-                <option value="2">Q2</option>
-                <option value="3">Q3</option>
-              
-            </select>
-        </label>
+            </label>
+        </div>
 
+        <div class="container">
+            
+                <label id="referencesH" >H index >=
+                  <input type="number" name="hindex" id="hindex" min="0" max="1159" value="100" oninput="this.form.hindex_range.value=this.value"   /> 
+                  <br>
+                  <input type="range" name="hindex_range" id="hindex_range" min="0" max="1159" value="100" oninput="this.form.hindex.value=this.value"  />
+                  
+              </label>
 
-        <!--SLIDER DE HINDEX-->
+              <label id="referencesL" >References >=
+                  <input type="number" name="references" id="references" min="0" max="989223" value="1000" oninput="this.form.refs_range.value=this.value"  /> 
+                  <br>
+                  <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="1000" oninput="this.form.references.value=this.value"   />
+                  
+              </label>
 
-        <div class="container">     
-            <label for="amountH">H index:</label>
-            <input type="text" id="amountH" name="range" style="border: 0; color: #4DCD7C    ; font-weight: bold;" readonly/>
+              <label id="referencesS" >SJR >=
+                  <input type="number" name="sjr" id="sjr" min="0" max="88" value="1.0" step="0.01"  oninput="this.form.sjr_range.value=this.value"   /> 
+                  <br>
+                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="88.192" value="1.0" step="0.01" oninput="this.form.sjr.value=this.value"   />
+                  
+              </label>
+           
+           
+        </div>
 
-            <div id="slider-rangeH" style="width:300px;"></div>
-        </div>   
-        <!--JQUERY que permite mostrar datos del slider-->    
-        <script>
-            $(function() {
-                $("#slider-rangeH").slider({
-                    range: true,
-                    min: 1,
-                    max: 1150,
-                    values: [0, 500],
-                    slide: function(event, ui) {
-                        $("#amountH").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
-                    }
-                });
-
-                $( "#amountH" ).val($("#slider-rangeH").slider("values", 0) + "-" + $("#slider-rangeH").slider( "values", 1) + "");
-            });
-        </script>
-
-        <!--SLIDER DE SJR-->
-
-        <div class="container">     
-            <label for="amountS">SJR:</label>
-            <input type="text" id="amountS" name="range" style="border: 0; color: #4DCD7C    ; font-weight: bold;"  readonly />
-
-            <div id="slider-rangeS" style="width:300px;"></div>
-        </div>   
-        <!--JQUERY que permite mostrar datos del slider-->    
-        <script>
-            $(function() {
-                $("#slider-rangeS").slider({
-                    range: true,
-                    min: 1,
-                    max: 88,
-                    values: [0, 44],
-                    slide: function(event, ui) {
-                        $("#amountS").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
-                    }
-                });
-
-                $( "#amountS" ).val($("#slider-rangeS").slider("values", 0) + "-" + $("#slider-rangeS").slider( "values", 1) + "");
-            });
-        </script>
-
-        <!--SLIDER DE REFERENES-->
-
-        <div class="container">     
-            <label for="amountR">References:</label>
-            <input type="text" id="amountR" name="range" style="border: 0; color: #4DCD7C    ; font-weight: bold;" readonly/>
-
-            <div id="slider-rangeR" style="width:300px;"></div>
-        </div>   
-        <!--JQUERY que permite mostrar datos del slider-->    
-        <script>
-            $(function() {
-                $("#slider-rangeR").slider({
-                    range: true,
-                    min: 0,
-                    max: 989223,
-                    values: [0, 400000],
-                    slide: function(event, ui) {
-                        $("#amountR").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] + "");
-                    }
-                });
-
-                $( "#amountR" ).val($("#slider-rangeR").slider("values", 0) + "-" + $("#slider-rangeR").slider( "values", 1) + "");
-            });
-        </script>
-
-
-		<br> <br>
-		<div class="form-group">
-			<input type="submit" class="btn btn-dark" value="Search with filters" name="Action">	
-		</div>        
-	</form>    
+        <br>
+        <div class="form-group">
+            <input type="submit" class="btn btn-dark" value="Save your search" name="Action">   
+        </div>        
+    </form>    
   </div>
+  <br>
 
 
 <div class="container"><!-- Pagination div-->
-	<div class="row"> 
-		<div class="col-md-9"></div>
-		<div class="col-md-3">
-		    <nav aria-label="Page navigation Journals">
-		    	<ul class="pagination">
-		            <li class="page-item <?php echo ($page==1)?"disabled": ""; ?>"><a class="page-link" href="<?php echo "index.php?pid=" . base64_encode("ui/filter_search/filterSearchPage.php") . "&page=" . ($page-1) . "&quantity=" . $quantity ?>"> &lt;&lt; </a></li>
-		            <?php 
-		            for($i=1; $i<=$totalPages; $i++){
-		            	if($i==$page){
-		            		echo "<li class='page-item active' aria-current='page'><span class='page-link'>" . $i . "<span class='sr-only'></span></span></li>";
-		            	}else{
-		            		echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("ui/filter_search/filterSearchPage.php") . "&page=" . $i . "&quantity=" . $quantity . "'>" . $i . "</a></li>";
-		            	}        						            						    
-		            }        						
-		            ?>
-		            <li class="page-item <?php echo ($lastPage)?"disabled": ""; ?>"><a class="page-link" href="<?php echo "index.php?pid=" . base64_encode("ui/filter_search/filterSearchPage.php") . "&page=" . ($page+1) . "&quantity=" . $quantity ?>"> &gt;&gt; </a></li>
-		        </ul>
-		    </nav>
-            <select id="quantity" >
-                <option value="900" <?php echo ($quantity==900)?"selected":"" ?>>900</option>
-                <option value="1800" <?php echo ($quantity==1800)?"selected":"" ?>>1800</option>
-                <option value="2700" <?php echo ($quantity==2700)?"selected":"" ?>>2700</option>
-                <option value="4000" <?php echo ($quantity==4000)?"selected":"" ?>>4000</option>
-            </select> 
-		</div>
-		    
-    </div>
+    
      
      <!--Table's Structure-->
-     <div class="text-right">Searchs <?php echo (($page-1)*$quantity+1) ?> to <?php echo (($page-1)*$quantity)+count($journalsP) ?> of <?php echo $journalsR ?> registers searched</div>
-
-     <select name="searchResult" id="searchResult" required>
-        <option  value="">Journals</option >
-    </select>
-
-
-
      <div id="searchResults">
-        <table class="table table-hover table-striped table-responsive-md">
-            <thead class="thead-dark">
+        <table   class="table table-dark " id="JournalTable">
+         <!--   <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Rank</th>
                     <th scope="col"> Title</th>
                     <th scope="col"> Issn</th>
                     <th scope="col">sjr</th>
@@ -364,11 +195,11 @@
             </thead>
             <tbody>
                 <?php 
-                $i=1;
-                foreach($journalsP as $jP){
+                /*$i=1;
+                foreach($journalsF as $jP){
                     echo "<tr>";
                     echo "<td>" . $jP->getIdJournal() . "</td>";
-                    echo "<td>" . $jP ->  getTitle() . "</td>";
+                    echo "<td>"."<a href='https://www.scimagojr.com/journalsearch.php?q=".$jP->getIssn()."' target='_blank'>".$jP->getTitle()."</a>"."</td>";
                     echo "<td>" . $jP ->  getIssn() . "</td>";
                     echo "<td>" . $jP  -> getSjr() . "</td>";
                     echo "<td>" . $jP  -> getBest_quartile() . "</td>";
@@ -381,23 +212,33 @@
                     echo "<td>" . $jP  -> getCountry(). "</td>";
                     echo "</tr>";
                     $i++;
-                }
+                }*/
                 ?>
             </tbody>
-
+        -->
         </table>
+      
     </div>
-     
+      
 </div>
 
-<!--SCRIPT QUE PERMITE LA PAGINACIÓN-->
-<script>
-    $("#quantity").on("change", function() {
-        url = "index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>&quantity=" + $(this).val();     
-        location.replace(url);
-    });
-</script>
+<!--DATABLE JQUERY
+            i=info
+            t=table
+            f=filter input text
+            p=pagination
+            r=research
+            l=list of dates
+-->
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#JournalTable').DataTable({
+            //dom:'<"top"lfip> rt <"bottom"pi><"clear">',
+            lengthMenu: [ [50, 500,-1],[50,500,"All"] ]
+        });
 
+    } );
+</script>
 
 
 
@@ -441,9 +282,35 @@
             chargesList();
         });
         
-          $('#amountH').change(function(){
+        $('#hindex_range').change(function(){
             chargesList();
         });
+
+        $('#refs_range').change(function(){
+            chargesList();
+        });
+
+        $('#sjr_range').change(function(){
+            chargesList();
+        });
+
+
+        $('#hindex').change(function(){
+            chargesList();
+        });
+
+        $('#references').change(function(){
+            chargesList();
+        });
+
+        $('#sjr').change(function(){
+            chargesList();
+        });
+
+        $('#quartile').change(function(){
+            chargesList();
+        });
+
 
     });
 </script>
@@ -452,6 +319,8 @@
     function chargesList(){
         //var hindex_range = $('#slider-rangeH').val();
        // $('#searchResult').html(loader);
+       var area=$('#countries').val();
+       console.log(area);
         $.ajax({
             type:"POST",
             url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
@@ -459,12 +328,16 @@
                 "area_filter":$('#areas').val(),
                 "country_filter":$('#countries').val(),
                 "category_filter":$('#categories').val(),
-                "hindex_filter":$('#amountH').val()
+                "hindex_filter":$('#hindex_range').val(),
+                "ref_filter":$('#refs_range').val(),
+                "sjr_filter":$('#sjr_range').val(),
+                "quartile_filter":$('#quartile').val()
 
                 },
+
             success:function(r){
-                $('#searchResult').html(r);
-                /*$('#searchResult').fadeOut('slow',function(){
+                $('#searchResults').html(r);
+               /* $('#searchResult').fadeOut('slow',function(){
                 $('#searchResult').html(r).fadeIn('fast');*/
             }
         });
@@ -472,38 +345,3 @@
 </script>
 
 
-
-        <!--<select name="hindex" id="hindex" required>
-            <option value="0">H index </option>
-            <option value="1">0-200</option>
-            <option value="2">201-400</option>
-            <option value="3">401-600</option>
-            <option value="4">601-800</option>
-            <option value="5">801 or more</option>
-        </select>-->
-
-
-      <!--  <label>SJR: 
-            <select name="sjr" id="sjr" required>
-                <option value="0">SJR</option>
-                <option value="1">1-20</option>
-                <option value="2">21-40</option>
-                <option value="3">41-60</option>
-                <option value="4">61-80</option>
-                <option value="5">80 or more</option>
-            </select>
-        </label>
-    -->
-    <!--
-
-        <label>References: 
-            <select  name="references" id="references" required>
-                <option value="0">References</option>
-                <option value="1">0-1000</option>
-                <option value="2">1001-10000</option>
-                <option value="3">10001-100000</option>
-                <option value="4">100001-500000</option>
-                <option value="5">500001 or more</option>
-            </select>
-        </label>
-    -->

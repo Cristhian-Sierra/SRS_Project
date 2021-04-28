@@ -67,30 +67,28 @@ if(isset($_GET['logOut'])){
 	$_SESSION['id']="";
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>SRS</title>
+		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="icon" type="image/png" href="img/logo.png" />
 		<link href="https://bootswatch.com/4/darkly/bootstrap.css" rel="stylesheet" />
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="ui/styles.css">
+		<link rel="stylesheet" type="text/css" href="ui/style.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css" />
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>	
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<link rel="stylesheet" href="/resources/demos/style.css">
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script>
-		<script charset="utf-8">
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+		<script charset="utf-8">
 			$(function () { 
 				$("[data-toggle='tooltip']").tooltip(); 
 			});
@@ -123,3 +121,5 @@ if(isset($_GET['logOut'])){
 		<div class="text-center text-muted">ITI &copy; <?php echo date("Y")?></div>
 	</body>
 </html>
+
+
