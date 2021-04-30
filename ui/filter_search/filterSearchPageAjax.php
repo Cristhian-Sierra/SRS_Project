@@ -109,7 +109,7 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
 
 					}
 
-					else if($country=="" && $category=="" && $quartile=="" ){
+					else if($country==""   && $quartile=="" && $category==""){
 						while ($ver=mysqli_fetch_row($resultA)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
@@ -119,7 +119,7 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
 						while ($ver=mysqli_fetch_row($resultCA)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
-						echo $sqlCA;
+						//echo $sqlCA;
 					}	
 
 					else if($area=="" && $country=="" && $category=="" ){ 
@@ -201,7 +201,7 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
 		<script type="text/javascript">
 			$(document).ready( function () {
 				$('#JournalTableS').DataTable({
-					dom:'<"top"lfip> rt <"bottom"pi><"clear">',
+					//dom:'<"top"lfip> rt <"bottom"pi><"clear">',
 					lengthMenu: [ [50, 500,-1],[50,500,"All"] ]
 				});
 

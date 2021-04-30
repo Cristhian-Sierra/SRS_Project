@@ -251,6 +251,9 @@
         $('#areas').change(function(){
             chargeList();
         });
+        /*$('#categories').change(function(){
+            chargeList();
+        });*/
     })
 </script>
 <script type="text/javascript">
@@ -261,6 +264,7 @@
             data:"area_category=" + $('#areas').val(),
             success:function(r){
                 $('#categories').html(r);
+                //$('#categories').attr("disabled", false);
             }
         });
     }
