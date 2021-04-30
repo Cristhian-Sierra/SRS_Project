@@ -147,6 +147,20 @@ class Journal {
 		$this -> connection -> close();
 	}
 
+	function insert_csv($pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> journalDAO -> insert_csv($pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage));
+		echo $this -> journalDAO -> insert_csv($pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage);
+		$this -> connection -> close();
+	}
+	function insert_idCountry($country){
+		$this -> connection -> open();
+		$this -> connection->run($this->journalDAO->insert_idCountry($country));
+		$this -> connection -> close();
+	}
+
+
+
 	function update(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> journalDAO -> update());

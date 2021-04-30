@@ -40,7 +40,7 @@ th,td{
 
 
 input[type=range]{
-	background-color: #1F1F1F;
+	background-color: #222;
 }
 
 
@@ -133,4 +133,19 @@ input[type=range]:focus::-ms-fill-lower {
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #B6B6B6;
+}
+
+.custom-input-file {
+  background-color: #941B80;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto 0;
+  min-height: 15px;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  width: 400px;
 }

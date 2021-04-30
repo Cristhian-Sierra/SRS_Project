@@ -36,6 +36,18 @@ class JournalDAO {
 		values('" . $this -> title . "', '" . $this -> issn . "', '" . $this -> sjr . "', '" . $this -> best_quartile . "', '" . $this -> hindex . "', '" . $this -> total_docs . "', '" . $this -> total_references . "', '" . $this -> total_cites . "', '" . $this -> citable_docs . "', '" . $this -> coverage . "', '" . $this -> categories . "', '" . $this -> country . "')";
 	}
 
+	function insert_csv( $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage)
+	{
+		return  "insert into Journal(title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage)
+		values('" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "')";
+	}
+
+	function insert_idCountry($country){
+	 return "INSERT INTO journal (country_idCountry)
+	 select c.idCountry from country as c
+	 where c.name LIKE '%".$country."%'";
+	}
+
 	function update(){
 		return "update Journal set 
 		title = '" . $this -> title . "',

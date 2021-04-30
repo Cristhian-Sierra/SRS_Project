@@ -53,6 +53,13 @@ $administrator -> select();
 					<a class="dropdown-item"href='index.php?pid=<?php echo base64_encode("ui/filter_search/PDFSearchs.php") ?>'  target="_blank">PDF</a>
 				</div>
 			</li>
+
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Upload</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item"href='index.php?pid=<?php echo base64_encode("ui/journal/upload.php") ?>'  target="_blank">CSV</a>
+				</div>
+			</li>
 		</ul>
 
 	
