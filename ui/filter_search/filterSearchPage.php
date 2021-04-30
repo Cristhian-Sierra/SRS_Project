@@ -20,9 +20,9 @@
     $countrysF=$countryFilter->selectAll();//Method that get all the dates from db table Country
     
 
-    $journalFilter = new Journal();
-    $journalsF= $journalFilter->selectAll();
-    
+   /* $journalFilter = new Journal();
+    $journalsF= $journalFilter->selectAllC();
+    */
 
     //date_default_timezone_set('UTC');
     date_default_timezone_set("America/Bogota");
@@ -160,15 +160,10 @@
               </label>
            
            
-        </div>
-
-        <br>
-        <div class="form-group">
-            <input type="submit" class="btn btn-dark" value="Save your search" name="Action">   
-        </div>        
+        </div>       
     </form>    
   </div>
-  <br>
+  <br> </br>
 
 
 <div class="container"><!-- Pagination div-->

@@ -41,7 +41,7 @@ if(isset($_GET['action']) && $_GET['action']=="delete"){
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-header">
-			<h4 class="card-title">Get All Journal</h4>
+			<h4 class="card-title">Get the best Journals where SJR >=1, Hindex >=100 and total references >=1000</h4>
 		</div>
 		<div class="card-body">
 		<?php if(isset($_GET['action']) && $_GET['action']=="delete"){ ?>
@@ -60,165 +60,23 @@ if(isset($_GET['action']) && $_GET['action']=="delete"){
 				<?php }
 			} ?>
 		<div class="table-responsive">
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr><th></th>
-						<th nowrap>Title 
-						<?php if($order=="title" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=title&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="title" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=title&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Issn 
-						<?php if($order=="issn" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=issn&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="issn" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=issn&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Sjr 
-						<?php if($order=="sjr" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=sjr&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="sjr" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=sjr&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Best_quartile 
-						<?php if($order=="best_quartile" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=best_quartile&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="best_quartile" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=best_quartile&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Hindex 
-						<?php if($order=="hindex" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=hindex&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="hindex" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=hindex&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Total_docs 
-						<?php if($order=="total_docs" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=total_docs&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="total_docs" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=total_docs&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Total_references 
-						<?php if($order=="total_references" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=total_references&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="total_references" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=total_references&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Total_cites 
-						<?php if($order=="total_cites" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=total_cites&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="total_cites" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=total_cites&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Citable_docs 
-						<?php if($order=="citable_docs" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=citable_docs&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="citable_docs" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=citable_docs&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Coverage 
-						<?php if($order=="coverage" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=coverage&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="coverage" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=coverage&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th nowrap>Categories 
-						<?php if($order=="categories" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=categories&dir=asc'>
-							<span class='fas fa-sort-amount-up' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' ></span></a>
-						<?php } ?>
-						<?php if($order=="categories" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournal.php") ?>&order=categories&dir=desc'>
-							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
-						<?php } ?>
-						</th>
-						<th>Country</th>
-						<th nowrap></th>
+			<table class="table table-striped table-hover" id="JournalTableA">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Rank</th>
+						<th scope="col"> Title</th>
+						<th scope="col"> Issn</th>
+						<th scope="col">sjr</th>
+						<th scope="col">Best_quartile</th>
+						<th scope="col">H index</th>
+						<th scope="col">Total documents</th>
+						<th scope="col">Total references</th>
+						<th scope="col">Total cites</th>
+						<th scope="col">Citablee docs</th>
+						<th scope="col">Coverage</th>
+						<th scope="col" >All categories</th>
+						<th scope="col">Country</th>
+						<th scope="col">Function</th>
 					</tr>
 				</thead>
 				</tbody>
@@ -227,12 +85,12 @@ if(isset($_GET['action']) && $_GET['action']=="delete"){
 					if($order != "" && $dir != "") {
 						$journals = $journal -> selectAllOrder($order, $dir);
 					} else {
-						$journals = $journal -> selectAllByCountry();
+						$journals = $journal -> selectAllA();
 					}
 					$counter = 1;
 					foreach ($journals as $currentJournal) {
-						echo "<tr><td>" . $counter . "</td>";
-						echo "<td>" . $currentJournal -> getTitle() . "</td>";
+						echo "<tr><td>" . $currentJournal->getIdJournal() . "</td>";
+						echo "<td>" ."<a href='https://www.scimagojr.com/journalsearch.php?q=".$currentJournal->getIssn()."' target='_blank'>". $currentJournal -> getTitle() ."</a>". "</td>";
 						echo "<td>" . $currentJournal -> getIssn() . "</td>";
 						echo "<td>" . $currentJournal -> getSjr() . "</td>";
 						echo "<td>" . $currentJournal -> getBest_quartile() . "</td>";
@@ -278,3 +136,15 @@ if(isset($_GET['action']) && $_GET['action']=="delete"){
 		$(this).find(".modal-content").load(link.attr("href"));
 	});
 </script>
+
+
+ <!--DATABLE JQUERY-->
+ <script type="text/javascript">
+ 	$(document).ready( function () {
+ 		$('#JournalTableA').DataTable({
+					//dom:'<"top"lfip> rt <"bottom"pi><"clear">',
+					lengthMenu: [ [50, 500,-1],[50,500,"All"] ]
+				});
+
+ 	} );
+ </script>

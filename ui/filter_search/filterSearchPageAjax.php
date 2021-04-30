@@ -57,7 +57,7 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
 
 	<!--class="table table-hover table-striped table-responsive-md"-->
 		<div id="container">
-			<table class="table table-dark "  id="JournalTableS">
+			<table class="table dt-responsive  table-dark "  id="JournalTableS">
 				<thead  class="thead-dark">
 					<tr>
 						<th scope="col">Rank</th>
@@ -197,16 +197,32 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
 
  ?>
 
-		<!--DATABLE JQUERY-->
-		<script type="text/javascript">
-			$(document).ready( function () {
-				$('#JournalTableS').DataTable({
-					//dom:'<"top"lfip> rt <"bottom"pi><"clear">',
-					lengthMenu: [ [50, 500,-1],[50,500,"All"] ]
+ <!--DATABLE JQUERY-->
+ <script type="text/javascript">
+ 	$(document).ready( function () {
+ 		var tbl = $('#JournalTableS');
+		var settings={};
+ 		$('#JournalTableS').DataTable({
+ 					responsive: "true",
+					dom:'Bfrtlip',
+					lengthMenu: [ [50, 500,-1],[50,500,"All"] ],
+					buttons: [
+					{
+						extend: 'pdfHtml5',
+						text: '<i class="fas fa-file-pdf">',
+						titleAttr: 'Export to PDF',
+						className:'btn btn-danger',
+						exportOptions: {
+                        columns: [ 0, 1, 2, 3,4,5,7,11]
+                    }
+					}
+					]
 				});
+ 		
+ 	});
 
-			} );
-		</script>
+
+ </script>
 
 	
 

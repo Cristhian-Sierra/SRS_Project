@@ -60,14 +60,26 @@ class JournalDAO {
 	}
 
 	function selectAll() {
-		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name 
-		FROM journal as j,country as co
-		WHERE j.country_idCountry=co.idCountry ";
+		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
+		from Journal";
 	}
+
+	function selectAllC() {
+		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.idCountry 
+		FROM journal as j,country as co
+		WHERE j.country_idCountry=co.idCountry";
+	}
+
+	function selectAllA() {
+		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
+		from Journal where sjr>=1 and hindex>=100 and total_references>=1000";
+	}
+
 
 	function selectAllByCountry() {
 		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-		from Journal";
+		from Journal
+		where country_idCountry = '" . $this -> country . "'";
 	}
 
 	function selectAllOrder($orden, $dir){
