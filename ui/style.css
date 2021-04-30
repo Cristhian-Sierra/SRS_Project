@@ -5,42 +5,44 @@
 }
 
 #JournalTableS_info,label,input[type="submit"]{
-	color:#fff; 
+  color:#fff; 
 }
 
 
 .paginate_button{
-	background: #636160;
-	color: #fff;
+  background: #636160;
+  color: #fff;
 }
 
+
+
 #referencesL{
-	position: relative;
-	left: 40px;
-	top: 20px;
+  position: relative;
+  left: 40px;
+  top: 20px;
 }
 
 #referencesS{
-	position: relative;
-	left: 80px;
-	top:20px;
+  position: relative;
+  left: 80px;
+  top:20px;
 }
 
 
 
 #referencesH{
-	position: relative;
-	top:20px;
+  position: relative;
+  top:20px;
 }
 
 th,td{
-	background-color: #636160;
+  background-color: #636160;
 }
 
 
 
 input[type=range]{
-	background-color: #222;
+  background-color: #222;
 }
 
 
@@ -133,4 +135,19 @@ input[type=range]:focus::-ms-fill-lower {
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #B6B6B6;
+}
+
+.custom-input-file {
+  background-color: #941B80;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto 0;
+  min-height: 15px;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  width: 400px;
 }

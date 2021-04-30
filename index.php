@@ -59,7 +59,8 @@ $webPages = array(
 	'ui/filter_search/insertFilter_search.php',
 	'ui/filter_search/updateFilter_search.php',
 	'ui/filter_search/selectAllFilter_search.php',
-	'ui/filter_search/searchFilter_search.php'
+	'ui/filter_search/searchFilter_search.php',
+	'ui/journal/upload.php'
 
 	
 );
@@ -88,6 +89,14 @@ if(isset($_GET['logOut'])){
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+		<!--PDF datatable-->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.css"/>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.js"></script>
+
+
+
 		<script charset="utf-8">
 			$(function () { 
 				$("[data-toggle='tooltip']").tooltip(); 
