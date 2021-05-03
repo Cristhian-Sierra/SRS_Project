@@ -36,6 +36,24 @@ class JournalDAO {
 		values('" . $this -> title . "', '" . $this -> issn . "', '" . $this -> sjr . "', '" . $this -> best_quartile . "', '" . $this -> hindex . "', '" . $this -> total_docs . "', '" . $this -> total_references . "', '" . $this -> total_cites . "', '" . $this -> citable_docs . "', '" . $this -> coverage . "', '" . $this -> categories . "', '" . $this -> country . "')";
 	}
 
+	function insert_csv($pIdJournal, $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage)
+	{
+		return  "insert into Journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage)
+		values('".$pIdJournal."','" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "')";
+	}
+
+	function  upgrade_csv($pIdJournal, $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage)
+	{
+		return  "insert into Journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage)
+		values('".$pIdJournal."','" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "')";
+	}
+
+	function insert_idCountry($country){
+	 return "INSERT INTO journal (country_idCountry)
+	 select c.idCountry from country as c
+	 where c.name LIKE '%".$country."%'";
+	}
+
 	function update(){
 		return "update Journal set 
 		title = '" . $this -> title . "',
@@ -64,20 +82,20 @@ class JournalDAO {
 		from Journal";
 	}
 
+	function selectAllA() {
+		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
+		from Journal where sjr=1 AND hindex>=100 AND total_references>=1000 ";
+	}
+
+
 	function selectAllC() {
 		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.idCountry 
 		FROM journal as j,country as co
 		WHERE j.country_idCountry=co.idCountry";
 	}
 
-	function selectAllA() {
-		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-		from Journal where sjr>=1 and hindex>=100 and total_references>=1000";
-	}
-
-
 	function selectAllByCountry() {
-		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
+		return  "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
 		from Journal
 		where country_idCountry = '" . $this -> country . "'";
 	}
@@ -90,19 +108,19 @@ class JournalDAO {
 
 	function selectAllByCountryOrder($orden, $dir) {
 		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-		from Journal
+		from journal
 		where country_idCountry = '" . $this -> country . "'
 		order by " . $orden . " " . $dir;
 	}
 
 	function search($search) {
 		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
-		from Journal
+		from journal
 		where title like '%" . $search . "%' or issn like '%" . $search . "%' or sjr like '%" . $search . "%' or best_quartile like '%" . $search . "%' or hindex like '%" . $search . "%' or total_docs like '%" . $search . "%' or total_references like '%" . $search . "%' or total_cites like '%" . $search . "%' or citable_docs like '%" . $search . "%' or coverage like '%" . $search . "%' or categories like '%" . $search . "%'";
 	}
 
 	function delete(){
-		return "delete from Journal
+		return "delete from journal
 		where idJournal = '" . $this -> idJournal . "'";
 	}
 
@@ -117,9 +135,7 @@ class JournalDAO {
 		return "SELECT count(j.idJournal) FROM journal as j";
 	}
 
-	function searchF($countryF){
-		return "select j.idJournal,j.title as title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name as country from journal as j, country as co WHERE co.name=".$countryF."";
-	}
+	
 
 }
 

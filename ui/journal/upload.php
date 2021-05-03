@@ -14,17 +14,17 @@ if (isset($_POST['insert'])) {
     if(file_exists($archivo_guardado)){
         $fp = fopen($archivo_guardado,'r');// abrir un archivo
         $rows = 0;
-        while($datos = fgetcsv($fp, 1000,",")){
-            echo $datos[0]. " " . $datos[2] . " <br/>" . $datos[4]. " <br/>". $datos[5]. " <br/>". $datos[6]. " <br/>". $datos[7]. " <br/>";
-            // . $datos[3] . " <br/>". $datos[4] . " <br/>" . $datos[5] . " <br/>" . $datos[6] . " <br/>" . $datos[7]. " <br/>" . $datos[8]. " <br/>" . $datos[9]. " <br/>" . $datos[10]. " <br/>" . $datos[11]. "<br/>"
-            // $newJournal = new Journal("",$datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6],$datos[7],$datos[8],$datos[9],$datos[10],$datos[11],"","");
-            // $resultado=$newJournal->insert_csv($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6],$datos[7],$datos[8],$datos[9],$datos[10],$datos[11]);
-            // if($resultado){
-            //     echo "se inserto correctamente los datos <br/>";
-            // }else{
-            //     echo "no se inserto  <br/>";
-            // }
-        }
+        $firstline = true;
+while (($datos = fgetcsv($fp, 1000,";",'"')) !== FALSE)
+{
+    if (!$firstline) {
+        //echo "Se insertaron correctamente los datos";
+        $newJournal = new Journal($datos[0],$datos[2],$datos[4],$datos[5],$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],"","");
+        $resultado=$newJournal->insert_csv($datos[0],$datos[2],$datos[4],$datos[5],$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18]);
+    }
+    $firstline = false;
+}
+     
 
         
     }else{

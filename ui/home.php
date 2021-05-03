@@ -45,7 +45,7 @@ if(isset($_POST['logIn'])){
 		<div class="col-md-9">
 			<div class="card">
 				<div class="card-header">
-					<h4><strong>SRS</strong></h4>
+					<h4><strong>Synopsis</strong></h4>
 				</div>
 				<div class="card-body">
 					<p>This project will be in charge of having an information system capable of filtering and suggesting the best magazines that exist registered on the ScimagoJR page, based on your search criteria, which you can do with filters such as area, category, country, references, quartile, Hindex and SJR.</p>

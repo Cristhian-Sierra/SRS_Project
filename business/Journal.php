@@ -140,12 +140,32 @@ class Journal {
 		$this -> journalDAO = new JournalDAO($this -> idJournal, $this -> title, $this -> issn, $this -> sjr, $this -> best_quartile, $this -> hindex, $this -> total_docs, $this -> total_references, $this -> total_cites, $this -> citable_docs, $this -> coverage, $this -> categories, $this -> country);
 		$this -> connection = new Connection();
 	}
-
+ //
+ // 
 	function insert(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> journalDAO -> insert());
 		$this -> connection -> close();
 	}
+
+	function insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> journalDAO -> insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage));
+		$this -> connection -> close();
+	}
+
+	function upgrade_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> journalDAO -> insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage));
+		$this -> connection -> close();
+	}
+	function insert_idCountry($country){
+		$this -> connection -> open();
+		$this -> connection->run($this->journalDAO->insert_idCountry($country));
+		$this -> connection -> close();
+	}
+
+
 
 	function update(){
 		$this -> connection -> open();
@@ -197,10 +217,11 @@ class Journal {
 		$this -> connection -> run($this -> journalDAO -> selectAllC());
 		$journals = array();
 		while ($result = $this -> connection -> fetchRow()){
-			$country = new Country();
+			/*$country = new Country();
 			$country -> getName();
-			$country=$result[12];
-			
+			$country=$result[12];*/
+			$country = new Country($result[12]);
+			$country -> select();
 	
 			array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
 		}
@@ -213,13 +234,18 @@ class Journal {
 		$this -> connection -> run($this -> journalDAO -> selectAllA());
 		$journals = array();
 		while ($result = $this -> connection -> fetchRow()){
+			/*$country = new Country();
+			$country -> getName();
+			$country=$result[12];*/
 			$country = new Country($result[12]);
 			$country -> select();
+	
 			array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
 		}
 		$this -> connection -> close();
 		return $journals;
 	}
+
 
 	function selectAllByCountry(){
 		$this -> connection -> open();
@@ -304,20 +330,7 @@ class Journal {
         return $this -> connection -> fetchRow()[0];
     }
 
-    function searchF($countries){
-    	$this -> connection -> open();
-    	$this -> connection -> run($this -> journalDAO -> searchF($countries));
-    	$filter_searchs = array();
-    	while ($result = $this -> connection -> fetchRow()){
-    		$country = new Country();
-    		$country -> getName();
-			$country=$result[12];
-    		array_push($filter_searchs, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
-    	}
-    	$this -> connection -> close();
-    	return $filter_searchs;
 
-    }
 
 }
 ?>
