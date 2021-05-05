@@ -57,10 +57,10 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
 
 	<!--class="table table-hover table-striped table-responsive-md"-->
 		<div id="container">
-			<table class="table dt-responsive  table-dark "  id="JournalTableS">
-				<thead  class="thead-dark">
+			<table class="table dt-responsive  table-dark " id="JournalTableS">
+				<thead >
 					<tr>
-						<th scope="col">Rank</th>
+						<th scope="col" >Rank</th>
 						<th scope="col"> Title</th>
 						<th scope="col"> Issn</th>
 						<th scope="col">sjr</th>
@@ -115,7 +115,7 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
 						}
 					}
 
-					else if($country==""  && $quartile=="" ){
+					else if($country==""  && $quartile==""  ){
 						while ($ver=mysqli_fetch_row($resultCA)) {
 							echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11]);
 						}
@@ -179,7 +179,7 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
 		return 
 		"<tr>	
 		<td>".$idJournal."</td>
-		<td>"."<a href='https://www.scimagojr.com/journalsearch.php?q=".$issn."' target='_blank'>".$title."</a>"."</td>
+		<td>"."<a href='https://www.scimagojr.com/journalsearch.php?q=".$issn."' target='_blank' style='color: #DF691A;'> ".$title."</a>"."</td>
 		<td>".$issn."</td>
 		<td>".$sjr."</td>
 		<td>".$quartile."</td>
@@ -200,23 +200,39 @@ $sqlCoQu="SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quart
  <!--DATABLE JQUERY-->
  <script type="text/javascript">
  	$(document).ready( function () {
- 		var tbl = $('#JournalTableS');
-		var settings={};
+ 		
  		$('#JournalTableS').DataTable({
  					responsive: "true",
-					dom:'Bfrtlip',
+ 					//dom: '<"top"Bf>irt<"bottom"lp><"clear">',
+					dom:'Bfrtip',
 					lengthMenu: [ [50, 500,-1],[50,500,"All"] ],
 					buttons: [
 					{
+						
 						extend: 'pdfHtml5',
 						text: '<i class="fas fa-file-pdf">',
-						titleAttr: 'Export to PDF',
+						titleAttr: 'Dowload to PDF',
 						className:'btn btn-danger',
 						exportOptions: {
                         columns: [ 0, 1, 2, 3,4,5,7,11]
                     }
+					},
+					{
+					extend: 'excelHtml5',
+						text: '<i class="fas fa-file-excel">',
+						titleAttr: 'Dowload to xlsx',
+						className:'btn btn-success'
+					},
+					{
+					extend: 'csv',
+						text: '<i class="fas fa-file-csv">',
+						titleAttr: 'Dowload to CSV',
+						className:'btn btn-clear'
 					}
+
+						
 					]
+					
 				});
  		
  	});

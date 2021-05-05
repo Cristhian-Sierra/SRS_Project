@@ -58,15 +58,10 @@ class CategoryDAO{
 				where name like '%" . $search . "%'";
 	}
 
-	function searchCatA($search){
-		return "select c.name from category as c,area as a  where c.area_idArea='".$search."' ";
-		
-
-	}
+	
 
 	function datesC($areaC){
-		return "select ca.idCategory,
-			 ca.area_idArea,ca.name 
+		return "select ca.idCategory,ca.name 
 		from category as ca, area as a
 		where a.idArea=ca.area_idArea AND a.idArea='".$areaC."'"; 
 

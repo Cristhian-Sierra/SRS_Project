@@ -23,11 +23,11 @@
 			echo "<td>" . $currentCategory -> getArea() -> getName() . "</td>";
 						echo "<td class='text-right' nowrap>";
 						if($_GET['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/category/updateCategory.php") . "&idCategory=" . $currentCategory -> getIdCategory() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Category' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/category/updateCategory.php") . "&idCategory=" . $currentCategory -> getIdCategory() . "' style='color: #DF691A;'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Category'  style='color: #DF691A;'></span></a> ";
 						}
-						echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/selectAllJournalcategoryByCategory.php") . "&idCategory=" . $currentCategory -> getIdCategory() . "'><span class='fas fa-search-plus' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Get All Journalcategory' ></span></a> ";
+						echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/selectAllJournalcategoryByCategory.php") . "&idCategory=" . $currentCategory -> getIdCategory() . "'><span class='fas fa-search-plus' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Get All Journalcategory'  style='color: #DF691A;'></span></a> ";
 						if($_GET['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/insertJournalcategory.php") . "&idCategory=" . $currentCategory -> getIdCategory() . "'><span class='fas fa-pen' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Create Journalcategory' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/insertJournalcategory.php") . "&idCategory=" . $currentCategory -> getIdCategory() . "' style='color: #DF691A;'><span class='fas fa-pen' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Create Journalcategory'  style='color: #DF691A;'></span></a> ";
 						}
 						echo "</td>";
 			echo "</tr>";

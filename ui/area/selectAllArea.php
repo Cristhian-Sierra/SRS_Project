@@ -93,14 +93,14 @@ if(isset($_GET['action']) && $_GET['action']=="delete"){
 						echo "<td>" . $currentArea -> getName() . "</td>";
 						echo "<td class='text-right' nowrap>";
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/area/updateArea.php") . "&idArea=" . $currentArea -> getIdArea() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Area' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/area/updateArea.php") . "&idArea=" . $currentArea -> getIdArea() . "'  style='color: #DF691A;'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Area' ></span></a> ";
 						}
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/area/selectAllArea.php") . "&idArea=" . $currentArea -> getIdArea() . "&action=delete' onclick='return confirm(\"Confirm to delete Area: " . $currentArea -> getName() . "\")'><span class='fas fa-backspace' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Delete Area' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/area/selectAllArea.php") . "&idArea=" . $currentArea -> getIdArea() . "&action=delete' onclick='return confirm(\"Confirm to delete Area: " . $currentArea -> getName() . "\")'><span class='fas fa-backspace' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Delete Area'  style='color: #DF691A;'></span></a> ";
 						}
-						echo "<a href='index.php?pid=" . base64_encode("ui/category/selectAllCategoryByArea.php") . "&idArea=" . $currentArea -> getIdArea() . "'><span class='fas fa-search-plus' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Get All Category' ></span></a> ";
+						echo "<a href='index.php?pid=" . base64_encode("ui/category/selectAllCategoryByArea.php") . "&idArea=" . $currentArea -> getIdArea() . "'><span class='fas fa-search-plus' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Get All Category'  style='color: #DF691A;'></span></a> ";
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/category/insertCategory.php") . "&idArea=" . $currentArea -> getIdArea() . "'><span class='fas fa-pen' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Create Category' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/category/insertCategory.php") . "&idArea=" . $currentArea -> getIdArea() . "'><span class='fas fa-pen' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Create Category'  style='color: #DF691A;'></span></a> ";
 						}
 						echo "</td>";
 						echo "</tr>";

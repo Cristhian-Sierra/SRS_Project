@@ -130,23 +130,15 @@ class Category {
 		return $categorys;
 	}
 
-	function searchCatA($search){
-		$this -> connection -> open();
-		$this -> connection -> run($this -> categoryDAO -> searchcatA($search));
-		$categorys = array();
-		while ($result = $this -> connection -> fetchRow()){
-			array_push($categorys, new Category("",$search));
-		}
-		$this -> connection -> close();
-		return $categorys;
-	}
 
-	function datesC($areaC){
+		function datesC($pArea){
 		$this -> connection -> open();
-		$this -> connection -> run($this -> categoryDAO -> datesC($areaC));
+		$this -> connection -> run($this -> categoryDAO -> datesC($pArea));
 		$categorys = array();
 		while ($result = $this -> connection -> fetchRow()){
-			array_push($categorys, new Category("","",$areaC));
+			$area = new Area($result[2]);
+			$area -> select();
+			array_push($categorys, new Category($result[0], $result[1], $area));
 		}
 		$this -> connection -> close();
 		return $categorys;

@@ -87,82 +87,86 @@
     <?php include("ui/header.php"); ?>
 </div>
 <br> <br>
-<div class="container" >
+
     <form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
 
         <div class="container">
-            <label>Area: 
-                <select name="areas" id="areas" class="form-control input-sm" >
-                    <option  value="">Area</option >
-                    <?php 
-                    $i=1;
-                    foreach($areasF as $aF ){?>
-                        <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
-                        <?php
-                        $i++;}
-                        ?>
-                    </select>
-            </label>
+            <div class="row">
+                <div class="col col-lg-12">
+                    <label>Area: 
+                        <select name="areas" id="areas" class="form-control input-sm" >
+                            <option  value="">Area</option >
+                            <?php 
+                            $i=1;
+                            foreach($areasF as $aF ){?>
+                                <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
+                                <?php
+                                $i++;}
+                                ?>
+                            </select>
+                        </label>
 
-            <label>Category: 
-                <select name="categories" id="categories" class="form-control input-sm" >
-                     <option  value="">Category</option >
-                </select>
-            </label>
+                        <label>Category: 
+                            <select name="categories" id="categories" class="form-control input-sm" >
 
-            <label>Country:
-                <select name="countries" id="countries" class="form-control input-sm"   >
-                    <option  value="">Country </option >
-                    <?php 
-                    $i=1;
-                    foreach($countrysF as $coF ){?>
-                        <option value= "<?php echo utf8_decode($coF->getIdCountry()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
-                        <?php
-                        $i++;}
-                        ?>
-                    </select>
-            </label>
-            
-            <label>Quartile
-                <select  name="quartile" id="quartile" class="form-control input-sm"  >
-                    <option value="">Quartile</option>
-                    <option value="Q1">Q1</option>
-                    <option value="Q2">Q2</option>
-                    <option value="Q3">Q3</option>
-                    <option value="Q4">Q4</option>
-                    <option value="-">Without quartile</option>
-                  
-                </select>
-            </label>
-        </div>
+                            </select>
+                        </label>
+
+                        <label>Country:
+                            <select name="countries" id="countries" class="form-control input-sm"   >
+                                <option  value="">All countries </option >
+                                <?php 
+                                $i=1;
+                                foreach($countrysF as $coF ){?>
+                                    <option value= "<?php echo utf8_decode($coF->getIdCountry()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
+                                    <?php
+                                    $i++;}
+                                    ?>
+                                </select>
+                            </label>
+
+                            <label>Quartile
+                                <select  name="quartile" id="quartile" class="form-control input-sm"  >
+                                    <option value="">All quartiles</option>
+                                    <option value="Q1">Q1</option>
+                                    <option value="Q2">Q2</option>
+                                    <option value="Q3">Q3</option>
+                                    <option value="Q4">Q4</option>
+                                    <option value="-">Without quartile</option>
+
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
         <div class="container">
             
                 <label id="referencesH" >H index >=
-                  <input type="number" name="hindex" id="hindex" min="0" max="1159" value="100" oninput="this.form.hindex_range.value=this.value"   /> 
+                  <input type="number" name="hindex" id="hindex" min="0" max="1159" value="100" oninput="this.form.hindex_range.value=this.value" /> 
                   <br>
-                  <input type="range" name="hindex_range" id="hindex_range" min="0" max="1159" value="100" oninput="this.form.hindex.value=this.value"  />
+                  <input type="range" name="hindex_range" id="hindex_range" min="0" max="1159" value="100" oninput="this.form.hindex.value=this.value"   />
                   
               </label>
 
               <label id="referencesL" >References >=
-                  <input type="number" name="references" id="references" min="0" max="989223" value="1000" oninput="this.form.refs_range.value=this.value"  /> 
+                  <input type="number" name="references" id="references" min="0" max="989223" value="1000" oninput="this.form.refs_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="1000" oninput="this.form.references.value=this.value"   />
+                  <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="1000" oninput="this.form.references.value=this.value"  />
                   
               </label>
 
               <label id="referencesS" >SJR >=
                   <input type="number" name="sjr" id="sjr" min="0" max="88" value="1.0" step="0.01"  oninput="this.form.sjr_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="88.192" value="1.0" step="0.01" oninput="this.form.sjr.value=this.value"   />
+                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="88.192" value="1.0" step="0.01" oninput="this.form.sjr.value=this.value"     />
                   
               </label>
            
            
         </div>       
     </form>    
-  </div>
+  
   <br> </br>
 
 
@@ -217,23 +221,7 @@
       
 </div>
 
-<!--DATABLE JQUERY
-            i=info
-            t=table
-            f=filter input text
-            p=pagination
-            r=research
-            l=list of dates
--->
-<script type="text/javascript">
-    $(document).ready( function () {
-        $('#JournalTable').DataTable({
-            //dom:'<"top"lfip> rt <"bottom"pi><"clear">',
-            lengthMenu: [ [50, 500,-1],[50,500,"All"] ]
-        });
 
-    } );
-</script>
 
 
 
@@ -246,9 +234,9 @@
         $('#areas').change(function(){
             chargeList();
         });
-        /*$('#categories').change(function(){
+        $('#categories').change(function(){
             chargeList();
-        });*/
+        });
     })
 </script>
 <script type="text/javascript">
