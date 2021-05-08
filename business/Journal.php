@@ -148,21 +148,23 @@ class Journal {
 		$this -> connection -> close();
 	}
 
-	function insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories){
+	function insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry){
 		$this -> connection -> open();
-		$this -> connection -> run($this -> journalDAO -> insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories));
+		$this -> connection -> run($this -> journalDAO -> insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry));
 		$this -> connection -> close();
 	}
 
 	function upgrade_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories){
 		$this -> connection -> open();
-		$this -> connection -> run($this -> journalDAO -> insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories));
+		$this -> connection -> run($this -> journalDAO -> upgrade_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories));
 		$this -> connection -> close();
 	}
-	function insert_idCountry($country){
+	function insert_idCountry($idCountry,$nameCountry){
 		$this -> connection -> open();
-		$this -> connection->run($this->journalDAO->insert_idCountry($country));
+		$this -> connection->run($this->journalDAO->insert_idCountry($idCountry,$nameCountry));
 		$this -> connection -> close();
+
+
 	}
 
 

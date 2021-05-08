@@ -3,7 +3,6 @@ session_start();
 require("business/Administrator.php");
 require("business/LogAdministrator.php");
 require("business/Area.php");
-require("business/Areacategory.php");
 require("business/Category.php");
 require("business/Journalcategory.php");
 require("business/Journal.php");
@@ -80,7 +79,7 @@ if(isset($_GET['logOut'])){
 		<link rel="icon" type="image/png" href="img/logo.png" />
 		<link href="https://bootswatch.com/4/superhero/bootstrap.css" rel="stylesheet" />
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="ui/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="ui/CSS/styles.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css" />
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">

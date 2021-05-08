@@ -69,5 +69,17 @@ class JournalcategoryDAO{
 		return "delete from Journalcategory
 				where idJournalcategory = '" . $this -> idJournalcategory . "'";
 	}
+	function deleteAll(){
+		return "delete from Journalcategory";
+	}
+
+	function insertIdJourCat($category){
+
+		return "INSERT INTO journalcategory(Journal_idJournal,Category_idCategory) 
+		select j.idJournal,c.idCategory
+		FROM journal as j, category as c
+		WHERE  j.categories LIKE  '%".$category."%'  AND c.name='".$category."'";
+
+	}
 }
 ?>

@@ -97,6 +97,11 @@ class Journalcategory {
 		return $journalcategorys;
 	}
 
+	function insertIdJourCat($pCategory){
+		$this -> connection -> open();
+		$this -> connection->run($this->journalDAO->insertIdJourCat($pCategory));
+		$this -> connection -> close();
+	}
 	function selectAllByJournal(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> journalcategoryDAO -> selectAllByJournal());
@@ -175,6 +180,14 @@ class Journalcategory {
 	function delete(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> journalcategoryDAO -> delete());
+		$success = $this -> connection -> querySuccess();
+		$this -> connection -> close();
+		return $success;
+	}
+
+	function deleteAll(){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> journalcategoryDAO -> deleteAll());
 		$success = $this -> connection -> querySuccess();
 		$this -> connection -> close();
 		return $success;

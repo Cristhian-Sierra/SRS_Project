@@ -36,22 +36,21 @@ class JournalDAO {
 		values('" . $this -> title . "', '" . $this -> issn . "', '" . $this -> sjr . "', '" . $this -> best_quartile . "', '" . $this -> hindex . "', '" . $this -> total_docs . "', '" . $this -> total_references . "', '" . $this -> total_cites . "', '" . $this -> citable_docs . "', '" . $this -> coverage . "', '" . $this -> categories . "', '" . $this -> country . "')";
 	}
 
-	function insert_csv($pIdJournal, $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories)
+	function insert_csv($pIdJournal, $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry)
 	{
-		return  "insert into Journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage,categories)
-		values('".$pIdJournal."','" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "','".$pCategories."')";
+		return  "insert into journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage,categories,country_idCountry)
+		values('".$pIdJournal."','" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "','".$pCategories."','".$pCountry."')";
 	}
 
-	function  upgrade_csv($pIdJournal, $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories)
+	function  upgrade_csv($pIdJournal, $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry)
 	{
 		return  "insert into Journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage,categories)
-		values('".$pIdJournal."','" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "','".$pCategories."')";
+		values('".$pIdJournal."','" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "','".$pCategories."','".$pCountry."')";
 	}
 
-	function insert_idCountry($country){
-	 return "INSERT INTO journal (country_idCountry)
-	 select c.idCountry from country as c
-	 where c.name LIKE '%".$country."%'";
+	function insert_idCountry($idCountry,$nameCountry){
+		return "UPDATE journal,country SET country_idCountry='$idCountry'
+		WHERE country.name=journal.country_idCountry AND country.name='$nameCountry'";
 	}
 
 	function update(){
@@ -90,7 +89,7 @@ class JournalDAO {
 
 	function selectAllC() {
 		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.idCountry 
-		FROM journal as j,country as co
+		FROM Journal as j,Country as co
 		WHERE j.country_idCountry=co.idCountry";
 	}
 
@@ -120,22 +119,22 @@ class JournalDAO {
 	}
 
 	function delete(){
-		return "delete from journal
+		return "delete from Journal
 		where idJournal = '" . $this -> idJournal . "'";
 	}
 
 	function deleteAll(){
-		return "delete from journal";
+		return "delete from Journal";
 	}
 
 	public function searchPage($quantity, $page){
 		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,
-		j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name FROM journal as j,country as co  WHERE j.country_idCountry=co.idCountry 
+		j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name FROM Journal as j,Country as co  WHERE j.country_idCountry=co.idCountry 
 		limit " . (($page-1) * $quantity) . ", " . $quantity;
 	}
 
 	public function searchQuantity(){
-		return "SELECT count(j.idJournal) FROM journal as j";
+		return "SELECT count(j.idJournal) FROM Journal as j";
 	}
 
 	

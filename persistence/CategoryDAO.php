@@ -62,7 +62,7 @@ class CategoryDAO{
 
 	function datesC($areaC){
 		return "select ca.idCategory,ca.name 
-		from category as ca, area as a
+		from Category as ca, Area as a
 		where a.idArea=ca.area_idArea AND a.idArea='".$areaC."'"; 
 
 	}

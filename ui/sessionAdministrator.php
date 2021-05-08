@@ -2,6 +2,7 @@
 $administrator = new Administrator($_SESSION['id']);
 $administrator -> select();
 ?>
+
 <div class="container">
 	<div>
 		<div class="card-header">
@@ -10,7 +11,7 @@ $administrator -> select();
 		<div class="card-body">
 			<div class="row">
 				<div class="col-md-3">
-					<img src="<?php echo ($administrator -> getPicture()!="")?$administrator -> getPicture():"http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/512/user2-2-icon.png"; ?>" width="100%" class="rounded">
+					<img src="<?php echo ($administrator -> getPicture()!="")?$administrator -> getPicture():"https://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/128/blue-user-icon.png"; ?>" width="100%" class="rounded">
 				</div>
 				<div class="col-md-9">
 					<div class="table-responsive-sm">

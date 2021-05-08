@@ -3,7 +3,7 @@
 </head>
 <?php 
     require_once ('business/Area.php');
-    require_once ('business/Areacategory.php');
+   
     require_once ('business/Category.php');
     require_once ('business/Country.php');
     require_once ('business/Filter_search.php');
@@ -234,9 +234,9 @@
         $('#areas').change(function(){
             chargeList();
         });
-        $('#categories').change(function(){
+        /*$('#categories').change(function(){
             chargeList();
-        });
+        });*/
     })
 </script>
 <script type="text/javascript">
