@@ -59,7 +59,8 @@ $webPages = array(
 	'ui/filter_search/updateFilter_search.php',
 	'ui/filter_search/selectAllFilter_search.php',
 	'ui/filter_search/searchFilter_search.php',
-	'ui/journal/upload.php'
+	'ui/journal/upload.php',
+	'ui/journalcategory/relationsJC.php'
 
 	
 );

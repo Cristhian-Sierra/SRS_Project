@@ -97,11 +97,12 @@ class Journalcategory {
 		return $journalcategorys;
 	}
 
-	function insertIdJourCat($pCategory){
+	function insertIdsJC($pCategory){
 		$this -> connection -> open();
-		$this -> connection->run($this->journalDAO->insertIdJourCat($pCategory));
+		$this -> connection -> run($this -> journalcategoryDAO -> insertIdsJC($pCategory));
 		$this -> connection -> close();
 	}
+
 	function selectAllByJournal(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> journalcategoryDAO -> selectAllByJournal());
@@ -192,5 +193,7 @@ class Journalcategory {
 		$this -> connection -> close();
 		return $success;
 	}
+
+
 }
 ?>

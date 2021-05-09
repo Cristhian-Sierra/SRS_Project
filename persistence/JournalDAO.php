@@ -38,18 +38,13 @@ class JournalDAO {
 
 	function insert_csv($pIdJournal, $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry)
 	{
-		return  "insert into journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage,categories,country_idCountry)
+		return  "insert into Journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage,categories,country_idCountry)
 		values('".$pIdJournal."','" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "','".$pCategories."','".$pCountry."')";
 	}
 
-	function  upgrade_csv($pIdJournal, $pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry)
-	{
-		return  "insert into Journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage,categories)
-		values('".$pIdJournal."','" . $pTitle . "', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "','".$pCategories."','".$pCountry."')";
-	}
 
 	function insert_idCountry($idCountry,$nameCountry){
-		return "UPDATE journal,country SET country_idCountry='$idCountry'
+		return "UPDATE Journal,Country SET country_idCountry='$idCountry'
 		WHERE country.name=journal.country_idCountry AND country.name='$nameCountry'";
 	}
 

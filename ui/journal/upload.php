@@ -64,30 +64,29 @@ if(file_exists($archivo_guardado)){
         //$logAdministrator->insert();
     }
     $processed = true;
-}
 
-if(isset($_POST['relations'])){
-
-$archivo = fopen("./csv/scimagojr_country.csv", "r");
+    $archivo = fopen("./csv/scimagojr_country.csv", "r");
 //Lo recorremos
-while (($datos = fgetcsv($archivo)) == true)
-{
+    while (($datos = fgetcsv($archivo)) == true)
+    {
 
-    $newJourCo = new Journal("","","","","","","","","","","","",$datos[0]);
-   $resultado=$newJourCo->insert_idCountry($datos[0],$datos[1]);
-    
+        $newJourCo = new Journal("","","","","","","","","","","","",$datos[0]);
+        $resultado=$newJourCo->insert_idCountry($datos[0],$datos[1]);
+
         
-    
-}
+
+    }
 //Cerramos el archivo
-fclose($archivo);
+    fclose($archivo);
 
     
 
 
-$processedC = true;
+    $processedC = true;
 
 }
+
+
 ?>
 <div class="container">
     <div class="row">
@@ -105,6 +104,13 @@ $processedC = true;
                             </button>
                         </div>
                     <?php } ?>
+                    <?php if ($processedC) { ?>
+                        <div class="alert alert-success">Countries id entered
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php } ?>
                     <form id="form" method="post" action="index.php?pid=<?php echo base64_encode("ui/journal/upload.php") ?>" enctype="multipart/form-data" class="bootstrap-form needs-validation">
                         <div>
                             <!-- FORMULARIO PARA SOICITAR LA CARGA DEL EXCEL -->
@@ -117,18 +123,6 @@ $processedC = true;
 
                     </form>
                     <br>
-
-                    <form id="form" method="post" action="index.php?pid=<?php echo base64_encode("ui/journal/upload.php") ?>" enctype="multipart/form-data" class="bootstrap-form needs-validation">
-                        <button type="submit" class="btn btn-info" name="relations">Create relations</button>
-
-                        <?php if ($processedC) { ?>
-                            <div class="alert alert-success">Countries id entered
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        <?php } ?>
-                    </form>
                 </div>
             </div>
         </div>

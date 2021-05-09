@@ -73,12 +73,12 @@ class JournalcategoryDAO{
 		return "delete from Journalcategory";
 	}
 
-	function insertIdJourCat($category){
+	function insertIdsJC($pCategory){
 
 		return "INSERT INTO journalcategory(Journal_idJournal,Category_idCategory) 
 		select j.idJournal,c.idCategory
 		FROM journal as j, category as c
-		WHERE  j.categories LIKE  '%".$category."%'  AND c.name='".$category."'";
+		WHERE  j.categories LIKE  '%".$pCategory."%'  AND c.name='".$pCategory."'";
 
 	}
 }

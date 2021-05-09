@@ -55,14 +55,15 @@ $administrator -> select();
 			</li>
 
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Upload</a>
+				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Update SRS</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item"href='index.php?pid=<?php echo base64_encode("ui/journal/upload.php") ?>'  target="_blank">CSV</a>
+					<a class="dropdown-item"href='index.php?pid=<?php echo base64_encode("ui/journal/upload.php") ?>'  target="_blank">Upload CSV</a>
+					<a class="dropdown-item"href='index.php?pid=<?php echo base64_encode("ui/journalcategory/relationsJC.php") ?>'  target="_blank">Make relations with JC</a>
 				</div>
 			</li>
 		</ul>
 
-	
+
 		<ul class="navbar-nav">
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown">Administrator: <?php echo $administrator -> getName() . " " . $administrator -> getLastName() ?><span class="caret"></span></a>
