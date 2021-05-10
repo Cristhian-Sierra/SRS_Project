@@ -33,7 +33,8 @@ $logAdministrator = new LogAdministrator("", "View all filter searchs", "", date
 		<div class="card-header">
 			<h4 class="card-title">Get All Filter_search</h4>
 		</div>
-		<div class="card-body">
+		<br>
+		<div class="card">
 		<div class="table-responsive">
 			<table class="table table-striped table-hover">
 				<thead>
@@ -189,7 +190,7 @@ $logAdministrator = new LogAdministrator("", "View all filter searchs", "", date
 						echo "<td>" . $currentFilter_search -> getSjr_filter() . "</td>";
 						echo "<td class='text-right' nowrap>";
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/filter_search/updateFilter_search.php") . "&idFilter_search=" . $currentFilter_search -> getIdFilter_search() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Filter_search' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/filter_search/updateFilter_search.php") . "&idFilter_search=" . $currentFilter_search -> getIdFilter_search() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Filter_search'style='color: #DF691A;' ></span></a> ";
 						}
 						echo "</td>";
 						echo "</tr>";

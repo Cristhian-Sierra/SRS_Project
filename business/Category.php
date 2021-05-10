@@ -64,6 +64,17 @@ class Category {
 		$area -> select();
 		$this -> area = $area;
 	}
+		function selectName(){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> categoryDAO -> selectName());
+		$categorys = array();
+		while ($result = $this -> connection -> fetchRow()){
+			array_push($categorys, new Category($result[0]));
+		}
+		$this -> connection -> close();
+		return $categorys;
+	}
+
 
 	function selectAll(){
 		$this -> connection -> open();

@@ -28,6 +28,11 @@ class CategoryDAO{
 				where idCategory = '" . $this -> idCategory . "'";
 	}
 
+	function selectName() {
+		return "select name
+				from Category";
+	}
+
 	function selectAll() {
 		return "select idCategory, name, area_idArea
 				from Category";

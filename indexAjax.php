@@ -2,7 +2,6 @@
 require("business/Administrator.php");
 require("business/LogAdministrator.php");
 require("business/Area.php");
-require("business/Areacategory.php");
 require("business/Category.php");
 require("business/Journalcategory.php");
 require("business/Journal.php");

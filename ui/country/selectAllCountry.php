@@ -130,7 +130,7 @@ if(isset($_GET['dir'])){
 							<span class='fas fa-sort-amount-down' data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' ></span></a>
 						<?php } ?>
 						</th>
-						<th nowrap></th>
+						<th nowrap><strong>Functions</strong></th>
 					</tr>
 				</thead>
 				</tbody>
@@ -154,11 +154,11 @@ if(isset($_GET['dir'])){
 						echo "<td>" . $currentCountry -> getHindex() . "</td>";
 						echo "<td class='text-right' nowrap>";
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/country/updateCountry.php") . "&idCountry=" . $currentCountry -> getIdCountry() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Country' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/country/updateCountry.php") . "&idCountry=" . $currentCountry -> getIdCountry() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Country' style='color: #DF691A;' ></span></a> ";
 						}
-						echo "<a href='index.php?pid=" . base64_encode("ui/journal/selectAllJournalByCountry.php") . "&idCountry=" . $currentCountry -> getIdCountry() . "'><span class='fas fa-search-plus' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Get All Journal' ></span></a> ";
+						echo "<a href='index.php?pid=" . base64_encode("ui/journal/selectAllJournalByCountry.php") . "&idCountry=" . $currentCountry -> getIdCountry() . "'><span class='fas fa-search-plus' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Get All Journal'  style='color: #DF691A;'></span></a> ";
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/journal/insertJournal.php") . "&idCountry=" . $currentCountry -> getIdCountry() . "'><span class='fas fa-pen' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Create Journal' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/journal/insertJournal.php") . "&idCountry=" . $currentCountry -> getIdCountry() . "'><span class='fas fa-pen' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Create Journal' style='color: #DF691A;' ></span></a> ";
 						}
 						echo "</td>";
 						echo "</tr>";

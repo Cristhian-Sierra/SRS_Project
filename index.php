@@ -80,20 +80,22 @@ if(isset($_GET['logOut'])){
 		<link rel="icon" type="image/png" href="img/logo.png" />
 		<link href="https://bootswatch.com/4/superhero/bootstrap.css" rel="stylesheet" />
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="ui/css/style.css">
+		<link rel="stylesheet" type="text/css" href="ui/css/styles.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css" />
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
-		<!--PDF datatable-->
+		<!-- datatable-->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.css"/>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.js"></script>
+
+		<!--pushJs-->
+		<script type="text/javascript" src="push.js/push.min.js"></script>
 
 
 

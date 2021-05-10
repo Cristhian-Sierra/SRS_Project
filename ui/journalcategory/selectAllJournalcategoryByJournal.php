@@ -82,14 +82,14 @@ if(!empty($_GET['action']) && $_GET['action']=="delete"){
 					$counter = 1;
 					foreach ($journalcategorys as $currentJournalcategory) {
 						echo "<tr><td>" . $counter . "</td>";
-						echo "<td><a href='modalCategory.php?idCategory=" . $currentJournalcategory -> getCategory() -> getIdCategory() . "' data-toggle='modal' data-target='#modalJournalcategory' >" . $currentJournalcategory -> getCategory() -> getName() . "</a></td>";
-						echo "<td><a href='modalJournal.php?idJournal=" . $currentJournalcategory -> getJournal() -> getIdJournal() . "' data-toggle='modal' data-target='#modalJournalcategory' >" . $currentJournalcategory -> getJournal() -> getTitle() . " " . $currentJournalcategory -> getJournal() -> getIssn() . "</a></td>";
+						echo "<td><a href='modalCategory.php?idCategory=" . $currentJournalcategory -> getCategory() -> getIdCategory() . "' data-toggle='modal' data-target='#modalJournalcategory'  style='color: #DF691A;' >" . $currentJournalcategory -> getCategory() -> getName() . "</a></td>";
+						echo "<td><a href='modalJournal.php?idJournal=" . $currentJournalcategory -> getJournal() -> getIdJournal() . "' data-toggle='modal' data-target='#modalJournalcategory' style='color: #DF691A;'  >" . $currentJournalcategory -> getJournal() -> getTitle() . " " . $currentJournalcategory -> getJournal() -> getIssn() . "</a></td>";
 						echo "<td class='text-right' nowrap>";
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/updateJournalcategory.php") . "&idJournalcategory=" . $currentJournalcategory -> getIdJournalcategory() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Journalcategory' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/updateJournalcategory.php") . "&idJournalcategory=" . $currentJournalcategory -> getIdJournalcategory() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Journalcategory'  style='color: #DF691A;' ></span></a> ";
 						}
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/selectAllJournalcategoryByJournal.php") . "&idJournal=" . $_GET['idJournal'] . "&idJournalcategory=" . $currentJournalcategory -> getIdJournalcategory() . "&action=delete' onclick='return confirm(\"Confirm to delete Journalcategory\")'> <span class='fas fa-backspace' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Delete Journalcategory' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/selectAllJournalcategoryByJournal.php") . "&idJournal=" . $_GET['idJournal'] . "&idJournalcategory=" . $currentJournalcategory -> getIdJournalcategory() . "&action=delete' onclick='return confirm(\"Confirm to delete Journalcategory\")'> <span class='fas fa-backspace' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Delete Journalcategory' style='color: #DF691A;'  ></span></a> ";
 						}
 						echo "</td>";
 						echo "</tr>";

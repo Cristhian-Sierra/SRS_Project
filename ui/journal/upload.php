@@ -6,13 +6,13 @@ if (isset($_POST['insert'])) {
    $jourCat= new Journalcategory();
    $deletAll=$jourCat->deleteAll();
    if($deletAll){
-    echo("Se han eliminado las relaciones");
+    echo("JC Deleted");
 }
 
 $jour= new Journal();
 $deletAll=$jour->deleteAll();
 if($deletAll){
-    echo("<br>Se han eliminado los journals");
+    echo("<br>Journals deleted");
 }
 
 $archivo = $_FILES["archivo"]["name"];
@@ -20,9 +20,9 @@ $archivo_copiad =  $_FILES["archivo"]["tmp_name"];
 $archivo_guardado = "copia_".$archivo;
     //echo $archivo . " esta es la ruta temporal: " .$archivo_copiad;
 if(copy($archivo_copiad,$archivo_guardado)){
-    echo "<br>Se ha colocado el archivo en la carpeta local";
+    echo "<br>The file is on the folder";
 }else{
-    echo"<br>Hubo un error al guardsar archivo en carpeta local<br/>";
+    echo"<br>Error to save the file on folder<br/>";
 }
 if(file_exists($archivo_guardado)){
         $fp = fopen($archivo_guardado,'r');// abrir un archivo
@@ -41,7 +41,7 @@ if(file_exists($archivo_guardado)){
 
         
     }else{
-        echo "No existe el archivo <br/>";
+        echo "The fiel doesn't exists <br/>";
     }
     $user_ip = getenv('REMOTE_ADDR');
     $agent = $_SERVER["HTTP_USER_AGENT"];
@@ -94,7 +94,7 @@ if(file_exists($archivo_guardado)){
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Create Journal</h4>
+                    <h4 class="card-title">Upload Journal</h4>
                 </div>
                 <div class="card-body">
                     <?php if ($processed) { ?>
@@ -102,6 +102,7 @@ if(file_exists($archivo_guardado)){
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
+                            
                         </div>
                     <?php } ?>
                     <?php if ($processedC) { ?>
@@ -110,7 +111,15 @@ if(file_exists($archivo_guardado)){
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <script type="text/javascript">
+                            Push.create("Upload success",{
+                                body:"The csv file was uploaded successfully",
+                                icon:"img/logo.png",
+                                timeout:10000
+                            });
+                        </script>
                     <?php } ?>
+
                     <form id="form" method="post" action="index.php?pid=<?php echo base64_encode("ui/journal/upload.php") ?>" enctype="multipart/form-data" class="bootstrap-form needs-validation">
                         <div>
                             <!-- FORMULARIO PARA SOICITAR LA CARGA DEL EXCEL -->

@@ -157,9 +157,9 @@
               </label>
 
               <label id="referencesS" >SJR >=
-                  <input type="number" name="sjr" id="sjr" min="0" max="88" value="1.0" step="0.01"  oninput="this.form.sjr_range.value=this.value"   /> 
+                  <input type="number" name="sjr" id="sjr" min="0" max="88" value="10.0" step="0.01"  oninput="this.form.sjr_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="88.192" value="1.0" step="0.01" oninput="this.form.sjr.value=this.value"     />
+                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="88.192" value="10.0" step="0.01" oninput="this.form.sjr.value=this.value"     />
                   
               </label>
            
@@ -170,57 +170,12 @@
   <br> </br>
 
 
-<div class="container" style="position: relative; left: 25px;"><!-- Pagination div-->
+<div class="container" ><!-- Pagination div-->
      <!--Table's Structure-->
      <div id="searchResults">
-        <table   class="table table-dark " id="JournalTable">
-         <!--   <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col"> Title</th>
-                    <th scope="col"> Issn</th>
-                    <th scope="col">sjr</th>
-                    <th scope="col">Best_quartile</th>
-                    <th scope="col">H index</th>
-                    <th scope="col">Total documents</th>
-                    <th scope="col">Total references</th>
-                    <th scope="col">Total cites</th>
-                    <th scope="col">Coverage</th>
-                    <th scope="col" >All categories</th>
-                    <th scope="col">Country</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                /*$i=1;
-                foreach($journalsF as $jP){
-                    echo "<tr>";
-                    echo "<td>" . $jP->getIdJournal() . "</td>";
-                    echo "<td>"."<a href='https://www.scimagojr.com/journalsearch.php?q=".$jP->getIssn()."' target='_blank'>".$jP->getTitle()."</a>"."</td>";
-                    echo "<td>" . $jP ->  getIssn() . "</td>";
-                    echo "<td>" . $jP  -> getSjr() . "</td>";
-                    echo "<td>" . $jP  -> getBest_quartile() . "</td>";
-                    echo "<td>" . $jP  -> getHindex(). "</td>";
-                    echo "<td>" . $jP  ->  getTotal_docs() . "</td>";
-                    echo "<td>" . $jP  ->  getTotal_references() . "</td>";
-                    echo "<td>" . $jP  ->  getTotal_cites() . "</td>";
-                    echo "<td>" . $jP  ->  getCoverage() . "</td>";
-                    echo "<td>" . $jP  -> getCategories(). "</td>";
-                    echo "<td>" . $jP  -> getCountry(). "</td>";
-                    echo "</tr>";
-                    $i++;
-                }*/
-                ?>
-            </tbody>
-        -->
-        </table>
-      
     </div>
       
 </div>
-
-
-
 
 
 <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
@@ -319,7 +274,6 @@
                 "quartile_filter":$('#quartile').val()
 
                 },
-
             success:function(r){
                 $('#searchResults').html(r);
                /* $('#searchResult').fadeOut('slow',function(){

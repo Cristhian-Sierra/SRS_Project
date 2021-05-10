@@ -1,5 +1,4 @@
 <?php
-$processed = false;
 $processedC = false;
 
 
@@ -7,7 +6,7 @@ if(isset($_POST['relations'])){
 
 $archivo = fopen("./csv/scimagojr_category.csv", "r");
 //Lo recorremos
-while (($datos = fgetcsv($archivo)) == true)
+while (($datos = fgetcsv($archivo,";",'"')) !== FALSE)
 {
 
     $newJourCa = new Journalcategory();
@@ -35,8 +34,6 @@ $processedC = true;
                     <h4 class="card-title">Create Ids to JournalCategory</h4>
                 </div>
                 <div class="card-body">
-                
-
                     <form id="form" method="post" action="index.php?pid=<?php echo base64_encode("ui/journalcategory/relationsJC.php") ?>" enctype="multipart/form-data" class="bootstrap-form needs-validation">
                         <button type="submit" class="btn btn-info" name="relations">Create relations</button>
 
@@ -46,6 +43,19 @@ $processedC = true;
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+                        </div>
+                        <script type="text/javascript">
+                            Push.create("Relations to JC success",{
+                                body:"The creations of The Journal-to-Category relationships were successful",
+                                icon:"img/logo.png",
+                                timeout:10000
+                                
+                                /*onClick: function(){
+                                    window.location="https://pushjs.org/docs/quick-start";
+                                   
+                                }*/
+                            });
+                        </script>
                         <?php } ?>
                     </form>
                 </div>
