@@ -43,7 +43,8 @@ if(isset($_GET['action']) && $_GET['action']=="delete"){
 		<div class="card-header">
 			<h4 class="card-title">Get the best Journals where SJR >=1, Hindex >=100 and total references >=1000</h4>
 		</div>
-		<div class="card-body">
+		
+		<div class="card">
 		<?php if(isset($_GET['action']) && $_GET['action']=="delete"){ ?>
 			<?php if($error == 0){ ?>
 				<div class="alert alert-success" >The registry was succesfully deleted.
@@ -59,24 +60,25 @@ if(isset($_GET['action']) && $_GET['action']=="delete"){
 				</div>
 				<?php }
 			} ?>
-		<div class="table-responsive">
+		<br>
+		<div class="table-responsive " >
 			<table class="table table-striped table-hover" id="JournalTableA">
-				<thead class="thead-dark">
+				<thead class="thead-dark" >
 					<tr>
-						<th scope="col">Rank</th>
-						<th scope="col"> Title</th>
-						<th scope="col"> Issn</th>
-						<th scope="col">sjr</th>
-						<th scope="col">Best_quartile</th>
-						<th scope="col">H index</th>
-						<th scope="col">Total documents</th>
-						<th scope="col">Total references</th>
-						<th scope="col">Total cites</th>
-						<th scope="col">Citablee docs</th>
-						<th scope="col">Coverage</th>
-						<th scope="col" >All categories</th>
-						<th scope="col">Country</th>
-						<th scope="col">Function</th>
+						<th scope="col" style="background-color:  #123456;">Rank</th>
+						<th scope="col"style="background-color:  #123456;"> Title</th>
+						<th scope="col"style="background-color:  #123456;"> Issn</th>
+						<th scope="col"style="background-color:  #123456;">sjr</th>
+						<th scope="col"style="background-color:  #123456;">Best_quartile</th>
+						<th scope="col"style="background-color:  #123456;">H index</th>
+						<th scope="col"style="background-color:  #123456;">Total documents</th>
+						<th scope="col"style="background-color:  #123456;">Total references</th>
+						<th scope="col"style="background-color:  #123456;">Total cites</th>
+						<th scope="col"style="background-color:  #123456;">Citablee docs</th>
+						<th scope="col"style="background-color:  #123456;">Coverage</th>
+						<th scope="col" style="background-color:  #123456;">All categories</th>
+						<th scope="col"style="background-color:  #123456;">Country</th>
+						<th scope="col"style="background-color:  #123456;">Function</th>
 					</tr>
 				</thead>
 				</tbody>

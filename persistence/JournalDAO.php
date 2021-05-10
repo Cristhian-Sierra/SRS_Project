@@ -122,17 +122,84 @@ class JournalDAO {
 		return "delete from Journal";
 	}
 
-	public function searchPage($quantity, $page){
+	function searchPage($quantity, $page){
 		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,
 		j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name FROM Journal as j,Country as co  WHERE j.country_idCountry=co.idCountry 
 		limit " . (($page-1) * $quantity) . ", " . $quantity;
 	}
 
-	public function searchQuantity(){
+	function searchQuantity(){
 		return "SELECT count(j.idJournal) FROM Journal as j";
 	}
 
-	
+	//selects to filters page
+
+	function selectAllF($area,$category,$country,$quartile,$hindex,$references,$sjr){
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') AND (j.best_quartile='$quartile') order by j.idJournal";
+
+	}
+
+	function selectWF($hindex,$references,$sjr){
+		//Select without filters
+		return "SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')  order by j.idJournal";
+	}
+
+	function selectAr($area,$hindex,$references,$sjr){
+        //Select with area
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area')  AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+	}
+
+	function selectArCa($area,$category,$hindex,$references,$sjr){
+        //Select with area and category filter
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+	}
+
+
+	function selectCo($country,$hindex,$references,$sjr){
+ 	       //Select with country filter
+		return " SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc
+		WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) 
+		AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) 
+		AND (co.idCountry='$country') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+	} 
+
+	function selectQ($quartile,$hindex,$references,$sjr){
+        //Select with quartile filter
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+	}
+
+	function selectACC($area,$category,$country,$hindex,$references,$sjr){
+		//select with area, category, country
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country') AND (ca.idCategory='$category') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+	}
+
+	function selectACo($area,$country,$hindex,$references,$sjr){
+	//select with area, country
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country')  AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')";
+
+	}
+
+	function selectACoQ($area,$country,$quartile,$hindex,$references,$sjr){
+	//select with area, country,quartile
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (co.idCountry='$country')  AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+
+	}
+
+	function selectACaQ($area,$category,$quartile,$hindex,$references,$sjr){
+	//select area,category, quartile
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (ca.idCategory='$category') AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+
+	}
+	function selectAQ($area,$quartile,$hindex,$references,$sjr){
+	//select area, quartile
+		return"SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (a.idArea='$area') AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+	}
+
+	function selectCoQ($country,$quartile,$hindex,$references,$sjr){
+	//select with country. quartile
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co,Category as ca, Area as a,Journalcategory as jc WHERE (jc.journal_idJournal=j.idJournal) AND (jc.category_idCategory=ca.idCategory) AND (co.idCountry=j.country_IdCountry) AND (a.idArea=ca.area_idArea ) AND (co.idCountry='$country') AND (j.best_quartile='$quartile') AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr') order by j.idJournal";
+
+	}
 
 }
 

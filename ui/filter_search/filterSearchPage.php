@@ -90,9 +90,9 @@
 
     <form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
 
-        <div class="container">
+        <div class="container-fluid" align="center"   >
             <div class="row">
-                <div class="col col-lg-12">
+                <div class="col col-lg-12 col-xl-12">
                     <label>Area: 
                         <select name="areas" id="areas" class="form-control input-sm" >
                             <option  value="">Area</option >
@@ -140,7 +140,7 @@
                     </div>
                 </div>
 
-        <div class="container">
+        <div class="container" style="position: relative; left: 25px;" >
             
                 <label id="referencesH" >H index >=
                   <input type="number" name="hindex" id="hindex" min="0" max="1159" value="100" oninput="this.form.hindex_range.value=this.value" /> 
@@ -170,9 +170,7 @@
   <br> </br>
 
 
-<div class="container"><!-- Pagination div-->
-    
-     
+<div class="container" style="position: relative; left: 25px;"><!-- Pagination div-->
      <!--Table's Structure-->
      <div id="searchResults">
         <table   class="table table-dark " id="JournalTable">

@@ -341,6 +341,156 @@ class Journal {
         return $this -> connection -> fetchRow()[0];
     }
 
+//Selects to Filters page 
+    function selectAllF($area,$category,$country,$quartile,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO->selectAllF($area,$category,$country,$quartile,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function selectWF($hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO ->selectWF($hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function selectAr($area,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO ->selectAr($area,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function selectArCa($area,$category,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO ->selectArCa($area,$category,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function selectCo($country,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO ->selectCo($country,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function  selectQ($quartile,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO -> selectQ($quartile,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function selectACC($area,$category,$country,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO ->selectACC($area,$category,$country,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+
+    function selectACo($area,$country,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO -> selectACo($area,$country,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function selectACoQ($area,$country,$quartile,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO -> selectACoQ($area,$country,$quartile,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function selectACaQ($area,$category,$quartile,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO -> selectACaQ($area,$category,$quartile,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+    function selectAQ($area,$quartile,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO -> selectAQ($area,$quartile,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+
+    function selectCoQ($country,$quartile,$hindex,$references,$sjr){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> journalDAO -> selectCoQ($country,$quartile,$hindex,$references,$sjr));
+    	$journals = array();
+    	while ($result = $this -> connection -> fetchRow()){
+    		$country = new Country($result[12]);
+    		$country -> select();
+    		array_push($journals, new Journal($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7], $result[8], $result[9], $result[10], $result[11], $country));
+    	}
+    	$this -> connection -> close();
+    	return $journals;
+    }
+
+
+
 
 
 }
