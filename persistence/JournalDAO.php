@@ -141,7 +141,7 @@ class JournalDAO {
 
 	function selectWF($hindex,$references,$sjr){
 		//Select without filters
-		return "SELECT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')  order by j.idJournal";
+		return "SELECT DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,j.country_idCountry AS country FROM Journal AS j,Country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')  order by j.idJournal";
 	}
 
 	function selectAr($area,$hindex,$references,$sjr){

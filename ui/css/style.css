@@ -1,4 +1,13 @@
- input[type=search],select {
+
+#loadScreenJ{
+  display:none;
+  position:absolute;
+  left:620px;
+  top:220px;
+}
+
+
+input[type=search],select {
   border-radius: 5px;
   background-color:#fff !important;
 
