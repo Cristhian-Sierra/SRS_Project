@@ -78,20 +78,19 @@ if(isset($_GET['logOut'])){
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!--My styles and Bootwatch-->
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 		<link rel="icon" type="image/png" href="img/logo.png" />
 		<link href="https://bootswatch.com/4/superhero/bootstrap.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="ui/css/style.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css" />
 
-		<!--AJAX JQUERY-->
+		<!--AJAX & jQUERY-->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 
-		<!--DATATABLE-->
+		<!-- datatable-->
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.css"/>
@@ -137,10 +136,4 @@ if(isset($_GET['logOut'])){
 		<div class="text-center text-muted">ITI &copy; <?php echo date("Y")?></div>
 	</body>
 </html>
-
-
-></div>
-	</body>
-</html>
-
 
