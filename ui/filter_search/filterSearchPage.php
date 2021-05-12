@@ -78,7 +78,13 @@
         $filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
         $filterSClass->insert();
 
-        echo "<script>alert('Search saved')</script>";
+        if ($filterSClass) {
+        	  echo "<script>alert('Search saved')</script>";
+
+        }
+      
+
+
        
     }
 ?>
@@ -162,14 +168,15 @@
                   <input type="range" name="sjr_range" id="sjr_range" min="0" max="88.192" value="10.0" step="0.01" oninput="this.form.sjr.value=this.value"     />
                   
               </label>
-           
-           
-        </div>       
-    </form>    
-  
-  <br> </br>
+        </div>
+        <br>
+        <div class="container" style="position: relative;left: 15px; ">      
+        <button name="Action" type="submit" class="btn btn-info">Save your search <i class="far fa-save"></i></button>
+        </div>
+    </form>  
 
-
+ 
+ <br> </br>
 <div class="container" >
      <!--Table's Structure-->
      <div id="searchResults"   >
@@ -257,10 +264,7 @@
 
 <script type="text/javascript">
     function chargesList(){
-        //var hindex_range = $('#slider-rangeH').val();
-       // $('#searchResult').html(loader);
-       var area=$('#countries').val();
-       console.log(area);
+     
         $.ajax({
             type:"POST",
             url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
