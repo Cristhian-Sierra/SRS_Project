@@ -55,11 +55,39 @@ class Filter_searchDAO{
 				from Filter_search";
 	}
 
-	/*function selectAll() {
-		return "select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, co.name , ca.name ,a.name , fs.quartile_filter, fs.sjr_filter
-			from Filter_search as fs, country as co, category as ca, area as a 
-			where  fs.country_filter=co.idCountry AND fs.category_filter=ca.idCategory AND fs.area_filter= a.idArea";
-	}*/
+	function selectAllN() {
+		return "select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, co.name as country, ca.name as category,a.name as area, fs.quartile_filter, fs.sjr_filter
+		from Filter_search as fs, Country as co, Category as ca, Area as a 
+		where  
+		fs.country_filter=co.idCountry AND fs.category_filter=ca.idCategory AND fs.area_filter= a.idArea
+		UNION
+		select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, fs.country_filter,fs.category_filter,a.name as area, fs.quartile_filter, fs.sjr_filter
+		from Filter_search as fs, Area as a 
+		where  
+		fs.area_filter= a.idArea and fs.country_filter='' AND fs.category_filter=''
+		UNION
+		select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, fs.country_filter ,a.name as area ,ca.name as category, 
+		fs.quartile_filter, fs.sjr_filter 
+		from 
+		Filter_search as fs, Area as a,Category as ca 
+		where fs.area_filter= a.idArea AND fs.category_filter=ca.idCategory AND fs.country_filter=''
+		UNION
+		select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, co.name as country, fs.category_filter,a.name as area, fs.quartile_filter, fs.sjr_filter
+		from Filter_search as fs, Country as co, Area as a 
+		where  
+		fs.country_filter=co.idCountry  AND fs.area_filter= a.idArea AND fs.category_filter=''
+		UNION
+		select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, co.name as country, fs.category_filter,FS.area_filter, fs.quartile_filter, fs.sjr_filter
+		from Filter_search as fs, Country as co 
+		where  
+		fs.country_filter=co.idCountry  AND fs.area_filter= '' AND fs.category_filter=''
+		UNION
+
+		select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, fs.country_filter, fs.category_filter,FS.area_filter, fs.quartile_filter, fs.sjr_filter
+		from Filter_search as fs, Country as co 
+		where  
+		fs.country_filter='' AND fs.area_filter= '' AND fs.category_filter=''";
+	}
 
 	function selectAllOrder($orden, $dir){
 		return "select idFilter_search, search_date, search_time, hindex_filter, references_filter, country_filter, category_filter, area_filter, quartile_filter, sjr_filter

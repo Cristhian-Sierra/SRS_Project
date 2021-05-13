@@ -24,7 +24,7 @@ $logAdministrator -> insert();
 
 $filterS = new  Filter_search();
 
-$filS=$filterS->selectAll();
+$filS=$filterS->selectAllN();
 
 $pdf =new Cezpdf('a4');
 $pdf->selectFont('pdf/fonts/Times-Roman.afm');

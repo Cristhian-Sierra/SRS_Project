@@ -48,7 +48,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			else if($area=="" && $category=="" && $quartile=="" ){
+			if($area=="" && $category=="" && $quartile=="" ){
 				$journal= new Journal();
 				$selectCo= $journal->selectCo($country,$hindex,$references,$sjr);
 				foreach($selectCo as $sCo) {
@@ -57,7 +57,7 @@ $sjr=$_POST['sjr_filter'];
 
 			}
 
-			else if($country==""   && $quartile=="" && $category==""){
+			 if($country==""   && $quartile=="" && $category==""){
 				$journal= new Journal();
 				$selectAr= $journal->selectAr($area,$hindex,$references,$sjr);
 				foreach($selectAr as $sA) {
@@ -65,7 +65,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			else if($country==""  && $quartile==""  ){
+			 if($country==""  && $quartile==""  ){
 				$journal= new Journal();
 				$selectArCa= $journal->selectArCa($area,$category,$hindex,$references,$sjr);
 				foreach($selectArCa as $sACa) {
@@ -74,7 +74,7 @@ $sjr=$_POST['sjr_filter'];
 						//echo $sqlCA;
 			}	
 
-			else if($area=="" && $country=="" && $category=="" ){
+			 if($area=="" && $country=="" && $category=="" ){
 				$journal= new Journal();
 				$selectQ= $journal->selectQ($quartile,$hindex,$references,$sjr); 
 				foreach($selectQ as $sQ) {
@@ -82,7 +82,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			else if($quartile=="" ){
+			 if($quartile=="" ){
 				$journal= new Journal();
 				$selectACC= $journal->selectACC($area,$category,$country,$hindex,$references,$sjr); 
 				foreach($selectACC as $sACC) {
@@ -90,7 +90,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			else if($quartile=="" && $category==""){
+			if($quartile=="" && $category==""){
 				$journal= new Journal();
 				$selectACo= $journal->selectACo($area,$country,$hindex,$references,$sjr); 
 				foreach($selectACo as $sACo) {
@@ -99,7 +99,7 @@ $sjr=$_POST['sjr_filter'];
 			}
 
 
-			else if($category=="" ){
+			 if($category=="" ){
 				$journal= new Journal();
 				$selectACoQ= $journal->selectACoQ($area,$country,$quartile,$hindex,$references,$sjr); 
 				foreach($selectACoQ as $sACoQ) {
@@ -107,7 +107,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			else if($country=="" ){
+			if($country=="" ){
 				$journal= new Journal();
 				$selectACaQ= $journal->selectACaQ($area,$category,$quartile,$hindex,$references,$sjr); 
 				foreach($selectACaQ as $sACaQ) {
@@ -115,7 +115,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			else if($country=="" && $category==""){
+			if($country=="" && $category==""){
 				$journal= new Journal();
 				$selectAQ= $journal->selectAQ($area,$quartile,$hindex,$references,$sjr); 
 				foreach($selectAQ as $sAQ) {
@@ -123,7 +123,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			else if($category=="" && $area==""){
+			 if($category=="" && $area==""){
 				$journal= new Journal();
 				$selectCoQ= $journal->selectCoQ($country,$quartile,$hindex,$references,$sjr);
 				foreach($selectCoQ as $sCoQ) {
@@ -189,6 +189,7 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
  						extend: 'pdfHtml5',
  						text: '<i class="fas fa-file-pdf">',
  						titleAttr: 'Dowload to PDF',
+ 						image:'./img/logo.png',
  						className:'btn btn-danger',
  						exportOptions: {
  							columns: [ 0, 1, 2, 3,4,5,7,11]
