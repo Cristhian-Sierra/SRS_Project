@@ -30,7 +30,7 @@ $pdf =new Cezpdf('a4');
 $pdf->selectFont('pdf/fonts/Times-Roman.afm');
 $pdf->ezText("<b>Search Reports </b>\n", 30, array("justification" => "center") );
 $opciones = array('width' => '550');
-$cols = array('nro' => 'Nro',
+$cols = array('nro' => '#',
     'search_date' => 'Search date' ,
     'search_time' => 'Search time' ,
     'hindex_filter' => 'H index filter',

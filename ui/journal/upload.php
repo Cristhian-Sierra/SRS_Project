@@ -69,19 +69,11 @@ if(file_exists($archivo_guardado)){
 //Lo recorremos
     while (($datos = fgetcsv($archivo)) == true)
     {
-
         $newJourCo = new Journal("","","","","","","","","","","","",$datos[0]);
         $resultado=$newJourCo->insert_idCountry($datos[0],$datos[1]);
-
-        
-
     }
 //Cerramos el archivo
     fclose($archivo);
-
-    
-
-
     $processedC = true;
 
 }

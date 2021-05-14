@@ -159,6 +159,61 @@ class Filter_search {
 		$this -> connection -> close();
 		return $filter_searchs;
 	}
+	function selectAllCo(){
+        $this -> connection -> open();
+        $this -> connection -> run($this -> filter_searchDAO -> selectAllCo());
+        $results = array();
+        $i=0;
+        while(($register = $this -> connection -> fetchRow())){
+            $results[$i][0] = $register[0];
+            $results[$i][1] = $register[1];
+            $i++;
+        }
+        $this -> connection -> close();
+        return $results;
+    }
+    function selectAllA(){
+        $this -> connection -> open();
+        $this -> connection -> run($this -> filter_searchDAO -> selectAllA());
+        $results = array();
+        $i=0;
+        while(($register = $this -> connection -> fetchRow())){
+            $results[$i][0] = $register[0];
+            $results[$i][1] = $register[1];
+            $i++;
+        }
+        $this -> connection -> close();
+        return $results;
+    }
+
+    function selectAllCa(){
+        $this -> connection -> open();
+        $this -> connection -> run($this -> filter_searchDAO -> selectAllCa());
+        $results = array();
+        $i=0;
+        while(($register = $this -> connection -> fetchRow())){
+            $results[$i][0] = $register[0];
+            $results[$i][1] = $register[1];
+            $i++;
+        }
+        $this -> connection -> close();
+        return $results;
+    }
+
+    function selectAllDate(){
+    	$this -> connection -> open();
+    	$this -> connection -> run($this -> filter_searchDAO -> selectAllDate());
+    	$results = array();
+    	$i=0;
+    	while(($register = $this -> connection -> fetchRow())){
+    		$results[$i][0] = $register[0];
+    		$results[$i][1] = $register[1];
+    		$i++;
+    	}
+    	$this -> connection -> close();
+    	return $results;
+    }
+
 	function selectAllN(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> filter_searchDAO -> selectAllN());
@@ -193,66 +248,6 @@ class Filter_search {
 	}
 
 
-
-	/*function searchF($sjr,$hindex,$references,$countries,$categories,$areas,$quartile){
-		$this -> connection -> open();
-		$this -> connection -> run($this -> filter_searchDAO -> searchF($sjr,$hindex,$references,$countries,$categories,$areas,$quartile));
-		$filter_searchs = array();
-		while ($result = $this -> connection -> fetchRow()){
-			array_push($filter_searchs, new Filter_search($result[0], $result[1], $result[2], $result[3], $result[4], $result[5], $result[6], $result[7]));
-		}
-		$this -> connection -> close();
-		return $filter_searchs;
-
-	}*/
-
-		/*function selectF(){
-		$this -> connection -> open();
-		$this -> connection -> run($this -> filter_searchDAO  -> selectF());
-		$filters= array();
-		while ($result = $this -> connection -> fetchRow()){
-			$journal = new Journal();
-
-			/*$journal->getIdJournal();
-			$journal_id=$result[0];
-
-			$journal->getTitle();
-			$journal_title=$result[1];
-			
-			$journal->getIssn();
-			$journal_issn=$result[2];
-
-			$journal->getHindex();
-			$journal_hindex=$result[3];
-
-			$journal->getTotal_references();
-			$journal_total_refs=$result[4];
-
-			$country = new Country();
-			$country -> getName();
-			$country=$result[5];
-
-			$journal->getCategories() ;
-			$journal_category=$result[6];
-
-			$area = new Area();
-			$area->getName();
-			$area=$result[7];
-
-			$journal->getBest_quartile();
-			$journal_quartile=$result[8];
-
-			$journal->getSjr();
-			$journal_sjr=$result[9];
-			
-			array_push($filters, new  Filter_search($result[0],$result[1],$result[2],$journal_hindex,$journal_total_refs,$country,$journal_category,$area,$journal_quartile,$journal_sjr));
-		
-		}
-
-
-		$this -> connection -> close();
-		return $filters;
-	}*/
 
 	
 	

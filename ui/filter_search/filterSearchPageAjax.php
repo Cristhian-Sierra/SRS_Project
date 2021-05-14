@@ -189,7 +189,9 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
  						extend: 'pdfHtml5',
  						text: '<i class="fas fa-file-pdf">',
  						titleAttr: 'Dowload to PDF',
- 						image:'./img/logo.png',
+ 						pageSize: 'LETTER',
+  						pageOrientation: 'landscape',
+ 						image:'img/logo.png',
  						className:'btn btn-danger',
  						exportOptions: {
  							columns: [ 0, 1, 2, 3,4,5,7,11]

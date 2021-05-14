@@ -55,6 +55,22 @@ class Filter_searchDAO{
 				from Filter_search";
 	}
 
+	function selectAllCo() {
+		return "select co.name, count(fs.country_filter) as countC from Filter_search as fs,Country as co WHERE fs.country_filter=co.idCountry group by co.name";
+	}
+
+	function selectAllA() {
+		return "select a.name, count(fs.area_filter) as countA from Filter_search as fs,Area as a WHERE fs.area_filter=a.idArea group by a.name";
+	}
+
+	function selectAllCa() {
+		return "select ca.name, count(fs.category_filter) as countCa from Filter_search as fs,Category as ca WHERE fs.category_filter=ca.idCategory group by
+		 ca.name";
+	}
+	function selectAllDate() {
+		return "select search_date as day,count(idFilter_search) from Filter_search group by day";
+	}
+
 	function selectAllN() {
 		return "select fs.idFilter_search, fs.search_date, fs.search_time, fs.hindex_filter, fs.references_filter, co.name as country, ca.name as category,a.name as area, fs.quartile_filter, fs.sjr_filter
 		from Filter_search as fs, Country as co, Category as ca, Area as a 

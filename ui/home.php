@@ -54,7 +54,7 @@ if(isset($_POST['logIn'])){
 					<a href="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>">Search the journals here</a>
 				</div>
 				<div class="card-body">
-					<a href='index.php?pid=<?php echo base64_encode("ui/filter_search/PDFSearchs.php") ?>'  target="_blank">View graphs</a>	
+					<a href='index.php?pid=<?php echo base64_encode("ui/filter_search/graphsFS.php") ?>'  target="_blank">View graphs</a>	
 				</div>
 			</div>
 		</div>

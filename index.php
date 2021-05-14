@@ -16,7 +16,8 @@ $webPagesNoAuthentication = array(
 	'ui/filter_search/datesC.php',
 	'ui/filter_search/getHindexFilter.php',
 	'ui/filter_search/filterSearchPageAjax.php',
-	'ui/filter_search/PDFSearchs.php'
+	'ui/filter_search/PDFSearchs.php',
+	'ui/filter_search/graphsFS.php'
 
 
 );
@@ -95,13 +96,18 @@ if(isset($_GET['logOut'])){
 		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.css"/>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.js"></script>
 
 		<!--pushJs-->
 		<script type="text/javascript" src="push.js/push.min.js"></script>
 
-
+		<!-- Charts-->
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/chartkick/2.3.0/chartkick.min.js"></script>
+		<script src="https://www.gstatic.com/charts/loader.js"></script>
 
 		<script charset="utf-8">
 			$(function () { 
