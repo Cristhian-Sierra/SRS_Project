@@ -68,7 +68,7 @@ class Filter_searchDAO{
 		 ca.name";
 	}
 	function selectAllDate() {
-		return "select search_date as day,count(idFilter_search) from Filter_search group by day";
+		return "select search_date as day,count(idFilter_search) from Filter_search where search_date=search_date group by day";
 	}
 
 	function selectAllN() {

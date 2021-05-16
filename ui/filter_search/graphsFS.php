@@ -14,7 +14,9 @@ $filterSDate = $filtersearchDate -> selectAllDate();
 
 
 ?>
+
 <div class="container mt-4">
+  <h1>Graphs</h1>
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -90,7 +92,7 @@ $filterSDate = $filtersearchDate -> selectAllDate();
                             $json4 .= "\"".$filterSDate [$i][0] . "\" : " . $filterSDate [$i][1] . ",";     
                       }
                       $json4 .= "}";
-                      echo "new Chartkick.ColumnChart(\"fsRDate\", " . $json4 . ",)";
+                      echo "new Chartkick.LineChart(\"fsRDate\", " . $json4 . ",)";
                         echo "</script>";
                     ?>          
         </div>        
