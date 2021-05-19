@@ -5,16 +5,14 @@ $areaC=$_POST['area_category'];
 $category= new Category();
 $cat= $category->datesC($areaC);
 
-$cadena='<option value=""> AllCategories </option>';
+$cadena='<option value=""> All categories </option>';
 
-if($areaC==""){
-   $cadena=$cadena;
-}
-else{
+
+
    foreach ($cat as $ca) {
 
-     $cadena=$cadena.'<option value= "'.$ca->getIdCategory().'">'.$ca->getName().'</option>';
- }  
+     $cadena=$cadena.'<option value="'.$ca->getIdCategory().'"> '.$ca->getName().'</option>';
+  
  
  
 

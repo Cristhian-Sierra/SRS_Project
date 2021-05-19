@@ -101,7 +101,7 @@
                 <div class="col col-lg-12 col-xl-12">
                     <label>Area: 
                         <select name="areas" id="areas" class="form-control input-sm" >
-                            <option  value="">Area</option >
+                            <option  value="">All areas</option >
                             <?php 
                             $i=1;
                             foreach($areasF as $aF ){?>
@@ -114,7 +114,6 @@
 
                         <label>Category: 
                             <select name="categories" id="categories" class="form-control input-sm" >
-
                             </select>
                         </label>
 
@@ -183,27 +182,20 @@
     </div>
       
 </div>
-
-
-<!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
+<!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA
 <script type="text/javascript">
     $(document).ready(function(){
-       // $('#areas').val(1);
         chargeList();
-
         $('#areas').change(function(){
             chargeList();
         });
-        /*$('#categories').change(function(){
-            chargeList();
-        });*/
-    })
+    });  
 </script>
 <script type="text/javascript">
     function chargeList(){
         $.ajax({
             type:"POST",
-            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
+            url:"index.php?pid=<?php// echo base64_encode("ui/filter_search/datesC.php") ?>",
             data:"area_category=" + $('#areas').val(),
             success:function(r){
                 $('#categories').html(r);
@@ -212,6 +204,24 @@
         });
     }
 </script>
+-->
+<!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA 2,0-->
+<script type="text/javascript">
+    $(document).ready(function(){
+       // $('#areas').val(1);
+      // chargeList();   
+
+       $('#areas').change(function(){
+           $("#areas option:selected").each(function (){   
+                area_category = $("#areas").val();
+                $.post("index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>", { area_category: area_category }, function(data){
+                    $("#categories").html(data);
+                });
+            });
+       });
+    });   
+</script>
+
 
 <!--EL JQUERY Y AJAX PARA HACER CONSULTAS CON FILTROS-->
 
