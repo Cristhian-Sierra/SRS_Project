@@ -4,23 +4,18 @@ $processedC = false;
 
 if(isset($_POST['relations'])){
 
-$archivo = fopen("./csv/scimagojr_category.csv", "r");
+    $archivo = fopen("./csv/scimagojr_category.csv", "r");
 //Lo recorremos
-while (($datos = fgetcsv($archivo,";",'"')) !== FALSE)
-{
+    while (($datos = fgetcsv($archivo, 2000,";",'"')) !== FALSE)
+    {
 
-    $newJourCa = new Journalcategory();
-   $resultado=$newJourCa->insertIdsJC($datos[0]);
-    
-        
-    
-}
+        $newJourCa = new Journalcategory();
+        $resultado=$newJourCa->insertIdsJC($datos[0]);
+
+    }
 //Cerramos el archivo
-fclose($archivo);
-
+    fclose($archivo);
     
-
-
 $processedC = true;
 
 }
