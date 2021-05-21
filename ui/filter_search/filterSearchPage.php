@@ -93,60 +93,67 @@
     <?php include("ui/header.php"); ?>
 </div>
 <br> <br>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("form").keypress(function(e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
+    });
+</script>
+<form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
+    <div class="container-fluid" align="center"   >
+        <div class="row">
+            <div class="col col-lg-12 col-xl-12">
+                <label>Area: 
+                    <select name="areas" id="areas" class="form-control input-sm" >
+                        <option  value="">All areas</option >
+                        <?php 
+                        $i=1;
+                        foreach($areasF as $aF ){?>
+                            <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
+                            <?php
+                            $i++;}
+                            ?>
+                        </select>
+                    </label>
 
-    <form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
+                    <label>Category: 
+                        <select name="categories" id="categories" class="form-control input-sm" >
+                        </select>
+                    </label>
 
-        <div class="container-fluid" align="center"   >
-            <div class="row">
-                <div class="col col-lg-12 col-xl-12">
-                    <label>Area: 
-                        <select name="areas" id="areas" class="form-control input-sm" >
-                            <option  value="">All areas</option >
+                    <label>Country:
+                        <select name="countries" id="countries" class="form-control input-sm"   >
+                            <option  value="">All countries </option >
                             <?php 
                             $i=1;
-                            foreach($areasF as $aF ){?>
-                                <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
+                            foreach($countrysF as $coF ){?>
+                                <option value= "<?php echo utf8_decode($coF->getIdCountry()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
                                 <?php
                                 $i++;}
                                 ?>
                             </select>
                         </label>
 
-                        <label>Category: 
-                            <select name="categories" id="categories" class="form-control input-sm" >
+                        <label>Quartile
+                            <select  name="quartile" id="quartile" class="form-control input-sm"  >
+                                <option value="">All quartiles</option>
+                                <option value="Q1">Q1</option>
+                                <option value="Q2">Q2</option>
+                                <option value="Q3">Q3</option>
+                                <option value="Q4">Q4</option>
+                                <option value="-">Without quartile</option>
+
                             </select>
                         </label>
-
-                        <label>Country:
-                            <select name="countries" id="countries" class="form-control input-sm"   >
-                                <option  value="">All countries </option >
-                                <?php 
-                                $i=1;
-                                foreach($countrysF as $coF ){?>
-                                    <option value= "<?php echo utf8_decode($coF->getIdCountry()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
-                                    <?php
-                                    $i++;}
-                                    ?>
-                                </select>
-                            </label>
-
-                            <label>Quartile
-                                <select  name="quartile" id="quartile" class="form-control input-sm"  >
-                                    <option value="">All quartiles</option>
-                                    <option value="Q1">Q1</option>
-                                    <option value="Q2">Q2</option>
-                                    <option value="Q3">Q3</option>
-                                    <option value="Q4">Q4</option>
-                                    <option value="-">Without quartile</option>
-
-                                </select>
-                            </label>
-                        </div>
                     </div>
                 </div>
+            </div>
 
-        <div class="container" style="position: relative; left: 25px;" >
-            
+            <div class="container" style="position: relative; left: 25px;" >
+
                 <label id="referencesH" >H index >=
                   <input type="number" name="hindex" id="hindex" min="0" max="1159" value="100" oninput="this.form.hindex_range.value=this.value" /> 
                   <br>
@@ -167,25 +174,24 @@
                   <input type="range" name="sjr_range" id="sjr_range" min="0" max="88.192" value="10.0" step="0.01" oninput="this.form.sjr.value=this.value"     />
                   
               </label>
-        </div>
-        <br>
-        <div class="container" style="position: relative;left: 15px; ">      
-        <button name="Action" type="submit" class="btn btn-info">Save your search <i class="far fa-save"></i></button>
+          </div>
+          <br>
+          <div class="container" style="position: relative;left: 15px; ">      
+            <button name="Action" type="submit" class="btn btn-info">Save your search <i class="far fa-save"></i></button>
         </div>
     </form>  
 
- 
- <br> </br>
-<div class="container" >
+
+    <br> </br>
+    <div class="container" >
      <!--Table's Structure-->
-     <div id="searchResults"   >
-    </div>
-      
-</div>
-<!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA
-<script type="text/javascript">
+     <div id="searchResults"></div>
+ </div>
+ <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
+ <script type="text/javascript">
     $(document).ready(function(){
-        chargeList();
+        // $('#areas').val(1);
+        chargeList();   
         $('#areas').change(function(){
             chargeList();
         });
@@ -195,7 +201,7 @@
     function chargeList(){
         $.ajax({
             type:"POST",
-            url:"index.php?pid=<?php// echo base64_encode("ui/filter_search/datesC.php") ?>",
+            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
             data:"area_category=" + $('#areas').val(),
             success:function(r){
                 $('#categories').html(r);
@@ -204,24 +210,21 @@
         });
     }
 </script>
--->
-<!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA 2,0-->
+
+<!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA 2,0
 <script type="text/javascript">
     $(document).ready(function(){
-       // $('#areas').val(1);
-      // chargeList();   
-
        $('#areas').change(function(){
            $("#areas option:selected").each(function (){   
                 area_category = $("#areas").val();
-                $.post("index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>", { area_category: area_category }, function(data){
+                $.post("index.php?pid=<?php //echo base64_encode("ui/filter_search/datesC.php") ?>", { area_category: area_category }, function(data){
                     $("#categories").html(data);
                 });
             });
        });
     });   
 </script>
-
+-->
 
 <!--EL JQUERY Y AJAX PARA HACER CONSULTAS CON FILTROS-->
 
