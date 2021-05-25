@@ -13,8 +13,8 @@ $sjr=$_POST['sjr_filter'];
 
 <!--class="table table-hover table-striped table-responsive-md"-->
 <div class="container" >
-	<div id="loadScreenJ" >
-		<img src="./img/load.gif" width="150px" height="150px"> 
+	<div id="loadScreenJ" class="container">
+		<img src="./img/load.gif" width="150px" height="150px" > 
 	</div>
 	<table class="table dt-responsive  table-dark " id="JournalTableS" >
 		<thead >

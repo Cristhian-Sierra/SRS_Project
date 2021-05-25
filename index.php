@@ -81,7 +81,7 @@ if(isset($_GET['logOut'])){
 
 		<link rel="icon" type="image/png" href="img/logo.png" />
 		<link href="https://bootswatch.com/4/superhero/bootstrap.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="ui/css/style.css">
+		<link rel="stylesheet" type="text/css" href="ui/css/styles.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css" />
 
 		<!--AJAX & jQUERY-->

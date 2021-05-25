@@ -1,11 +1,9 @@
 
 #loadScreenJ{
-  display:none;
-  position:absolute;
-  left:620px;
-  top:220px;
+  display: none;
+  width: 150px;
+  height: 150px;
 }
-
 
 input[type=search],select {
   border-radius: 5px;
