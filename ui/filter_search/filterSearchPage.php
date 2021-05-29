@@ -236,7 +236,7 @@
             chargesList();
         });
         $('#areas').change(function(){
-            chargesList();
+            areachargesList();
         });
          $('#categories').change(function(){
             chargesList();
@@ -300,4 +300,25 @@
     }
 </script>
 
+<script type="text/javascript">
+    function areachargesList(){
+     
+        $.ajax({
+            type:"POST",
+            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
+            data:{
+                "area_filter":$('#areas').val(),
+                "country_filter":$('#countries').val(),
+                "category_filter":'',
+                "hindex_filter":$('#hindex_range').val(),
+                "ref_filter":$('#refs_range').val(),
+                "sjr_filter":$('#sjr_range').val(),
+                "quartile_filter":$('#quartile').val()
 
+                },
+            success:function(r){
+                $('#searchResults').html(r);
+                         }
+        });
+    }
+</script>
