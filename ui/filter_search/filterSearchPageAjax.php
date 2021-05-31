@@ -37,7 +37,8 @@ $sjr=$_POST['sjr_filter'];
 		<tbody>
 
 			<?php
-			$con=mysqli_connect('localhost','root','','srs');
+			$con=mysqli_connect("localhost", "root", "", "srs");;
+			
 			//Select without filters
 			$sqlAll="SELECT  DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name AS country FROM Journal AS j,Country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')  order by j.idJournal";
 			$resultAll=mysqli_query($con,$sqlAll);
@@ -127,7 +128,7 @@ $sjr=$_POST['sjr_filter'];
 				$journal= new Journal();
 				$selectCoQ= $journal->selectCoQ($country,$quartile,$hindex,$references,$sjr);
 				foreach($selectCoQ as $sCoQ) {
-					echo tableJ($sAQ->getIdJournal(),$sAQ->getTitle(),$sAQ->getIssn(),$sAQ->getSjr(),$sAQ->getBest_quartile(),$sAQ->getHindex(),$sAQ->getTotal_docs(),$sAQ->getTotal_references(),$sAQ->getTotal_cites(),$sAQ->getCitable_docs(),$sAQ->getCoverage(),$sAQ-> getCategories(),$sAQ-> getCountry()->getName());
+					echo tableJ($sCoQ->getIdJournal(),$sCoQ->getTitle(),$sCoQ->getIssn(),$sCoQ->getSjr(),$sCoQ->getBest_quartile(),$sCoQ->getHindex(),$sCoQ->getTotal_docs(),$sCoQ->getTotal_references(),$sCoQ->getTotal_cites(),$sCoQ->getCitable_docs(),$sCoQ->getCoverage(),$sCoQ-> getCategories(),$sCoQ-> getCountry()->getName());
 				}
 
 			}	
