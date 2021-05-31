@@ -217,7 +217,7 @@
        $('#areas').change(function(){
            $("#areas option:selected").each(function (){   
                 area_category = $("#areas").val();
-                $.post("index.php?pid=<?php //echo base64_encode("ui/filter_search/datesC.php") ?>", { area_category: area_category }, function(data){
+                $.post("index.php?pid=<?//php //echo base64_encode("ui/filter_search/datesC.php") ?>", { area_category: area_category }, function(data){
                     $("#categories").html(data);
                 });
             });

@@ -28,12 +28,16 @@ if(file_exists($archivo_guardado)){
         $fp = fopen($archivo_guardado,'r');// abrir un archivo
         $rows = 0;
         $firstline = true;
-        while (($datos = fgetcsv($fp, 1000,";",'"')) !== FALSE)
+
+        while (($datos = fgetcsv($fp, 2000,";",'"')) !== FALSE)
         {
             if (!$firstline) {
                // echo "<br>Se insertaron correctamente los datos";
-                $newJournal = new Journal($datos[0],$datos[2],$datos[4],$datos[5],$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
-                $resultado=$newJournal->insert_csv($datos[0],$datos[2],$datos[4],$datos[5],$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
+                
+                $sjrF= str_replace(',', '.', $datos[5]);
+                //$sjrF = floatval($datos[5]); //Solo funciona con punto y no con coma
+                $newJournal = new Journal($datos[0],$datos[2],$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
+                $resultado=$newJournal->insert_csv($datos[0],$datos[2],$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
             }
             $firstline = false;
         }
