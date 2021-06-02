@@ -79,20 +79,7 @@ if(!empty($_GET['action']) && $_GET['action']=="delete"){
 							<span class='fas fa-sort-amount-down'></span></a>
 						<?php } ?>
 						</th>
-						<th nowrap>Issn 
-						<?php if($order=="issn" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournalByCountry.php") ?>&idCountry=<?php echo $_GET['idCountry'] ?>&order=issn&dir=asc'>
-							<span class='fas fa-sort-amount-up'></span></a>
-						<?php } ?>
-						<?php if($order=="issn" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournalByCountry.php") ?>&idCountry=<?php echo $_GET['idCountry'] ?>&order=issn&dir=desc'>
-							<span class='fas fa-sort-amount-down'></span></a>
-						<?php } ?>
-						</th>
+						
 						<th nowrap>Sjr 
 						<?php if($order=="sjr" && $dir=="asc") { ?>
 							<span class='fas fa-sort-up'></span>
@@ -191,20 +178,7 @@ if(!empty($_GET['action']) && $_GET['action']=="delete"){
 							<span class='fas fa-sort-amount-down'></span></a>
 						<?php } ?>
 						</th>
-						<th nowrap>Coverage 
-						<?php if($order=="coverage" && $dir=="asc") { ?>
-							<span class='fas fa-sort-up'></span>
-						<?php } else { ?>
-							<a data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Ascending' href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournalByCountry.php") ?>&idCountry=<?php echo $_GET['idCountry'] ?>&order=coverage&dir=asc'>
-							<span class='fas fa-sort-amount-up'></span></a>
-						<?php } ?>
-						<?php if($order=="coverage" && $dir=="desc") { ?>
-							<span class='fas fa-sort-down'></span>
-						<?php } else { ?>
-							<a data-toggle='tooltip' class='tooltipLink' data-original-title='Sort Descending' href='index.php?pid=<?php echo base64_encode("ui/journal/selectAllJournalByCountry.php") ?>&idCountry=<?php echo $_GET['idCountry'] ?>&order=coverage&dir=desc'>
-							<span class='fas fa-sort-amount-down'></span></a>
-						<?php } ?>
-						</th>
+						
 						<th nowrap>Categories 
 						<?php if($order=="categories" && $dir=="asc") { ?>
 							<span class='fas fa-sort-up'></span>
@@ -235,7 +209,7 @@ if(!empty($_GET['action']) && $_GET['action']=="delete"){
 					foreach ($journals as $currentJournal) {
 						echo "<tr><td>" . $counter . "</td>";
 						echo "<td>" . $currentJournal -> getTitle() . "</td>";
-						echo "<td>" . $currentJournal -> getIssn() . "</td>";
+					
 						echo "<td>" . $currentJournal -> getSjr() . "</td>";
 						echo "<td>" . $currentJournal -> getBest_quartile() . "</td>";
 						echo "<td>" . $currentJournal -> getHindex() . "</td>";
@@ -243,19 +217,19 @@ if(!empty($_GET['action']) && $_GET['action']=="delete"){
 						echo "<td>" . $currentJournal -> getTotal_references() . "</td>";
 						echo "<td>" . $currentJournal -> getTotal_cites() . "</td>";
 						echo "<td>" . $currentJournal -> getCitable_docs() . "</td>";
-						echo "<td>" . $currentJournal -> getCoverage() . "</td>";
+					
 						echo "<td>" . $currentJournal -> getCategories() . "</td>";
-						echo "<td><a href='modalCountry.php?idCountry=" . $currentJournal -> getCountry() -> getIdCountry() . "' data-toggle='modal' data-target='#modalJournal' >" . $currentJournal -> getCountry() -> getName() . "</a></td>";
+						echo "<td><a href='modalCountry.php?idCountry=" . $currentJournal -> getCountry() -> getIdCountry() . "' data-toggle='modal' data-target='#modalJournal' style='color: #DF691A;' >" . $currentJournal -> getCountry() -> getName() . "</a></td>";
 						echo "<td class='text-right' nowrap>";
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/journal/updateJournal.php") . "&idJournal=" . $currentJournal -> getIdJournal() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Journal' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/journal/updateJournal.php") . "&idJournal=" . $currentJournal -> getIdJournal() . "'><span class='fas fa-edit' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Edit Journal' style='color: #DF691A;'></span></a> ";
 						}
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/journal/selectAllJournalByCountry.php") . "&idCountry=" . $_GET['idCountry'] . "&idJournal=" . $currentJournal -> getIdJournal() . "&action=delete' onclick='return confirm(\"Confirm to delete Journal: " . $currentJournal -> getTitle() . " " . $currentJournal -> getIssn() . "\")'> <span class='fas fa-backspace' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Delete Journal' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/journal/selectAllJournalByCountry.php") . "&idCountry=" . $_GET['idCountry'] . "&idJournal=" . $currentJournal -> getIdJournal() . "&action=delete' onclick='return confirm(\"Confirm to delete Journal: " . $currentJournal -> getTitle() . " " . $currentJournal -> getIssn() . "\")'> <span class='fas fa-backspace' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Delete Journal' style='color: #DF691A;'></span></a> ";
 						}
-						echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/selectAllJournalcategoryByJournal.php") . "&idJournal=" . $currentJournal -> getIdJournal() . "'><span class='fas fa-search-plus' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Get All Journalcategory' ></span></a> ";
+						echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/selectAllJournalcategoryByJournal.php") . "&idJournal=" . $currentJournal -> getIdJournal() . "'><span class='fas fa-search-plus' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Get All Journalcategory' style='color: #DF691A;'></span></a> ";
 						if($_SESSION['entity'] == 'Administrator') {
-							echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/insertJournalcategory.php") . "&idJournal=" . $currentJournal -> getIdJournal() . "'><span class='fas fa-pen' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Create Journalcategory' ></span></a> ";
+							echo "<a href='index.php?pid=" . base64_encode("ui/journalcategory/insertJournalcategory.php") . "&idJournal=" . $currentJournal -> getIdJournal() . "'><span class='fas fa-pen' data-toggle='tooltip' data-placement='left' class='tooltipLink' data-original-title='Create Journalcategory'style='color: #DF691A;' ></span></a> ";
 						}
 						echo "</td>";
 						echo "</tr>";

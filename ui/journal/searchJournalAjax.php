@@ -8,7 +8,7 @@
 	<thead>
 		<tr><th></th>
 			<th nowrap>Title</th>
-			<th nowrap>Issn</th>
+		
 			<th nowrap>Sjr</th>
 			<th nowrap>Best_quartile</th>
 			<th nowrap>Hindex</th>
@@ -16,10 +16,10 @@
 			<th nowrap>Total_references</th>
 			<th nowrap>Total_cites</th>
 			<th nowrap>Citable_docs</th>
-			<th nowrap>Coverage</th>
+			
 			<th nowrap>Categories</th>
 			<th>Country</th>
-			<th nowrap></th>
+			<th nowrap>Functions</th>
 		</tr>
 	</thead>
 	</tbody>
@@ -30,7 +30,7 @@
 		foreach ($journals as $currentJournal) {
 			echo "<tr><td>" . $counter . "</td>";
 			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getTitle()) . "</td>";
-			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getIssn()) . "</td>";
+			
 			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getSjr()) . "</td>";
 			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getBest_quartile()) . "</td>";
 			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getHindex()) . "</td>";
@@ -38,7 +38,7 @@
 			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getTotal_references()) . "</td>";
 			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getTotal_cites()) . "</td>";
 			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getCitable_docs()) . "</td>";
-			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getCoverage()) . "</td>";
+		
 			echo "<td>" . str_ireplace($_GET['search'], "<mark>" . $_GET['search'] . "</mark>", $currentJournal -> getCategories()) . "</td>";
 			echo "<td>" . $currentJournal -> getCountry() -> getName() . "</td>";
 						echo "<td class='text-right' nowrap>";
