@@ -29,7 +29,7 @@ if(file_exists($archivo_guardado)){
         $rows = 0;
         $firstline = true;
 
-        while (($datos = fgetcsv($fp, 2000,";",'"')) !== FALSE)
+        while (($datos = fgetcsv($fp, 2000,";")))
         {
             if (!$firstline) {
                // echo "<br>Se insertaron correctamente los datos";
