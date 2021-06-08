@@ -154,11 +154,7 @@ class Journal {
 		$this -> connection -> close();
 	}
 
-	function upgrade_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories){
-		$this -> connection -> open();
-		$this -> connection -> run($this -> journalDAO -> upgrade_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories));
-		$this -> connection -> close();
-	}
+	
 	function insert_idCountry($idCountry,$nameCountry){
 		$this -> connection -> open();
 		$this -> connection->run($this->journalDAO->insert_idCountry($idCountry,$nameCountry));

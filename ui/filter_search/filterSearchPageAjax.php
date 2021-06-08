@@ -1,5 +1,6 @@
 <?php 
 //$con=mysqli_connect('localhost','root','','srs');
+
 $country=$_POST['country_filter'];
 $area=$_POST['area_filter'];
 $category=$_POST['category_filter'];
@@ -38,20 +39,28 @@ $sjr=$_POST['sjr_filter'];
 
 			<?php
 			//Select without filters
-			$con=mysqli_connect("localhost", "root", "", "srs");;
+
+			/*
+			$con=mysqli_connect('localhost','root','','srs');
 			$sqlAll="SELECT  DISTINCT j.idJournal,j.title AS title,j.issn,j.sjr,j.best_quartile,j.hindex, j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.name AS country FROM Journal AS j,Country AS co WHERE co.idCountry=j.country_IdCountry AND (j.hindex>='$hindex') AND (j.total_references>='$references') AND (j.sjr>='$sjr')  order by j.idJournal";
 			$resultAll=mysqli_query($con,$sqlAll);
-
-			if($area=="" && $country==""  && $quartile=="" ){	
-				while ($ver=mysqli_fetch_row($resultAll)) {
+			*/
+			if($area=="" && $country==""  && $quartile=="" ){
+				/*while ($ver=mysqli_fetch_row($resultAll)) {
 					echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11],$ver[12]);
 				}
-				/*$journal= new Journal();
-				$selectWF= $journal->selectWF($hindex,$references,$sjr);
-				foreach($selectWF as $sWF) {
-					echo tableJ($sWF->getIdJournal(),$sWF->getTitle(),$sWF->getIssn(),$sWF->getSjr(),$sWF->getBest_quartile(),$sWF->getHindex(),$sWF->getTotal_docs(),$sWF->getTotal_references(),$sWF->getTotal_cites(),$sWF->getCitable_docs(),$sWF->getCoverage(),$sWF-> getCategories(),$sWF-> getCountry()->getName());
-				}
 				*/
+				if($hindex=="0" && $sjr=="0" && $references=="0"){
+					echo "<script>alert('Too much data to show')</script>";
+
+				}
+				else{
+					$journal= new Journal();
+					$selectWF= $journal->selectWF($hindex,$references,$sjr);
+					foreach($selectWF as $sWF) {
+						echo tableJ($sWF->getIdJournal(),$sWF->getTitle(),$sWF->getIssn(),$sWF->getSjr(),$sWF->getBest_quartile(),$sWF->getHindex(),$sWF->getTotal_docs(),$sWF->getTotal_references(),$sWF->getTotal_cites(),$sWF->getCitable_docs(),$sWF->getCoverage(),$sWF-> getCategories(),$sWF-> getCountry()->getName());
+					}
+				}			
 			}
 
 			if($area=="" && $category=="" && $quartile=="" ){

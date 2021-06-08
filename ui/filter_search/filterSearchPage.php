@@ -169,9 +169,9 @@
               </label>
 
               <label id="referencesS" >SJR >=
-                  <input type="number" name="sjr" id="sjr" min="0" max="88" value="10.0" step="0.01"  oninput="this.form.sjr_range.value=this.value"   /> 
+                  <input type="number" name="sjr" id="sjr" min="0" max="62.937" value="10.0" step="0.01"  oninput="this.form.sjr_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="88.192" value="10.0" step="0.01" oninput="this.form.sjr.value=this.value"     />
+                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="62.937" value="10.0" step="0.01" oninput="this.form.sjr.value=this.value"     />
                   
               </label>
           </div>

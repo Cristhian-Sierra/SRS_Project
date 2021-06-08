@@ -11,6 +11,9 @@ class Connection {
 		$this -> mysqli -> set_charset("utf8");
 	}
 
+	function openSRS(){
+		$this -> mysqli=mysqli_connect("localhost", "root", "", "srs");
+	}
 	function lastId(){
 		return $this -> mysqli -> insert_id;
 	}

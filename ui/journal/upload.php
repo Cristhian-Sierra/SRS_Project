@@ -29,7 +29,7 @@ if(file_exists($archivo_guardado)){
         $rows = 0;
         $firstline = true;
 
-        while (($datos = fgetcsv($fp, 2000,";")))
+        while (($datos = fgetcsv($fp, 2000,";"))== true)
         {
             if (!$firstline) {
                // echo "<br>Se insertaron correctamente los datos";
@@ -45,7 +45,7 @@ if(file_exists($archivo_guardado)){
 
         
     }else{
-        echo "The fiel doesn't exists <br/>";
+        echo "The file doesn't exist <br/>";
     }
     $user_ip = getenv('REMOTE_ADDR');
     $agent = $_SERVER["HTTP_USER_AGENT"];
