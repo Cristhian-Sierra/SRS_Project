@@ -12,7 +12,7 @@ class Connection {
 	}
 
 	function openSRS(){
-		$this -> mysqli=mysqli_connect("localhost", "root", "", "srs");
+		return mysqli_connect("localhost", "root", "", "srs");
 	}
 	function lastId(){
 		return $this -> mysqli -> insert_id;
