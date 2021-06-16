@@ -1,6 +1,7 @@
 <?php
 $processed = false;
 $processedC = false;
+$processedJ = false;
 
 if (isset($_POST['insert'])) {
    $jourCat= new Journalcategory();
@@ -33,11 +34,13 @@ if(file_exists($archivo_guardado)){
         {
             if (!$firstline) {
                // echo "<br>Se insertaron correctamente los datos";
-                
+
                 $sjrF= str_replace(',', '.', $datos[5]);
+                
                 //$sjrF = floatval($datos[5]); //Solo funciona con punto y no con coma
-                $newJournal = new Journal($datos[0],$datos[2],$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
-                $resultado=$newJournal->insert_csv($datos[0],$datos[2],$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
+                $newJournal = new Journal($datos[0],$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
+
+                $resultado=$newJournal->insert_csv($datos[0],$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
             }
             $firstline = false;
         }
@@ -47,6 +50,7 @@ if(file_exists($archivo_guardado)){
     }else{
         echo "The file doesn't exist <br/>";
     }
+
     $user_ip = getenv('REMOTE_ADDR');
     $agent = $_SERVER["HTTP_USER_AGENT"];
     $browser = "-";
@@ -64,23 +68,37 @@ if(file_exists($archivo_guardado)){
         $browser = "Safari";
     }
     if ($_SESSION['entity'] == 'Administrator') {
-        //$logAdministrator = new LogAdministrator("", "Create Journal", "Title: " . $title . "; Issn: " . $issn . "; Sjr: " . $sjr . "; Best_quartile: " . $best_quartile . "; Hindex: " . $hindex . "; Total_docs: " . $total_docs . "; Total_references: " . $total_references . "; Total_cites: " . $total_cites . "; Citable_docs: " . $citable_docs . "; Coverage: " . $coverage . "; Categories: " . $categories . "; Country: " . $nameCountry, date("Y-m-d"), date("H:i:s"), $user_ip, PHP_OS, $browser, $_SESSION['id']);
-        //$logAdministrator->insert();
+        $logAdministrator = new LogAdministrator("", "Update SRS", "Update all information about journals",date("Y-m-d"), date("H:i:s"), $user_ip, PHP_OS, $browser, $_SESSION['id']);
+        $logAdministrator->insert();
     }
     $processed = true;
 
-    $archivo = fopen("./csv/scimagojr_country.csv", "r");
-//Lo recorremos
-    while (($datos = fgetcsv($archivo)) == true)
+//------------------------Poner los IDS del country en tabla journal---------------------------------------
+
+    $archivoC = fopen("./csv/scimagojr_country.csv", "r");
+    //Lo recorremos
+    while (($datos = fgetcsv($archivoC)) == true)
     {
         $newJourCo = new Journal("","","","","","","","","","","","",$datos[0]);
         $resultado=$newJourCo->insert_idCountry($datos[0],$datos[1]);
     }
-//Cerramos el archivo
-    fclose($archivo);
+    //Cerramos el archivo
+    fclose($archivoC);
     $processedC = true;
 
-}
+//------------------------Colocar el title en Journal--------------------------------------
+
+ $archivoJ = fopen("./csv/scimagojr_title.csv", "r");
+    //Lo recorremos
+    while (($datos = fgetcsv($archivoJ,1000,';')) == true)
+    {
+        $newJourCo = new Journal("",$datos[0]);
+        $resultado=$newJourCo->insert_csvT($datos[0]);
+    }
+    //Cerramos el archivo
+    fclose($archivoJ);
+    $processedJ = true;
+
 
 
 ?>
@@ -101,6 +119,15 @@ if(file_exists($archivo_guardado)){
                             
                         </div>
                     <?php } ?>
+                    <?php if ($processedJ) { ?>
+                        <div class="alert alert-success">Title Entered in Journal
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            
+                        </div>
+                    <?php } ?>
+
                     <?php if ($processedC) { ?>
                         <div class="alert alert-success">Countries id entered
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -148,9 +148,15 @@ class Journal {
 		$this -> connection -> close();
 	}
 
-	function insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry){
+	function insert_csv($pIdJournal, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry){
 		$this -> connection -> open();
-		$this -> connection -> run($this -> journalDAO -> insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry));
+		$this -> connection -> run($this -> journalDAO -> insert_csv($pIdJournal, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry));
+		$this -> connection -> close();
+	}
+
+	function insert_csvT($pTitle){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> journalDAO -> insert_csvT($pTitle));
 		$this -> connection -> close();
 	}
 

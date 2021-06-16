@@ -6,7 +6,7 @@ if(isset($_POST['relations'])){
 
     $archivo = fopen("./csv/scimagojr_category.csv", "r");
 //Lo recorremos
-    while (($datos = fgetcsv($archivo, 2000,";",'"')) !== FALSE)
+    while (($datos = fgetcsv($archivo, 2000,';','"')) !== FALSE)
     {
 
         $newJourCa = new Journalcategory();
