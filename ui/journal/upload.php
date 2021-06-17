@@ -36,11 +36,10 @@ if(file_exists($archivo_guardado)){
                // echo "<br>Se insertaron correctamente los datos";
 
                 $sjrF= str_replace(',', '.', $datos[5]);
-                
-                //$sjrF = floatval($datos[5]); //Solo funciona con punto y no con coma
-                $newJournal = new Journal($datos[0],$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
+                $titleS=str_replace("'"," ",$datos[2]);
+                $newJournal = new Journal($datos[0],$titleS,$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
 
-                $resultado=$newJournal->insert_csv($datos[0],$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
+                $resultado=$newJournal->insert_csv($datos[0],$titleS,$datos[4],$sjrF,$datos[6],$datos[7],$datos[8],$datos[10],$datos[11],$datos[12],$datos[18],$datos[19],$datos[15]);
             }
             $firstline = false;
         }
@@ -86,20 +85,22 @@ if(file_exists($archivo_guardado)){
     fclose($archivoC);
     $processedC = true;
 
-//------------------------Colocar el title en Journal--------------------------------------
-
- $archivoJ = fopen("./csv/scimagojr_title.csv", "r");
+/*------------------------Colocar el title en Journal--------------------------------------
+    
+    $fp = fopen($archivo_guardado,'r');// abrir un archivo
     //Lo recorremos
-    while (($datos = fgetcsv($archivoJ,1000,';')) == true)
+    while (($datos = fgetcsv($fp,1000,';','"')) == true)
     {
-        $newJourCo = new Journal("",$datos[0]);
-        $resultado=$newJourCo->insert_csvT($datos[0]);
+        $titleS=str_replace("'"," ",$datos[2]);
+        $newJourCo = new Journal($datos[0],$titleS);
+        $resultado=$newJourCo->insert_csvT($datos[0],$titleS);
     }
     //Cerramos el archivo
-    fclose($archivoJ);
-    $processedJ = true;
+
+    $processedJ = true;*/
 
 
+}
 
 ?>
 <div class="container">
@@ -122,9 +123,8 @@ if(file_exists($archivo_guardado)){
                     <?php if ($processedJ) { ?>
                         <div class="alert alert-success">Title Entered in Journal
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                <span Saria-hidden="true">&times;</span>
                             </button>
-                            
                         </div>
                     <?php } ?>
 
@@ -142,17 +142,13 @@ if(file_exists($archivo_guardado)){
                             });
                         </script>
                     <?php } ?>
-
                     <form id="form" method="post" action="index.php?pid=<?php echo base64_encode("ui/journal/upload.php") ?>" enctype="multipart/form-data" class="bootstrap-form needs-validation">
                         <div>
-                            <!-- FORMULARIO PARA SOICITAR LA CARGA DEL EXCEL -->
+                            <!-- FORMULARIO PARA SOLICITAR LA CARGA DEL CSV -->
                             Please, choose the file to import:
                             <input type="file" name="archivo" required />
-                            <!--                                <input type='submit' name='enviar'  value="Importar"  />-->
-                            <!-- CARGA LA MISMA PAGINA MANDANDO LA VARIABLE upload -->
                         </div>
                         <button type="submit" class="btn btn-info" name="insert">Create</button>
-
                     </form>
                     <br>
                 </div>

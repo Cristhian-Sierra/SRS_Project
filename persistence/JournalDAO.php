@@ -36,16 +36,15 @@ class JournalDAO {
 		values('" . $this -> title . "', '" . $this -> issn . "', '" . $this -> sjr . "', '" . $this -> best_quartile . "', '" . $this -> hindex . "', '" . $this -> total_docs . "', '" . $this -> total_references . "', '" . $this -> total_cites . "', '" . $this -> citable_docs . "', '" . $this -> coverage . "', '" . $this -> categories . "', '" . $this -> country . "')";
 	}
 
-	function insert_csv($pIdJournal, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry)
+	function insert_csv($pIdJournal,$pTitle, $pIssn, $pSjr, $pBest_quartile, $pHindex, $pTotal_docs, $pTotal_references, $pTotal_cites, $pCitable_docs, $pCoverage,$pCategories,$pCountry)
 	{
-		return  "insert into Journal(idJournal, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage,categories,country_idCountry)
-		values('".$pIdJournal."', '" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "','".$pCategories."','".$pCountry."')";
+		return  "insert into Journal(idJournal,title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage,categories,country_idCountry)
+		values('".$pIdJournal."', '" . $pTitle . "','" . $pIssn . "', '" . $pSjr . "', '" . $pBest_quartile . "', '" . $pHindex . "', '" . $pTotal_docs . "', '" . $pTotal_references . "', '" . $pTotal_cites . "', '" . $pCitable_docs . "', '" . $pCoverage . "','".$pCategories."','".$pCountry."')";
 	}
 
-	function insert_csvT($pTitle)
+	function insert_csvT($idJournal,$pTitle)
 	{
-		return  "insert into Journal(title)
-		values('".$pTitle."')";
+		return  "update Journal SET title='$pTitle' where idJournal='$idJournal'";
 	}
 
 
