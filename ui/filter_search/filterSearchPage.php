@@ -126,7 +126,7 @@
 
                     <label>Country:
                         <select name="countries" id="countries" class="form-control input-sm"   >
-                            <option  value="">All countries </option >
+                            <option  value="0">All countries </option >
                             <?php 
                             $i=1;
                             foreach($countrysF as $coF ){?>
@@ -136,6 +136,14 @@
                                 ?>
                             </select>
                         </label>
+                        
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $('#countries').select2({
+                                    placeholder: 'Select an option'
+                                });
+                            });
+                        </script>
 
                         <label>Quartile
                             <select  name="quartile" id="quartile" class="form-control input-sm"  >
