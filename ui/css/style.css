@@ -7,6 +7,11 @@
 
 .select2-dropdown {
   color: #000000;
+  font-family: "Times";
+  |
+}
+.select2-search__field{
+  color: #000000;
 }
 
 input[type=search],select {

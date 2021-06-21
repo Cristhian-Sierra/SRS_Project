@@ -40,7 +40,7 @@ $sjr=$_POST['sjr_filter'];
 			<?php
 			//Select without filters
 			
-			if($area=="" && $country=="0"  && $quartile=="" ){
+			if($area=="0" && $country=="0"  && $quartile=="0" ){
 				$conn= new Connection();
 				$con=$conn->openSRS();
 				$journal=new JournalDAO();
@@ -53,7 +53,7 @@ $sjr=$_POST['sjr_filter'];
 						
 			}
 
-			if($area=="" && $category=="" && $quartile=="" ){
+			if($area=="0" && $category=="0" && $quartile=="0" ){
 				$journal= new Journal();
 				$selectCo= $journal->selectCo($country,$hindex,$references,$sjr);
 				foreach($selectCo as $sCo) {
@@ -62,7 +62,7 @@ $sjr=$_POST['sjr_filter'];
 
 			}
 
-			 if($country=="0"   && $quartile=="" && $category==""){
+			if($country=="0"   &&  $quartile=="0" && $category=="0"){
 				$journal= new Journal();
 				$selectAr= $journal->selectAr($area,$hindex,$references,$sjr);
 				foreach($selectAr as $sA) {
@@ -70,7 +70,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			 if($country=="0"  && $quartile==""  ){
+			 if($country=="0"  && $quartile=="0"  ){
 				$journal= new Journal();
 				$selectArCa= $journal->selectArCa($area,$category,$hindex,$references,$sjr);
 				foreach($selectArCa as $sACa) {
@@ -79,7 +79,7 @@ $sjr=$_POST['sjr_filter'];
 						//echo $sqlCA;
 			}	
 
-			 if($area=="" && $country=="0" && $category=="" ){
+			 if($area=="0" && $country=="0" && $category=="0" ){
 				$journal= new Journal();
 				$selectQ= $journal->selectQ($quartile,$hindex,$references,$sjr); 
 				foreach($selectQ as $sQ) {
@@ -87,7 +87,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			 if($quartile=="" ){
+			 if($quartile=="0" ){
 				$journal= new Journal();
 				$selectACC= $journal->selectACC($area,$category,$country,$hindex,$references,$sjr); 
 				foreach($selectACC as $sACC) {
@@ -95,7 +95,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			if($quartile=="" && $category==""){
+			if($quartile=="0" && $category=="0"){
 				$journal= new Journal();
 				$selectACo= $journal->selectACo($area,$country,$hindex,$references,$sjr); 
 				foreach($selectACo as $sACo) {
@@ -104,7 +104,7 @@ $sjr=$_POST['sjr_filter'];
 			}
 
 
-			 if($category=="" ){
+			 if($category=="0" ){
 				$journal= new Journal();
 				$selectACoQ= $journal->selectACoQ($area,$country,$quartile,$hindex,$references,$sjr); 
 				foreach($selectACoQ as $sACoQ) {
@@ -120,7 +120,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			if($country=="0" && $category==""){
+			if($country=="0" && $category=="0"){
 				$journal= new Journal();
 				$selectAQ= $journal->selectAQ($area,$quartile,$hindex,$references,$sjr); 
 				foreach($selectAQ as $sAQ) {
@@ -128,7 +128,7 @@ $sjr=$_POST['sjr_filter'];
 				}
 			}
 
-			 if($category=="" && $area==""){
+			 if($category=="0" && $area=="0"){
 				$journal= new Journal();
 				$selectCoQ= $journal->selectCoQ($country,$quartile,$hindex,$references,$sjr);
 				foreach($selectCoQ as $sCoQ) {

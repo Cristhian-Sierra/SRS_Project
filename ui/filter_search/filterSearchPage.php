@@ -108,7 +108,7 @@
             <div class="col col-lg-12 col-xl-12">
                 <label>Area: 
                     <select name="areas" id="areas" class="form-control input-sm" >
-                        <option  value="">All areas</option >
+                        <option  value="0">All areas</option >
                         <?php 
                         $i=1;
                         foreach($areasF as $aF ){?>
@@ -119,13 +119,34 @@
                         </select>
                     </label>
 
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#areas').select2({
+                                 theme:'bootstrap4'
+
+                            });
+                        });
+                    </script>
+
                     <label>Category: 
-                        <select name="categories" id="categories" class="form-control input-sm" >
+                        <select name="categories" id="categories" class="form-control input-sm">
+                             <option  value="0">All Categories</option >
                         </select>
                     </label>
 
-                    <label>Country:
-                        <select name="countries" id="countries" class="form-control input-sm"   >
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#categories').select2({
+
+                        
+                                theme:'bootstrap4'
+
+                            });
+                        });
+                    </script>
+
+                    <label for="countries">Country:
+                        <select name="countries" id="countries" class="form-control input-sm" >
                             <option  value="0">All countries </option >
                             <?php 
                             $i=1;
@@ -140,14 +161,17 @@
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 $('#countries').select2({
-                                    placeholder: 'Select an option'
+                                    
+                            
+                                    theme:'bootstrap4'
+
                                 });
                             });
                         </script>
 
                         <label>Quartile
                             <select  name="quartile" id="quartile" class="form-control input-sm"  >
-                                <option value="">All quartiles</option>
+                                <option value="0">All quartiles</option>
                                 <option value="Q1">Q1</option>
                                 <option value="Q2">Q2</option>
                                 <option value="Q3">Q3</option>
@@ -156,6 +180,17 @@
 
                             </select>
                         </label>
+
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#quartile').select2({
+
+                           
+                                theme:'bootstrap4'
+
+                            });
+                        });
+                    </script>
                     </div>
                 </div>
             </div>
@@ -219,20 +254,7 @@
     }
 </script>
 
-<!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA 2,0
-<script type="text/javascript">
-    $(document).ready(function(){
-       $('#areas').change(function(){
-           $("#areas option:selected").each(function (){   
-                area_category = $("#areas").val();
-                $.post("index.php?pid=<?//php //echo base64_encode("ui/filter_search/datesC.php") ?>", { area_category: area_category }, function(data){
-                    $("#categories").html(data);
-                });
-            });
-       });
-    });   
-</script>
--->
+
 
 <!--EL JQUERY Y AJAX PARA HACER CONSULTAS CON FILTROS-->
 
@@ -317,7 +339,7 @@
             data:{
                 "area_filter":$('#areas').val(),
                 "country_filter":$('#countries').val(),
-                "category_filter":'',
+                "category_filter":'0',
                 "hindex_filter":$('#hindex_range').val(),
                 "ref_filter":$('#refs_range').val(),
                 "sjr_filter":$('#sjr_range').val(),

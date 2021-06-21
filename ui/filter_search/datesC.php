@@ -5,7 +5,7 @@ $areaC=$_POST['area_category'];
 $category= new Category();
 $cat= $category->datesC($areaC);
 
-$cadena='<option value=""> All categories </option>';
+$cadena='<option value="0"> All categories </option>';
 
    foreach ($cat as $ca) {
     	$cadena=$cadena.'<option value="'.$ca->getIdCategory().'"> '.$ca->getName().'</option>';
