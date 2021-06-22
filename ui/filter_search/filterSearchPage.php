@@ -198,16 +198,16 @@
             <div class="container" style="position: relative; left: 25px;" >
 
                 <label id="referencesH" >H index >=
-                  <input type="number" name="hindex" id="hindex" min="0" max="1159" value="100" oninput="this.form.hindex_range.value=this.value" /> 
+                  <input type="number" name="hindex" id="hindex" min="0" max="1226" value="100" oninput="this.form.hindex_range.value=this.value" /> 
                   <br>
-                  <input type="range" name="hindex_range" id="hindex_range" min="0" max="1159" value="100" oninput="this.form.hindex.value=this.value"   />
+                  <input type="range" name="hindex_range" id="hindex_range" min="0" max="1226" value="100" oninput="this.form.hindex.value=this.value"   />
                   
               </label>
 
               <label id="referencesL" >References >=
-                  <input type="number" name="references" id="references" min="0" max="989223" value="1000" oninput="this.form.refs_range.value=this.value"   /> 
+                  <input type="number" name="references" id="references" min="0" max="1033089" value="1000" oninput="this.form.refs_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="refs_range" id="refs_range" min="0" max="989223" value="1000" oninput="this.form.references.value=this.value"  />
+                  <input type="range" name="refs_range" id="refs_range" min="0" max="1033089" value="1000" oninput="this.form.references.value=this.value"  />
                   
               </label>
 
