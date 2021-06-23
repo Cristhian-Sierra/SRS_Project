@@ -186,8 +186,8 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
 		$('#JournalTableS').DataTable({
 			responsive: "true",
  					//dom: '<"top"Bf>irt<"bottom"lp><"clear">',
- 					dom:'Bfrtip',
- 					lengthMenu: [ [50, 500,-1],[50,500,"All"] ],
+ 					dom:'Bfrtlip',
+ 					lengthMenu: [ [10, 50,100],[10,50,100] ],
  					buttons: [
  					{
 
