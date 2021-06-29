@@ -9,46 +9,46 @@ class AreaDAO{
 	}
 
 	function insert(){
-		return "insert into Area(name)
+		return "insert into area(name)
 				values('" . $this -> name . "')";
 	}
 
 	function update(){
-		return "update Area set 
+		return "update area set 
 				name = '" . $this -> name . "'	
 				where idArea = '" . $this -> idArea . "'";
 	}
 
 	function select() {
 		return "select idArea, name
-				from Area
+				from area
 				where idArea = '" . $this -> idArea . "'";
 	}
 
 	function selectAll() {
 		return "select idArea, name
-				from Area";
+				from area";
 	}
 
 	function selectAllOrder($orden, $dir){
 		return "select idArea, name
-				from Area
+				from area
 				order by " . $orden . " " . $dir;
 	}
 
 	function search($search) {
 		return "select idArea, name
-				from Area
+				from area
 				where name like '%" . $search . "%'";
 	}
 
 	function delete(){
-		return "delete from Area
+		return "delete from area
 				where idArea = '" . $this -> idArea . "'";
 	}
 
 	function selectName(){
-		return "select name from Area";
+		return "select name from area";
 	}
 }
 ?>

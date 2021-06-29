@@ -11,12 +11,12 @@ class JournalcategoryDAO{
 	}
 
 	function insert(){
-		return "insert into Journalcategory(category_idCategory, journal_idJournal)
+		return "insert into journalcategory(category_idCategory, journal_idJournal)
 				values('" . $this -> category . "', '" . $this -> journal . "')";
 	}
 
 	function update(){
-		return "update Journalcategory set 
+		return "update journalcategory set 
 				category_idCategory = '" . $this -> category . "',
 				journal_idJournal = '" . $this -> journal . "'	
 				where idJournalcategory = '" . $this -> idJournalcategory . "'";
@@ -24,53 +24,53 @@ class JournalcategoryDAO{
 
 	function select() {
 		return "select idJournalcategory, category_idCategory, journal_idJournal
-				from Journalcategory
+				from journalcategory
 				where idJournalcategory = '" . $this -> idJournalcategory . "'";
 	}
 
 	function selectAll() {
 		return "select idJournalcategory, category_idCategory, journal_idJournal
-				from Journalcategory";
+				from journalcategory";
 	}
 
 	function selectAllByCategory() {
 		return "select idJournalcategory, category_idCategory, journal_idJournal
-				from Journalcategory
+				from journalcategory
 				where category_idCategory = '" . $this -> category . "'";
 	}
 
 	function selectAllByJournal() {
 		return "select idJournalcategory, category_idCategory, journal_idJournal
-				from Journalcategory
+				from journalcategory
 				where journal_idJournal = '" . $this -> journal . "'";
 	}
 
 	function selectAllOrder($orden, $dir){
 		return "select idJournalcategory, category_idCategory, journal_idJournal
-				from Journalcategory
+				from journalcategory
 				order by " . $orden . " " . $dir;
 	}
 
 	function selectAllByCategoryOrder($orden, $dir) {
 		return "select idJournalcategory, category_idCategory, journal_idJournal
-				from Journalcategory
+				from journalcategory
 				where category_idCategory = '" . $this -> category . "'
 				order by " . $orden . " " . $dir;
 	}
 
 	function selectAllByJournalOrder($orden, $dir) {
 		return "select idJournalcategory, category_idCategory, journal_idJournal
-				from Journalcategory
+				from journalcategory
 				where journal_idJournal = '" . $this -> journal . "'
 				order by " . $orden . " " . $dir;
 	}
 
 	function delete(){
-		return "delete from Journalcategory
+		return "delete from journalcategory
 				where idJournalcategory = '" . $this -> idJournalcategory . "'";
 	}
 	function deleteAll(){
-		return "delete from Journalcategory";
+		return "delete from journalcategory";
 	}
 
 	function insertIdsJC($pCategory){

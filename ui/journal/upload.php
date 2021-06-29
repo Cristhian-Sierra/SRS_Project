@@ -117,17 +117,10 @@ if(file_exists($archivo_guardado)){
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            
                         </div>
-                    <?php } ?>
-                    <?php if ($processedJ) { ?>
-                        <div class="alert alert-success">Title Entered in Journal
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span Saria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    <?php } ?>
 
+                    <?php } ?>
+                
                     <?php if ($processedC) { ?>
                         <div class="alert alert-success">Countries id entered
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

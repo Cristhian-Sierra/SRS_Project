@@ -23,12 +23,12 @@ class CountryDAO{
 	}
 
 	function insert(){
-		return "insert into Country(name, region, documents, citable_docs, citations, self_citations, citations_per_doc, hindex)
+		return "insert into country(name, region, documents, citable_docs, citations, self_citations, citations_per_doc, hindex)
 				values('" . $this -> name . "', '" . $this -> region . "', '" . $this -> documents . "', '" . $this -> citable_docs . "', '" . $this -> citations . "', '" . $this -> self_citations . "', '" . $this -> citations_per_doc . "', '" . $this -> hindex . "')";
 	}
 
 	function update(){
-		return "update Country set 
+		return "update country set 
 				name = '" . $this -> name . "',
 				region = '" . $this -> region . "',
 				documents = '" . $this -> documents . "',
@@ -42,7 +42,7 @@ class CountryDAO{
 
 	function select() {
 		return "select idCountry, name, region, documents, citable_docs, citations, self_citations, citations_per_doc, hindex
-				from Country
+				from country
 				where idCountry = '" . $this -> idCountry . "'";
 	}
 
@@ -52,18 +52,18 @@ class CountryDAO{
 
 	function selectAll() {
 		return "select idCountry, name, region, documents, citable_docs, citations, self_citations, citations_per_doc, hindex
-				from Country order by name";
+				from country order by name";
 	}
 
 	function selectAllOrder($orden, $dir){
 		return "select idCountry, name, region, documents, citable_docs, citations, self_citations, citations_per_doc, hindex
-				from Country
+				from country
 				order by " . $orden . " " . $dir;
 	}
 
 	function search($search) {
 		return "select idCountry, name, region, documents, citable_docs, citations, self_citations, citations_per_doc, hindex
-				from Country
+				from country
 				where name like '%" . $search . "%' or region like '%" . $search . "%' or documents like '%" . $search . "%' or citable_docs like '%" . $search . "%' or citations like '%" . $search . "%' or self_citations like '%" . $search . "%' or citations_per_doc like '%" . $search . "%' or hindex like '%" . $search . "%'";
 	}
 }

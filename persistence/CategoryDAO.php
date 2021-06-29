@@ -11,12 +11,12 @@ class CategoryDAO{
 	}
 
 	function insert(){
-		return "insert into Category(name, area_idArea)
+		return "insert into category(name, area_idArea)
 				values('" . $this -> name . "', '" . $this -> area . "')";
 	}
 
 	function update(){
-		return "update Category set 
+		return "update category set 
 				name = '" . $this -> name . "',
 				area_idArea = '" . $this -> area . "'	
 				where idCategory = '" . $this -> idCategory . "'";
@@ -24,42 +24,42 @@ class CategoryDAO{
 
 	function select() {
 		return "select idCategory, name, area_idArea
-				from Category
+				from category
 				where idCategory = '" . $this -> idCategory . "'";
 	}
 
 	function selectName() {
 		return "select name
-				from Category";
+				from category";
 	}
 
 	function selectAll() {
 		return "select idCategory, name, area_idArea
-				from Category";
+				from category";
 	}
 
 	function selectAllByArea() {
 		return "select idCategory, name, area_idArea
-				from Category
+				from category
 				where area_idArea = '" . $this -> area . "'";
 	}
 
 	function selectAllOrder($orden, $dir){
 		return "select idCategory, name, area_idArea
-				from Category
+				from category
 				order by " . $orden . " " . $dir;
 	}
 
 	function selectAllByAreaOrder($orden, $dir) {
 		return "select idCategory, name, area_idArea
-				from Category
+				from category
 				where area_idArea = '" . $this -> area . "'
 				order by " . $orden . " " . $dir;
 	}
 
 	function search($search) {
 		return "select idCategory, name, area_idArea
-				from Category
+				from category
 				where name like '%" . $search . "%'";
 	}
 
@@ -67,7 +67,7 @@ class CategoryDAO{
 
 	function datesC($areaC){
 		return "select ca.idCategory,ca.name 
-		from Category as ca, Area as a
+		from category as ca, area as a
 		where a.idArea=ca.area_idArea AND a.idArea='".$areaC."'"; 
 
 	}

@@ -23,12 +23,12 @@ class LogAdministratorDAO{
 	}
 
 	function insert(){
-		return "insert into LogAdministrator(action, information, date, time, ip, os, browser, administrator_idAdministrator)
+		return "insert into logAdministrator(action, information, date, time, ip, os, browser, administrator_idAdministrator)
 				values('" . $this -> action . "', '" . $this -> information . "', '" . $this -> date . "', '" . $this -> time . "', '" . $this -> ip . "', '" . $this -> os . "', '" . $this -> browser . "', '" . $this -> administrator . "')";
 	}
 
 	function update(){
-		return "update LogAdministrator set 
+		return "update logAdministrator set 
 				action = '" . $this -> action . "',
 				information = '" . $this -> information . "',
 				date = '" . $this -> date . "',
@@ -42,18 +42,18 @@ class LogAdministratorDAO{
 
 	function select() {
 		return "select idLogAdministrator, action, information, date, time, ip, os, browser, administrator_idAdministrator
-				from LogAdministrator
+				from logAdministrator
 				where idLogAdministrator = '" . $this -> idLogAdministrator . "'";
 	}
 
 	function selectAll() {
 		return "select idLogAdministrator, action, information, date, time, ip, os, browser, administrator_idAdministrator
-				from LogAdministrator";
+				from logAdministrator";
 	}
 
 	function selectAllByAdministrator() {
 		return "select idLogAdministrator, action, information, date, time, ip, os, browser, administrator_idAdministrator
-				from LogAdministrator
+				from logAdministrator
 				where administrator_idAdministrator = '" . $this -> administrator . "'";
 	}
 
@@ -65,14 +65,14 @@ class LogAdministratorDAO{
 
 	function selectAllByAdministratorOrder($orden, $dir) {
 		return "select idLogAdministrator, action, information, date, time, ip, os, browser, administrator_idAdministrator
-				from LogAdministrator
+				from logAdministrator
 				where administrator_idAdministrator = '" . $this -> administrator . "'
 				order by " . $orden . " " . $dir;
 	}
 
 	function search($search) {
 		return "select idLogAdministrator, action, information, date, time, ip, os, browser, administrator_idAdministrator
-				from LogAdministrator
+				from logAdministrator
 				where action like '%" . $search . "%' or date like '%" . $search . "%' or time like '%" . $search . "%' or ip like '%" . $search . "%' or os like '%" . $search . "%' or browser like '%" . $search . "%'
 				order by date desc, time desc";
 	}
