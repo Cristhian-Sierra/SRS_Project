@@ -49,7 +49,7 @@ class JournalDAO {
 
 
 	function insert_idCountry($idCountry,$nameCountry){
-		return "UPDATE journal,Country SET country_idCountry='$idCountry'
+		return "UPDATE journal,country SET country_idCountry='$idCountry'
 		WHERE country.name=journal.country_idCountry AND country.name='$nameCountry'";
 	}
 
@@ -91,7 +91,7 @@ class JournalDAO {
 
 	function selectAllC() {
 		return "SELECT j.idJournal,j.title,j.issn,j.sjr,j.best_quartile,j.hindex,j.total_docs,j.total_references,j.total_cites,j.citable_docs,j.coverage,j.categories,co.idCountry 
-		FROM journal as j,Country as co
+		FROM journal as j,country as co
 		WHERE j.country_idCountry=co.idCountry";
 	}
 

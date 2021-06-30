@@ -50,7 +50,7 @@ $administrator -> select();
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Reports</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item"href='index.php?pid=<?php echo base64_encode("ui/filter_search/pdfSearchs.php") ?>'  target="_blank">PDF</a>
+					<a class="dropdown-item"href='index.php?pid=<?php echo base64_encode("ui/filter_search/PDFSearchs.php") ?>'  target="_blank">PDF</a>
 				</div>
 			</li>
 
