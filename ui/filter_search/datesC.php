@@ -7,8 +7,8 @@ $cat= $category->datesC($areaC);
 
 $cadena='<option value="0"> All categories </option>';
 
-   foreach ($cat as $ca) {
-    	$cadena=$cadena.'<option value="'.$ca->getIdCategory().'"> '.$ca->getName().'</option>';
+   foreach ($cat as $ca) {     
+    $cadena=$cadena.'<option value="'.$ca->getIdCategory().'"> '.$ca->getName().'</option>';
  	}
 echo  $cadena;
 ?>

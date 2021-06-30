@@ -74,6 +74,14 @@
    
     if(isset($_POST["Action"])){
         //This conditional is of the button that makes insert in the db
+       $valorA =$area;
+       $valorCa =$category;
+       $valorCo=$country;
+       $valorQ =$quartile;
+       $valorH =$hindex;
+       $valorR =$references;
+       $valorS =$sjr;
+
 
         $filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
         $filterSClass->insert();
@@ -110,11 +118,18 @@
                         <option  value="0">All areas</option >
                         <?php 
                         $i=1;
-                        foreach($areasF as $aF ){?>
+                        foreach($areasF as $aF ){
+                            if ($aF->getIdArea()==$valorA){?>
+                                <option value= "<?php echo $aF->getIdArea() ?>" selected> <?php echo utf8_decode($aF->getName()) ?> </option >;
+                
+                            <?php
+                            }
+                            else{              
+                            ?>
                             <option value= "<?php echo $aF->getIdArea() ?>"> <?php echo utf8_decode($aF->getName()) ?> </option >;
                             <?php
                             $i++;}
-                            ?>
+                        }?>
                         </select>
                     </label>
 
@@ -149,11 +164,18 @@
                             <option  value="0">All countries </option >
                             <?php 
                             $i=1;
-                            foreach($countrysF as $coF ){?>
-                                <option value= "<?php echo utf8_decode($coF->getIdCountry()) ?>"> <?php echo utf8_decode($coF->getName()) ?> </option >;
-                                <?php
-                                $i++;}
-                                ?>
+                            foreach($countrysF as $cF ){
+                                if ($cF->getIdCountry()==$valorCo){?>
+                                    <option value= "<?php echo $cF->getIdCountry() ?>" selected> <?php echo utf8_decode($cF->getName()) ?> </option >;
+
+                                    <?php
+                                }
+                                else{              
+                                    ?>
+                                    <option value= "<?php echo $cF->getIdCountry() ?>"> <?php echo utf8_decode($cF->getName()) ?> </option >;
+                                    <?php
+                                    $i++;}
+                                }?>
                             </select>
                         </label>
                         
@@ -197,38 +219,34 @@
             <div class="container" style="position: relative; left: 25px;" >
 
                 <label id="referencesH" >H index >=
-                  <input type="number" name="hindex" id="hindex" min="0" max="1226" value="100" oninput="this.form.hindex_range.value=this.value" /> 
+                  <input type="number" name="hindex" id="hindex" min="0" max="1226" value="<?php echo($valorH)?>" oninput="this.form.hindex_range.value=this.value" /> 
                   <br>
-                  <input type="range" name="hindex_range" id="hindex_range" min="0" max="1226" value="100" oninput="this.form.hindex.value=this.value"   />
+                  <input type="range" name="hindex_range" id="hindex_range" min="0" max="1226" value="<?php echo($valorH)?>" oninput="this.form.hindex.value=this.value"   />
                   
               </label>
 
               <label id="referencesL" >References >=
-                  <input type="number" name="references" id="references" min="0" max="1033089" value="1000" oninput="this.form.refs_range.value=this.value"   /> 
+                  <input type="number" name="references" id="references" min="0" max="1033089" value="<?php echo($valorR)?>" oninput="this.form.refs_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="refs_range" id="refs_range" min="0" max="1033089" value="1000" oninput="this.form.references.value=this.value"  />
+                  <input type="range" name="refs_range" id="refs_range" min="0" max="1033089" value="<?php echo($valorR)?>" oninput="this.form.references.value=this.value"  />
                   
               </label>
 
               <label id="referencesS" >SJR >=
-                  <input type="number" name="sjr" id="sjr" min="0" max="62.937" value="10.0" step="0.01"  oninput="this.form.sjr_range.value=this.value"   /> 
+                  <input type="number" name="sjr" id="sjr" min="0" max="62.937" value="<?php echo($valorS)?>" step="0.01"  oninput="this.form.sjr_range.value=this.value"   /> 
                   <br>
-                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="62.937" value="10.0" step="0.01" oninput="this.form.sjr.value=this.value"     />
+                  <input type="range" name="sjr_range" id="sjr_range" min="0" max="62.937" value="<?php echo($valorS)?>" step="0.01" oninput="this.form.sjr.value=this.value"     />
                   
               </label>
           </div>
           <br>
           <div class="container" style="position: relative;left: 15px; ">      
-            <button name="Action" type="submit" class="btn btn-info">Search <i class="far fa-save"></i></button>
-        </div>
-    </form>  
-
-
-    <br> </br>
-<div class="container" >
-    <div id="loadScreenJ" class="container">
-        <img src="./img/load.gif" width="150px" height="150px" > 
+            <button  name="Action" type="submit" class="btn btn-info">Search <i class="fas fa-search"></i></button>
+            
     </div>
+</form>  
+<br></br>
+<div class="container" >
     <table class="table dt-responsive  table-dark " id="JournalTableS" >
         <thead >
             <tr>
@@ -427,17 +445,7 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
     });
 </script>
 
-<script >
-    function loadScreen(screen){
-        $(document)
-        .ajaxStart(function(){
-            screen.fadeIn();
-        })
-        .ajaxStop(function(){
-            screen.fadeOut();
-        });
-    }
-</script>
+
  <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
  <script type="text/javascript">
     $(document).ready(function(){
@@ -446,6 +454,7 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
         $('#areas').change(function(){
             chargeList();
         });
+      
     });  
 </script>
 <script type="text/javascript">
@@ -453,7 +462,10 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
         $.ajax({
             type:"POST",
             url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
-            data:"area_category=" + $('#areas').val(),
+            data:{
+                "area_category":$('#areas').val(),
+                "categoryV":$('#categories').val()
+                },
             success:function(r){
                 $('#categories').html(r);
                 //$('#categories').attr("disabled", false);
