@@ -114,6 +114,10 @@ class JournalDAO {
 		order by " . $orden . " " . $dir;
 	}
 
+	function selectQuartile() {
+		return "select DISTINCT best_quartile from journal";
+	}
+
 	function search($search) {
 		return "select idJournal, title, issn, sjr, best_quartile, hindex, total_docs, total_references, total_cites, citable_docs, coverage, categories, country_idCountry
 		from journal

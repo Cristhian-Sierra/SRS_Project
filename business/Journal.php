@@ -216,6 +216,17 @@ class Journal {
 		return $journals;
 	}
 
+	function selectQuartile(){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> journalDAO -> selectQuartile());
+		$journals = array();
+		while ($result = $this -> connection -> fetchRow()){
+			array_push($journals, new Journal("","","","",$result[0]));
+		}
+		$this -> connection -> close();
+		return $journals;
+	}
+
 	function selectAllC(){
 		$this -> connection -> open();
 		$this -> connection -> run($this -> journalDAO -> selectAllC());

@@ -111,7 +111,7 @@
 </script>
 <form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
     <div class="container-fluid" align="center"   >
-        <div class="row">
+        <div class="row" style="position:relative; left: -30px;">
             <div class="col col-lg-12 col-xl-12">
                 <label>Area: 
                     <select name="areas" id="areas" class="form-control input-sm" >
@@ -193,11 +193,23 @@
                         <label>Quartile
                             <select  name="quartile" id="quartile" class="form-control input-sm"  >
                                 <option value="0">All quartiles</option>
-                                <option value="Q1">Q1</option>
-                                <option value="Q2">Q2</option>
-                                <option value="Q3">Q3</option>
-                                <option value="Q4">Q4</option>
-                                <option value="-">Without quartile</option>
+                                <?php
+                                $journal=new Journal();
+                                $journalsF=$journal->selectQuartile();
+
+                                $i=1;
+                                foreach($journalsF as $jF ){
+                                    if ($jF->getBest_quartile()==$valorQ){?>
+                                        <option value= "<?php echo $jF->getBest_quartile() ?>" selected> <?php echo utf8_decode($jF->getBest_quartile()) ?> </option >;
+
+                                        <?php
+                                    }
+                                    else{              
+                                        ?>
+                                        <option value= "<?php echo $jF->getBest_quartile() ?>"> <?php echo utf8_decode($jF->getBest_quartile()) ?> </option >;
+                                        <?php
+                                        $i++;}
+                                    }?>
 
                             </select>
                         </label>
@@ -216,7 +228,7 @@
                 </div>
             </div>
 
-            <div class="container" style="position: relative; left: 25px;" >
+            <div class="container" >
 
                 <label id="referencesH" >H index >=
                   <input type="number" name="hindex" id="hindex" min="0" max="1226" value="<?php echo($valorH)?>" oninput="this.form.hindex_range.value=this.value" /> 
@@ -240,7 +252,7 @@
               </label>
           </div>
           <br>
-          <div class="container" style="position: relative;left: 15px; ">      
+          <div class="container" style="position:  ">      
             <button  name="Action" type="submit" class="btn btn-info">Search <i class="fas fa-search"></i></button>
             
     </div>
@@ -449,8 +461,7 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
  <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
  <script type="text/javascript">
     $(document).ready(function(){
-        // $('#areas').val(1);
-        chargeList();   
+        //chargeList();   
         $('#areas').change(function(){
             chargeList();
         });
@@ -475,101 +486,3 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
 </script>
 
 
-
-<!--EL JQUERY Y AJAX PARA HACER CONSULTAS CON FILTROS
-
-<script type="text/javascript">
-    $(document).ready(function(){
-    
-        chargesList();
-        $('#countries').change(function(){
-            chargesList();
-        });
-        $('#areas').change(function(){
-            areachargesList();
-        });
-         $('#categories').change(function(){
-            chargesList();
-        });
-        
-        $('#hindex_range').change(function(){
-            chargesList();
-        });
-
-        $('#refs_range').change(function(){
-            chargesList();
-        });
-
-        $('#sjr_range').change(function(){
-            chargesList();
-        });
-
-
-        $('#hindex').change(function(){
-            chargesList();
-        });
-
-        $('#references').change(function(){
-            chargesList();
-        });
-
-        $('#sjr').change(function(){
-            chargesList();
-        });
-
-        $('#quartile').change(function(){
-            chargesList();
-        });
-
-
-    });
-</script>
-
-<script type="text/javascript">
-    function chargesList(){
-     
-        $.ajax({
-            type:"POST",
-            url:"index.php?pid=<?php //echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
-            data:{
-                "area_filter":$('#areas').val(),
-                "country_filter":$('#countries').val(),
-                "category_filter":$('#categories').val(),
-                "hindex_filter":$('#hindex_range').val(),
-                "ref_filter":$('#refs_range').val(),
-                "sjr_filter":$('#sjr_range').val(),
-                "quartile_filter":$('#quartile').val()
-
-                },
-            success:function(r){
-                $('#searchResults').html(r);
-               /* $('#searchResult').fadeOut('slow',function(){
-                $('#searchResult').html(r).fadeIn('fast');*/
-            }
-        });
-    }
-</script>
-
-<script type="text/javascript">
-    function areachargesList(){
-     
-        $.ajax({
-            type:"POST",
-            url:"index.php?pid=<?php //echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
-            data:{
-                "area_filter":$('#areas').val(),
-                "country_filter":$('#countries').val(),
-                "category_filter":'0',
-                "hindex_filter":$('#hindex_range').val(),
-                "ref_filter":$('#refs_range').val(),
-                "sjr_filter":$('#sjr_range').val(),
-                "quartile_filter":$('#quartile').val()
-
-                },
-            success:function(r){
-                $('#searchResults').html(r);
-                         }
-        });
-    }
-</script>
--->
