@@ -147,8 +147,9 @@ class Category {
 		$this -> connection -> run($this -> categoryDAO -> datesC($pArea));
 		$categorys = array();
 		while ($result = $this -> connection -> fetchRow()){
-			
-			array_push($categorys, new Category($result[0], $result[1]));
+			$area = new Area($result[2]);
+			$area -> select();
+			array_push($categorys, new Category($result[0], $result[1], $area));
 		}
 		$this -> connection -> close();
 		return $categorys;
