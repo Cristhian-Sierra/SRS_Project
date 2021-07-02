@@ -1,7 +1,7 @@
 <?php
 
 $filtersearch= new Filter_search();
-$filterSC = $filtersearch -> selectAllCo();
+$filterSCo = $filtersearch -> selectAllCo();
 
 $filtersearchA= new Filter_search();
 $filterSA = $filtersearchA -> selectAllA();
@@ -17,28 +17,7 @@ $filterSDate = $filtersearchDate -> selectAllDate();
 
 <div class="container mt-4">
   <h1>Charts</h1>
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header bg-dark text-white">Country filters</div>
-        <div class="card-body">
-          <div id="fsR" style="height: 300px;"></div>
-                    <?php 
-                        echo "<script>";
-                        $json1="{";
-                        for ($i=0; $i<count($filterSC ); $i++) {
-                            $json1 .= "\"".$filterSC [$i][0] . "\" : " . $filterSC [$i][1] . ",";     
-                      }
-                      $json1 .= "}";
 
-
-                      echo "new Chartkick.PieChart(\"fsR\", " . $json1 . ",)";
-                        echo "</script>";
-                    ?>          
-        </div>        
-      </div>
-    </div>
-  </div> 
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -73,6 +52,27 @@ $filterSDate = $filtersearchDate -> selectAllDate();
                       }
                       $json3 .= "}";
                       echo "new Chartkick.PieChart(\"fsRCa\", " . $json3 . ",)";
+                        echo "</script>";
+                    ?>          
+        </div>        
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-dark text-white">Country Filters</div>
+        <div class="card-body">
+          <div id="fsRCo" style="height: 300px;"></div>
+                    <?php 
+                        echo "<script>";
+                        $json="{";
+                        for ($i=0; $i<count($filterSCo ); $i++) {
+                            $json .= "\"".$filterSCo [$i][0] . "\" : " . $filterSCo [$i][1] . ",";     
+                      }
+                      $json .= "}";
+                      echo "new Chartkick.PieChart(\"fsRCo\", " . $json . ",)";
                         echo "</script>";
                     ?>          
         </div>        

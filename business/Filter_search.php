@@ -247,6 +247,14 @@ class Filter_search {
 		return $filter_searchs;
 	}
 
+	function deleteAll(){
+		$this -> connection -> open();
+		$this -> connection -> run($this -> filter_searchDAO-> deleteAll());
+		$success = $this -> connection -> querySuccess();
+		$this -> connection -> close();
+		return $success;
+	}
+
 
 
 	

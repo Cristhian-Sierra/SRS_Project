@@ -18,11 +18,6 @@
 
     $countryFilter= new Country();//Instance from business in the Country class
     $countrysF=$countryFilter->selectAll();//Method that get all the dates from db table Country
-    
-
-   /* $journalFilter = new Journal();
-    $journalsF= $journalFilter->selectAllC();
-    */
 
     //date_default_timezone_set('UTC');
     date_default_timezone_set("America/Bogota");
@@ -44,36 +39,41 @@
     $country="";
     if(isset($_POST["countries"])){
         $country=$_POST["countries"];
-        
+
     }
 
     $hindex="";
     if(isset($_POST["hindex"])){
         $hindex=$_POST["hindex"];
-        
+
     } 
 
     $references="";
     if(isset($_POST["references"])){
         $references=$_POST["references"];
-        
+
     }
 
     $sjr=""; 
     if(isset($_POST["sjr"])){
         $sjr=$_POST["sjr"];
-        
+
     }
 
     $quartile="";
     if(isset($_POST["quartile"])){
         $quartile=$_POST["quartile"];
-        
+
     } 
 
-   
-    if(isset($_POST["Action"])){
-        //This conditional is of the button that makes insert in the db
+    /*if(isset($_POST["Action"])){
+
+    }*/
+?>
+<script type="text/javascript">
+    
+    $('#Action').on('click', function(){
+    <?php 
        $valorA =$area;
        $valorCa =$category;
        $valorCo=$country;
@@ -82,20 +82,12 @@
        $valorR =$references;
        $valorS =$sjr;
 
-
         $filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
         $filterSClass->insert();
-
-        /*if ($filterSClass) {
-        	  echo "<script>alert('Search saved')</script>";
-
-        }*/
-
-        //Querys to Database
-       
-    }
-?>
-
+    ?>
+  
+  });
+</script>
 <div align="center">
     <?php include("ui/header.php"); ?>
 </div>
@@ -111,7 +103,7 @@
 </script>
 <form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
     <div class="container-fluid" align="center"   >
-        <div class="row" style="position:relative; left: -30px;">
+        <div class="row" style="position:relative; left: -45px;">
             <div class="col col-lg-12 col-xl-12">
                 <label>Area: 
                     <select name="areas" id="areas" class="form-control input-sm" >
@@ -144,17 +136,37 @@
 
                     <label>Category: 
                         <select name="categories" id="categories" class="form-control input-sm">
-                             <option  value="0">All Categories</option >
+                            <option  value="0">All Categories</option >
                         </select>
+                        
                     </label>
 
+                    <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            //chargeList();
+                            $('#areas').change(function(){
+                                chargeList();
+                            });
+                        });  
+                    </script>
+                    <script type="text/javascript">
+                        function chargeList(){
+                            $.ajax({
+                                type:"POST",
+                                url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
+                                data:"area_category="+$('#areas').val(),
+                                success:function(r){
+                                    $('#categories').html(r);
+                                    //$('#categories').attr("disabled", false);
+                                }
+                            });
+                        }
+                    </script>
                     <script type="text/javascript">
                         $(document).ready(function() {
                             $('#categories').select2({
-
-                        
                                 theme:'bootstrap4'
-
                             });
                         });
                     </script>
@@ -253,7 +265,7 @@
           </div>
           <br>
           <div class="container" style="position:  ">      
-            <button  name="Action" type="submit" class="btn btn-info">Search <i class="fas fa-search"></i></button>
+            <button  name="Action" id="Action" type="submit" class="btn btn-info">Search <i class="fas fa-search"></i></button>
             
     </div>
 </form>  
@@ -278,10 +290,10 @@
             </tr>
         </thead>
         <tbody>
-
+           
             <?php
-            //Select without filters
-            
+
+                //Select without filters
             if($area=="0" && $country=="0"  && $quartile=="0" ){
                 $conn= new Connection();
                 $con=$conn->openSRS();
@@ -291,8 +303,8 @@
                 while ($ver=mysqli_fetch_row($resultAll)) {
                     echo tableJ($ver[0],$ver[1],$ver[2],$ver[3],$ver[4],$ver[5],$ver[6],$ver[7],$ver[8],$ver[9],$ver[10],$ver[11],$ver[12]);
                 }
-                
-                        
+
+
             }
 
             if($area=="0" && $category=="0" && $quartile=="0" ){
@@ -312,7 +324,7 @@
                 }
             }
 
-             if($country=="0"  && $quartile=="0"  ){
+            if($country=="0"  && $quartile=="0"  ){
                 $journal= new Journal();
                 $selectArCa= $journal->selectArCa($area,$category,$hindex,$references,$sjr);
                 foreach($selectArCa as $sACa) {
@@ -321,7 +333,7 @@
                         //echo $sqlCA;
             }   
 
-             if($area=="0" && $country=="0" && $category=="0" ){
+            if($area=="0" && $country=="0" && $category=="0" ){
                 $journal= new Journal();
                 $selectQ= $journal->selectQ($quartile,$hindex,$references,$sjr); 
                 foreach($selectQ as $sQ) {
@@ -329,7 +341,7 @@
                 }
             }
 
-             if($quartile=="0" ){
+            if($quartile=="0" ){
                 $journal= new Journal();
                 $selectACC= $journal->selectACC($area,$category,$country,$hindex,$references,$sjr); 
                 foreach($selectACC as $sACC) {
@@ -346,7 +358,7 @@
             }
 
 
-             if($category=="0" ){
+            if($category=="0" ){
                 $journal= new Journal();
                 $selectACoQ= $journal->selectACoQ($area,$country,$quartile,$hindex,$references,$sjr); 
                 foreach($selectACoQ as $sACoQ) {
@@ -370,7 +382,7 @@
                 }
             }
 
-             if($category=="0" && $area=="0"){
+            if($category=="0" && $area=="0"){
                 $journal= new Journal();
                 $selectCoQ= $journal->selectCoQ($country,$quartile,$hindex,$references,$sjr);
                 foreach($selectCoQ as $sCoQ) {
@@ -385,15 +397,13 @@
                 foreach($selectF as $sF) {
                     echo tableJ($sF->getIdJournal(),$sF->getTitle(),$sF->getIssn(),$sF->getSjr(),$sF->getBest_quartile(),$sF->getHindex(),$sF->getTotal_docs(),$sF->getTotal_references(),$sF->getTotal_cites(),$sF->getCitable_docs(),$sF->getCoverage(),$sF-> getCategories(),$sF-> getCountry()->getName());
                 }
-            }
-
-            ?>
+            }?>
+  
         </tbody>
     </table>
 </div>
 
-<?php 
-
+<?php
 function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$cites,$citesdoc,$coverage,$category,$country){
 
     return 
@@ -458,31 +468,5 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
 </script>
 
 
- <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
- <script type="text/javascript">
-    $(document).ready(function(){
-        //chargeList();   
-        $('#areas').change(function(){
-            chargeList();
-        });
-      
-    });  
-</script>
-<script type="text/javascript">
-    function chargeList(){
-        $.ajax({
-            type:"POST",
-            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
-            data:{
-                "area_category":$('#areas').val(),
-                "categoryV":$('#categories').val()
-                },
-            success:function(r){
-                $('#categories').html(r);
-                //$('#categories').attr("disabled", false);
-            }
-        });
-    }
-</script>
 
 
