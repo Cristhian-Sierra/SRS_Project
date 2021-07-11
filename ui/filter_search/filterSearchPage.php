@@ -66,13 +66,14 @@
 
     } 
 
-    /*if(isset($_POST["Action"])){
-
-    }*/
-?>
-<script type="text/javascript">
+    if(isset($_POST["Action"])){
     
-    $('#Action').on('click', function(){
+    }
+?>
+<script type="text/javascript"> 
+    $('#Action').on('click', function(e){
+       
+       chargesList();
     <?php 
        $valorA =$area;
        $valorCa =$category;
@@ -85,9 +86,37 @@
         $filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
         $filterSClass->insert();
     ?>
-  
+
+
   });
 </script>
+<script type="text/javascript">
+    function chargesList(){
+     
+        $.ajax({
+            type:"POST",
+            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
+            data:{
+                "area_filter":$('#areas').val(),
+                "country_filter":$('#countries').val(),
+                "category_filter":$('#categories').val(),
+                "hindex_filter":$('#hindex_range').val(),
+                "ref_filter":$('#refs_range').val(),
+                "sjr_filter":$('#sjr_range').val(),
+                "quartile_filter":$('#quartile').val()
+
+                },
+            success:function(r){
+                $('#searchResults').html(r);
+               /* $('#searchResult').fadeOut('slow',function(){
+                $('#searchResult').html(r).fadeIn('fast');*/
+            }
+        });
+    }
+</script>
+
+
+
 <div align="center">
     <?php include("ui/header.php"); ?>
 </div>
@@ -143,26 +172,42 @@
 
                     <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
                     <script type="text/javascript">
-                        $(document).ready(function(){
-                            //chargeList();
-                            $('#areas').change(function(){
-                                chargeList();
-                            });
-                        });  
+                    
+                    $(document).ready(function(){
+                       				$("#areas").change(function () {
+
+					                    //$('#categories').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+					
+					                    $("#areas option:selected").each(function () {
+						                area_s = $(this).val();
+						                $.post("index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php")?>", { area_category: area_s}, function(data){
+						            	$("#categories").html(data);
+					                	});            
+					                        });
+				                                });            
+			                                            });
                     </script>
-                    <script type="text/javascript">
-                        function chargeList(){
-                            $.ajax({
-                                type:"POST",
-                                url:"index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php") ?>",
-                                data:"area_category="+$('#areas').val(),
-                                success:function(r){
-                                    $('#categories').html(r);
-                                    //$('#categories').attr("disabled", false);
-                                }
-                            });
-                        }
+                
+                <script type="text/javascript">
+                        $(document).ready(function() {
+                      //  $('#categories').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+                      var category_s;
+                        $("#categories").change(function(){
+                            $("#categories").each(function () {
+                                category_s=$(this).val();  
+                                alert(category_s);
+                                                           })
+                                                 
+                        });
+						area_s = $("#areas").val();
+						$.post("index.php?pid=<?php echo base64_encode("ui/filter_search/datesC.php")?>", { area_category: area_s <?php if(isset($_POST["categories"])){ echo "," ?>  category: category_s    <?php } ?>}, function(data){
+							$("#categories").html(data);
+						});            
+					       
+                        });
                     </script>
+
+
                     <script type="text/javascript">
                         $(document).ready(function() {
                             $('#categories').select2({
@@ -264,7 +309,7 @@
               </label>
           </div>
           <br>
-          <div class="container" style="position:  ">      
+          <div class="container" style="position:center">      
             <button  name="Action" id="Action" type="submit" class="btn btn-info">Search <i class="fas fa-search"></i></button>
             
     </div>
