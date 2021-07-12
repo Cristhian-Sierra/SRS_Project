@@ -223,6 +223,7 @@ if(isset($_POST["quartile"])){
      <!--Table's Structure-->
      <div id="searchResults"></div>
  </div>
+
  <!--SCRIPTS PARA CAMBIAR EL SELECT DE CATEGORIES BASADOS EN EL AREA-->
  <script type="text/javascript">
     $(document).ready(function(){
@@ -232,6 +233,7 @@ if(isset($_POST["quartile"])){
         });
     });  
 </script>
+
 
 <script type="text/javascript">
     function chargeList(){
@@ -247,7 +249,6 @@ if(isset($_POST["quartile"])){
         });
     }
 </script>
-
 
 
 <!--EL JQUERY Y AJAX PARA HACER CONSULTAS CON FILTROS-->
@@ -299,8 +300,33 @@ if(isset($_POST["quartile"])){
     });
 </script>-->
 
+<!--To search-->
 <script type="text/javascript">
-   
+    function chargesList(){
+
+        $.ajax({
+            type:"POST",
+            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
+            data:{
+                "area_filter": $('#areas').val(),
+                "category_filter": $('#categories').val(),
+                "country_filter": $('#countries').val(),
+                "quartile_filter": $('#quartile').val(),
+                "hindex_filter": $('#hindex_range').val(),
+                "references_filter": $('#refs_range').val(),
+                "sjr_filter": $('#sjr_range').val(),
+            },
+            success:function(r){
+                alert('Search success');
+                
+            }
+        });
+    }
+</script>
+
+<!--To save-->
+<script type="text/javascript">
+    $(document).ready(function(){
         $('#Action').click(function(){
             var datas=$('#myform').serialize();
             $.ajax({
@@ -308,17 +334,12 @@ if(isset($_POST["quartile"])){
                 url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
                 data: datas,
                 success:function(r){
-                    alert('Search success');
+                    
                 }
             });
-        return false
+            return false
         });
- 
-       
-/*
-,
-                    
-*/
-    
+    });
+        
 </script>
 

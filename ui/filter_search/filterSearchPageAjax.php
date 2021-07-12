@@ -4,8 +4,9 @@ date_default_timezone_set("America/Bogota");
 $date = date("Y-m-d");
 $time = date("H:i a");  
 //To save
-$countryS=$_POST['countries'];
+
 $areaS=$_POST['areas'];
+$countryS=$_POST['countries'];
 $categoryS=$_POST['categories'];
 $quartileS=$_POST['quartile'];
 $hindexS=$_POST['hindex'];
@@ -13,9 +14,9 @@ $referencesS=$_POST['references'];
 $sjrS=$_POST['sjr'];
 
 //To search
-$country=$_POST['country_filter'];
 $area=$_POST['area_filter'];
 $category=$_POST['category_filter'];
+$country=$_POST['country_filter'];
 $quartile=$_POST['quartile_filter'];
 $hindex=$_POST['hindex_filter'];
 $references=$_POST['references_filter'];
