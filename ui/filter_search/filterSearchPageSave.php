@@ -3,6 +3,7 @@
 date_default_timezone_set("America/Bogota");
 $date = date("Y-m-d");
 $time = date("H:i a");  
+
 $areaS=$_POST['areas'];
 $countryS=$_POST['countries'];
 $categoryS=$_POST['categories'];

@@ -244,35 +244,7 @@
     }
 </script>
 
-<!--JSCRIPT QUE EVITA QUE EL AREA NO CAMBIE DE VALOR-->
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#areas').change(function(){
-            areachargesList();
-        });
-    });
-</script>
-<script type="text/javascript">
-    function areachargesList(){
-        $.ajax({
-            type:"POST",
-            url:"index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
-            data:{
-                "area_filter":$('#areas').val(),
-                "country_filter":$('#countries').val(),
-                "category_filter":'0',
-                "hindex_filter":$('#hindex_range').val(),
-                "ref_filter":$('#refs_range').val(),
-                "sjr_filter":$('#sjr_range').val(),
-                "quartile_filter":$('#quartile').val()
 
-                },
-            success:function(r){
-               
-            }
-        });
-    }
-</script>
 
 <!--EL JQUERY Y AJAX PARA HACER CONSULTAS CON FILTROS-->
 <script type="text/javascript">
@@ -307,7 +279,7 @@
             var datas=$('#myform').serialize();
             $.ajax({
                 type:"POST",
-                url:"index.php?pid=<?php //echo base64_encode("ui/filter_search/filterSearchPageSave.php") ?>",
+                url:"index.php?pid=<?php // echo base64_encode("ui/filter_search/filterSearchPageSave.php") ?>",
                 data: datas,
                 success:function(r){
                     
@@ -317,4 +289,37 @@
         });
     });
         
+</script>
+-->
+
+<!--JSCRIPT QUE EVITA QUE EL AREA NO CAMBIE DE VALOR
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#areas').change(function(){
+            areachargesList();
+        });
+    });
 </script>-->
+
+<!--<script type="text/javascript">
+    function areachargesList(){
+        $.ajax({
+            type:"POST",
+            url:"index.php?pid=<?php// echo base64_encode("ui/filter_search/filterSearchPageAjax.php") ?>",
+            data:{
+                "area_filter":$('#areas').val(),
+                "country_filter":$('#countries').val(),
+                "category_filter":'0',
+                "hindex_filter":$('#hindex_range').val(),
+                "ref_filter":$('#refs_range').val(),
+                "sjr_filter":$('#sjr_range').val(),
+                "quartile_filter":$('#quartile').val()
+
+                },
+            success:function(r){
+               
+            }
+        });
+    }
+</script>
+-->
