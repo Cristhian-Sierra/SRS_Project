@@ -120,6 +120,9 @@ class Filter_searchDAO{
 /*	function searchF($sjrF,$hindexF,$referenceF,$countryF,$categoryF,$areaF,$quartileF){
 		return "select j.title as title,j.hindex, j.total_references, co.name as country, ca.name as category, a.name as area, j.best_quartile from journal as j, country as co, category as ca, area as a where j.hindex>=".$hindexF." AND j.total_references>=".$referenceF." AND co.name='".$countryF."' AND ca.name='".$categoryF."' AND a.name='".$areaF."' AND j.best_quartile='".$quartileF."' AND j.sjr>=".$sjrF."";
 	}*/
+function deleteAll(){
+		return "delete from filter_search";
+}
 }
 
 

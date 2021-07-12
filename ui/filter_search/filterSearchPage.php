@@ -81,14 +81,20 @@
         if ($filterSClass) {
         	  echo "<script>alert('Search saved')</script>";
 
-        }
-      
-
-
-       
+        }  
     }
 ?>
-
+<!--<script type="text/javascript">
+    $(document).ready(function(){
+        $('#Action').on('click',function(){
+            <?php 
+            $filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
+            $filterSClass->insert();
+            ?>
+        });
+    });
+</script>
+-->
 <div align="center">
     <?php include("ui/header.php"); ?>
 </div>

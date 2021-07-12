@@ -28,6 +28,20 @@ $administrator=new Administrator();
 $logAdministrator = new LogAdministrator("", "View all filter searchs", "", date("Y-m-d"), date("H:i:s"), $user_ip, PHP_OS, $browser, $administrator -> getIdAdministrator());
 				$logAdministrator -> insert();
 ?>
+
+
+<?php
+$processedC = false;
+
+
+if(isset($_POST['deleteFilter'])){
+
+$filter_search=new Filter_search();
+$filterD=$filter_search->deleteAll();
+$processedC = true;
+}
+?>
+
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-header">
@@ -38,6 +52,20 @@ $logAdministrator = new LogAdministrator("", "View all filter searchs", "", date
 		<div class="table-responsive">
 			<table class="table table-striped table-hover">
 				<thead>
+					<div class="card-body">
+						<form id="form" method="post" action="index.php?pid=<?php echo base64_encode("ui/filter_search/selectAllFilter_search.php") ?>" enctype="multipart/form-data" class="bootstrap-form needs-validation">
+							 <button  name="deleteFilter" type="submit" class="btn btn-danger">Delete all <i class="far fa-trash-alt"></i></button>
+							<?php if ($processedC) { ?>
+								<div class="alert alert-success">Deleted data
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							</div>
+
+						<?php } ?>
+					</form>
+				</div>
 					<tr><th></th>
 						<th nowrap>Search_date 
 						<?php if($order=="search_date" && $dir=="asc") { ?>
@@ -167,6 +195,7 @@ $logAdministrator = new LogAdministrator("", "View all filter searchs", "", date
 						</th>
 						<th nowrap></th>
 					</tr>
+
 				</thead>
 				</tbody>
 					<?php
@@ -216,3 +245,7 @@ $logAdministrator = new LogAdministrator("", "View all filter searchs", "", date
 		$(this).find(".modal-content").load(link.attr("href"));
 	});
 </script>
+
+
+
+   
