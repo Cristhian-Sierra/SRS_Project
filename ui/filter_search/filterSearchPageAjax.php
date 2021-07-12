@@ -14,9 +14,7 @@ $sjr=$_POST['sjr_filter'];
 
 <!--class="table table-hover table-striped table-responsive-md"-->
 <div class="container" >
-	<div id="loadScreenJ" class="container">
-		<img src="./img/load.gif" width="150px" height="150px" > 
-	</div>
+	
 	<table class="table dt-responsive  table-dark " id="JournalTableS" >
 		<thead >
 			<tr>
@@ -181,8 +179,6 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
 <!--DATABLE JQUERY-->
 <script type="text/javascript">
 	$(document).ready( function () {
-		var screen=$('#loadScreenJ');
-		loadScreen(screen);
 		$('#JournalTableS').DataTable({
 			responsive: "true",
  					//dom: '<"top"Bf>irt<"bottom"lp><"clear">',
@@ -222,17 +218,5 @@ function tableJ($idJournal,$title,$issn,$sjr,$quartile,$hindex,$document,$refs,$
 
 	});
 
-
 </script>
 
-<script >
-	function loadScreen(screen){
-		$(document)
-		.ajaxStart(function(){
-			screen.fadeIn();
-		})
-		.ajaxStop(function(){
-			screen.fadeOut();
-		});
-	}
-</script>

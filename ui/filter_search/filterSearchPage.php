@@ -102,7 +102,7 @@
         });
     });
 </script>
-<form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST">
+<form action="index.php?pid=<?php echo base64_encode("ui/filter_search/filterSearchPage.php") ?>" method="POST" onsubmit="return chargesList();">
     <div class="container-fluid" align="center"   >
         <div class="row">
             <div class="col col-lg-12 col-xl-12">
@@ -219,8 +219,8 @@
               </label>
           </div>
           <br>
-          <div class="container" style="position: relative;left: 15px; ">      
-            <button name="Action" type="submit" class="btn btn-info">Save your search <i class="far fa-save"></i></button>
+          <div class="container" style="position: relative;left: 25px; ">      
+            <button name="Action" type="submit" class="btn btn-info">Search <i class="fas fa-search"></i></button>
         </div>
     </form>  
 
@@ -258,7 +258,7 @@
 
 <!--EL JQUERY Y AJAX PARA HACER CONSULTAS CON FILTROS-->
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     $(document).ready(function(){
     
         chargesList();
@@ -303,7 +303,7 @@
 
 
     });
-</script>
+</script>-->
 
 <script type="text/javascript">
     function chargesList(){
@@ -327,9 +327,10 @@
                 $('#searchResult').html(r).fadeIn('fast');*/
             }
         });
+        return false
     }
 </script>
-
+<!--Script que evita que area no cambie de valor-->
 <script type="text/javascript">
     function areachargesList(){
      
