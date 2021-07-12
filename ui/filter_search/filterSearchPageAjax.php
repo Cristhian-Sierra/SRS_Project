@@ -1,17 +1,5 @@
 <?php 
 //$con=mysqli_connect('localhost','root','','srs');
-date_default_timezone_set("America/Bogota");
-$date = date("Y-m-d");
-$time = date("H:i a");  
-//To save
-
-$areaS=$_POST['areas'];
-$countryS=$_POST['countries'];
-$categoryS=$_POST['categories'];
-$quartileS=$_POST['quartile'];
-$hindexS=$_POST['hindex'];
-$referencesS=$_POST['references'];
-$sjrS=$_POST['sjr'];
 
 //To search
 $area=$_POST['area_filter'];
@@ -19,13 +7,15 @@ $category=$_POST['category_filter'];
 $country=$_POST['country_filter'];
 $quartile=$_POST['quartile_filter'];
 $hindex=$_POST['hindex_filter'];
-$references=$_POST['references_filter'];
+$references=$_POST['ref_filter'];
 $sjr=$_POST['sjr_filter'];
 
-$filterSClass = new Filter_search("",$date,$time,$hindexS,$referencesS,$countryS,$categoryS,$areaS,$quartileS,$sjrS);
+date_default_timezone_set("America/Bogota");
+$date = date("Y-m-d");
+$time = date("H:i a"); 
+$filterSClass = new Filter_search("",$date,$time,$hindex,$references,$country,$category,$area,$quartile,$sjr);
 $filterSClass->insert();
 
-  
 ?>
 
 <!--class="table table-hover table-striped table-responsive-md"-->

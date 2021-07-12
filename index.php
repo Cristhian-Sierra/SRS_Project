@@ -16,6 +16,7 @@ $webPagesNoAuthentication = array(
 	'ui/filter_search/datesC.php',
 	'ui/filter_search/getHindexFilter.php',
 	'ui/filter_search/filterSearchPageAjax.php',
+	'ui/filter_search/filterSearchPageSave.php',
 	'ui/filter_search/PDFSearchs.php',
 	'ui/filter_search/graphsFS.php'
 
